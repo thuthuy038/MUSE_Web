@@ -62,7 +62,7 @@
           <tr *ngFor="let c of paginatedCategories">
             <td>{{ c.code }}</td>
             <td>
-              <img *ngIf="c.banner?.length" [src]="'http://localhost:3000' + $any(c.banner[0]).url" height="60"
+              <img *ngIf="c.banner?.length" [src]="'https://server-testing-ymn9.onrender.com' + $any(c.banner[0]).url" height="60"
                 style="object-fit:cover" />
             </td>
             <td class="fw-semibold">{{ c.name }}</td>

@@ -48,7 +48,7 @@
 
                         <div class="image-item" *ngFor="let img of banner">
 
-                            <img [src]="'http://localhost:3000' + img.url" (click)="openPreview(img.url)">
+                            <img [src]="'https://server-testing-ymn9.onrender.com' + img.url" (click)="openPreview(img.url)">
 
                             <!-- nút xóa -->
                             <div class="delete-btn" (click)="deleteBanner(img, $event)">
@@ -68,7 +68,7 @@
                     <!-- popup xem ảnh -->
                     <div class="image-preview" *ngIf="previewImage" (click)="closePreview()">
 
-                        <img [src]="'http://localhost:3000' + previewImage">
+                        <img [src]="'https://server-testing-ymn9.onrender.com' + previewImage">
 
                     </div>
 

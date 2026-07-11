@@ -52,7 +52,7 @@
 
       <div class="preview-multiple">
         <div *ngFor="let img of form.oldImages; let oldImgIdx = index">
-          <img [src]="'http://localhost:3000' + img.url" class="preview-media" />
+          <img [src]="'https://server-testing-ymn9.onrender.com' + img.url" class="preview-media" />
           <button class="btn-remove" (click)="removeOldImage(i, oldImgIdx)">x</button>
         </div>
         <div *ngFor="let img of form.previewImages; let newImgIdx = index">
@@ -71,7 +71,7 @@
 
       <div class="preview-multiple">
         <div *ngFor="let video of form.oldVideos; let oldVidIdx = index">
-          <video [src]="'http://localhost:3000' + video.url" controls class="preview-media"></video>
+          <video [src]="'https://server-testing-ymn9.onrender.com' + video.url" controls class="preview-media"></video>
           <button class="btn-remove" (click)="removeOldVideo(i, oldVidIdx)">x</button>
         </div>
         <div *ngFor="let video of form.previewVideos; let newVidIdx = index">

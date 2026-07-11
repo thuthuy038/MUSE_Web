@@ -42,8 +42,8 @@
 
       <div class="review-images" *ngIf="comment?.images?.length">
         <div *ngFor="let img of comment.images">
-          <img *ngIf="img?.url" [src]="'http://localhost:3000' + img.url" class="review-img" />
-          <img *ngIf="!img?.url && img" [src]="'http://localhost:3000' + img" class="review-img" />
+          <img *ngIf="img?.url" [src]="'https://server-testing-ymn9.onrender.com' + img.url" class="review-img" />
+          <img *ngIf="!img?.url && img" [src]="'https://server-testing-ymn9.onrender.com' + img" class="review-img" />
         </div>
       </div>
     </div>

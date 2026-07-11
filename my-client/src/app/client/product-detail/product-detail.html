@@ -235,7 +235,7 @@
             </div>
             <div class="review-content">{{ review.content }}</div>
             <div class="review-images mt-2" *ngIf="review.images && review.images.length > 0">
-              <img *ngFor="let img of review.images" [src]="'http://localhost:3000' + img" class="review-img me-2"
+              <img *ngFor="let img of review.images" [src]="'https://server-testing-ymn9.onrender.com' + img" class="review-img me-2"
                 style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer;"
                 (click)="openImageModal(img)">
             </div>

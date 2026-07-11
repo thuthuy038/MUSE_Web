@@ -78,7 +78,7 @@ export class UserService {
 
     if (!rawUrl) return null;
 
-    // Xử lý trường hợp bị ghép base URL sai (http://localhost:3000https://...)
+    // Xử lý trường hợp bị ghép base URL sai (https://server-testing-ymn9.onrender.comhttps://...)
     const baseUrl = 'https://server-testing-ymn9.onrender.com';
     if (rawUrl.startsWith(baseUrl)) {
       const afterBase = rawUrl.substring(baseUrl.length);
