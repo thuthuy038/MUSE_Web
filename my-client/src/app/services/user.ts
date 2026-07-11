@@ -7,8 +7,8 @@ import { CartEventsService } from './cartevent';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/api/auth';
-  private usersApiUrl = 'http://localhost:3000/api/users';
+  private apiUrl = 'https://server-testing-ymn9.onrender.com/api/auth';
+  private usersApiUrl = 'https://server-testing-ymn9.onrender.com/api/users';
   private currentUserSubject = new BehaviorSubject<IUser | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
@@ -51,7 +51,7 @@ export class UserService {
   private mergeGuestCart(userId: string): void {
     const guestId = localStorage.getItem('guest_id');
     if (guestId) {
-      this.http.post('http://localhost:3000/api/cart/merge', { guestId, userId }).subscribe({
+      this.http.post('https://server-testing-ymn9.onrender.com/api/cart/merge', { guestId, userId }).subscribe({
         next: () => {
           localStorage.removeItem('guest_id');
           this.cartEvents.emitRefreshCart();
@@ -79,7 +79,7 @@ export class UserService {
     if (!rawUrl) return null;
 
     // Xử lý trường hợp bị ghép base URL sai (http://localhost:3000https://...)
-    const baseUrl = 'http://localhost:3000';
+    const baseUrl = 'https://server-testing-ymn9.onrender.com';
     if (rawUrl.startsWith(baseUrl)) {
       const afterBase = rawUrl.substring(baseUrl.length);
       if (afterBase.startsWith('http://') || afterBase.startsWith('https://')) {
@@ -139,7 +139,7 @@ export class UserService {
   }
 
   addAddress(userId: string, addressData: any): Observable<any> {
-    return this.http.post(`http://localhost:3000/api/address/add/${userId}`, addressData);
+    return this.http.post(`https://server-testing-ymn9.onrender.com/api/address/add/${userId}`, addressData);
   }
 
   // ===== Admin / Users CRUD =====
@@ -170,7 +170,7 @@ export class UserService {
   uploadAvatar(formData: FormData): Observable<any> {
     const userId = this.currentUserValue?._id;
     if (!userId) throw new Error('User not logged in');
-    return this.http.post(`http://localhost:3000/api/users/${userId}/avatar`, formData);
+    return this.http.post(`https://server-testing-ymn9.onrender.com/api/users/${userId}/avatar`, formData);
   }
 
   getUserByCode(code: string): Observable<any> {
