@@ -9,7 +9,7 @@ import { Banner } from '../interfaces/banner'
 
 export class BannerService {
 
-  private api = 'http://localhost:3000/api/banners'
+  private api = 'https://server-testing-ymn9.onrender.com/api/banners'
 
   constructor(private http: HttpClient) {}
 
