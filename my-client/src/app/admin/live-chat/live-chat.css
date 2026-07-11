@@ -1,0 +1,24 @@
+/* Tin nhắn của Admin */
+.message-right .message-content {
+  background-color: #FB6F92 !important; 
+  color: #ffffff !important;           
+  border-radius: 15px 15px 2px 15px;
+  padding: 10px 15px;
+  display: inline-block;
+  box-shadow: 0 2px 5px rgba(251, 111, 146, 0.2);
+  text-align: left;
+}
+
+/* Tin nhắn của Khách*/
+.message-left .message-content {
+  background-color: #f1f1f1;
+  color: #333;
+  border-radius: 15px 15px 15px 2px;
+  padding: 10px 15px;
+  display: inline-block;
+}
+
+.message-content::selection {
+  background-color: #FFC2D1;
+  color: #FB6F92;
+}

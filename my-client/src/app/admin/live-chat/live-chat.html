@@ -1,0 +1,85 @@
+<div class="live-chat-container d-flex" style="height: calc(100vh - 100px);">
+  <div class="chat-sidebar border-end bg-white" style="width: 300px;">
+    <div class="p-3 border-bottom">
+      <input type="text" [(ngModel)]="searchText" (input)="searchCustomers()" class="form-control form-control-sm rounded-pill" placeholder="Tìm khách hàng...">
+    </div>
+    <div class="chat-list overflow-auto">
+      <div *ngIf="isLoading" class="text-center p-3 small text-muted">Đang tải...</div>
+      <div *ngFor="let chat of filteredChatList" (click)="selectChat(chat)" [class.bg-pink-light-soft]="selectedChat?.customerId === chat.customerId" class="chat-item p-3 border-bottom d-flex gap-2 cursor-pointer">
+        <img [src]="chat.avatar || 'https://i.pravatar.cc/45'" class="rounded-circle shadow-sm" width="45" height="45">
+        <div class="flex-grow-1 overflow-hidden text-dark">
+          <div class="d-flex justify-content-between">
+            <span class="fw-bold small">{{ chat.customerName }}</span>
+            <span class="text-muted" style="font-size: 10px;">{{ chat.updatedAt | date:'HH:mm' }}</span>
+          </div>
+          <div class="text-muted small text-truncate">{{ chat.lastMessage || 'Chưa có tin nhắn' }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-main flex-grow-1 d-flex flex-column bg-light">
+    <ng-container *ngIf="selectedChat; else noChatSelected">
+      <div class="p-3 bg-white border-bottom d-flex justify-content-between align-items-center">
+        <div class="fw-bold text-dark">{{ selectedChat.customerName }} <small class="text-success mx-2">● Trực tuyến</small></div>
+        <button class="btn btn-sm btn-outline-pink px-3"><i class="bi bi-telephone"></i> Gọi khách</button>
+      </div>
+      
+      <div class="chat-messages p-4 flex-grow-1 overflow-auto" #scrollMe style="background: #fdfdfd;">
+        <div *ngFor="let msg of selectedChat.messages" [ngClass]="msg.sender === 'admin' ? 'text-end mb-3' : 'mb-3'">
+          <div [ngClass]="msg.sender === 'admin' ? 'message-right' : 'message-left'">
+            <div class="message-content shadow-sm">
+              <div *ngIf="msg.content">{{ msg.content }}</div>
+              <img *ngIf="msg.image" [src]="msg.image"class="rounded-circle shadow-sm mx-auto" width="45" height="45">
+            </div>
+            <div class="text-muted" style="font-size: 9px; margin-top: 2px;">{{ msg.timestamp | date:'HH:mm' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-3 bg-white border-top shadow-sm">
+        <div class="input-group">
+          <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" hidden>
+          <button type="button" class="btn btn-outline-light text-muted border-0" (click)="fileInput.click()">
+            <i class="bi bi-image"></i>
+          </button>
+          
+          <input type="text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" class="form-control border-0 shadow-none" placeholder="Nhập tin nhắn...">
+          <button type="button" (click)="sendMessage()" class="btn btn-pink px-4 shadow-sm" [disabled]="!newMessage.trim()">Gửi</button>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noChatSelected>
+      <div class="h-100 d-flex flex-column justify-content-center align-items-center text-muted bg-white">
+        <div class="mb-3" style="font-size: 4rem;"><i class="bi bi-chat-heart text-pink-light"></i></div>
+        <h5 class="fw-bold">Hỗ trợ khách hàng Muse</h5>
+        <p>Chọn một hội thoại ở bên trái để bắt đầu tư vấn nhé!</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="chat-info border-start bg-white p-3 shadow-sm" style="width: 280px;" *ngIf="selectedChat">
+    <div class="text-center mb-4">
+      <img [src]="selectedChat.avatar || 'https://i.pravatar.cc/80'" class="rounded-circle mb-2 shadow mx-auto" width="80" height="80">
+      <h6 class="fw-bold text-dark">{{ selectedChat.customerName }}</h6>
+      <span class="badge bg-secondary-light text-dark px-3 py-1 rounded-pill" style="font-size: 11px;">{{ selectedChat.customerId }}</span>
+    </div>
+    <hr>
+    
+    <div class="order-section" *ngIf="currentOrder">
+      <div class="fw-bold small mb-2 text-pink text-uppercase">Đơn hàng hiện tại</div>
+      <div class="card p-3 border-0 bg-pink-light-soft mb-3" style="font-size: 12px; border-radius: 12px;">
+        <div class="fw-bold text-dark">{{ currentOrder.id }}</div>
+        <div class="d-flex justify-content-between">
+          <span>{{ currentOrder.totalPrice | number }}đ</span>
+          <span class="text-primary fw-bold">{{ currentOrder.status }}</span>
+        </div>
+      </div>
+      
+      <div class="fw-bold small mb-2 text-pink text-uppercase">Ghi chú nhanh</div>
+      <textarea class="form-control form-control-sm border-0 bg-light p-2" style="border-radius: 10px;" [(ngModel)]="currentOrder.note" (blur)="updateOrderNote()" placeholder="Ghi chú sở thích khách hàng..."></textarea>
+      <small class="text-muted d-block mt-1" style="font-size: 10px;">* Lưu tự động khi nhấn ra ngoài.</small>
+    </div>
+  </div>
+</div>

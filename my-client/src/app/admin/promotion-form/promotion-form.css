@@ -1,0 +1,167 @@
+.title {
+    color: #FB6F92;
+    font-weight: 600;
+}
+
+.promotion-card {
+    border-radius: 15px;
+    border: 2px solid #6d4c41;
+    overflow: hidden;
+}
+
+.promotion-name {
+    max-width: 260px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-header {
+    background: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-box {
+    width: 220px;
+}
+
+table {
+    font-size: 14px;
+}
+
+thead th {
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+table td {
+    padding: 8px 12px;
+    vertical-align: middle;
+}
+
+.status {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+}
+
+.status.active {
+    background: #28a745;
+}
+
+.status.disabled {
+    background: #6c757d;
+}
+
+.action-icons i {
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.action-icons i:hover {
+    color: #e91e63;
+}
+
+.pagination {
+    gap: 8px;
+}
+
+.pagination .page-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    border: 1.5px solid #f48ca5;
+
+    color: #f48ca5;
+    font-weight: 600;
+
+    background: white;
+}
+
+.pagination .page-item.active .page-link {
+    background: #f48ca5;
+    color: white;
+    border: none;
+}
+
+.pagination .page-link:hover {
+    background: #f48ca5;
+    color: white;
+}
+
+/* BOX ĐIỀU KIỆN */
+.condition-box {
+    border: 1px dashed #f48ca5;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+    background: #fff6f9;
+}
+
+/* NÚT ADD */
+.btn-add {
+    border-radius: 20px;
+    border: 1.5px solid #f48ca5;
+    color: #f48ca5;
+    background: white;
+    padding: 6px 16px;
+}
+
+.btn-add:hover {
+    background: #f48ca5;
+    color: white;
+}
+
+.product-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.product-item:hover {
+    background: #f5f5f5;
+}
+
+/* Nút mặc định (xám) */
+.toggle-btn {
+    background-color: #f1f1f1;
+    color: #666;
+    border: 1px solid #ddd;
+    transition: all 0.2s ease;
+}
+
+/* Khi được chọn (hồng) */
+.toggle-btn.active {
+    background-color: #ff4d6d;
+    /* 🔥 màu hồng */
+    color: white;
+    border-color: #ff4d6d;
+}
+
+/* Hover nhẹ cho xịn */
+.toggle-btn:hover {
+    opacity: 0.9;
+}
+
+.btn-save{
+background:#ff6b8b;
+color:white;
+border:none;
+padding:8px 25px;
+border-radius:20px;
+}
+
+.btn-cancel{
+background:#e9e9e9;
+border:none;
+padding:8px 25px;
+border-radius:20px;
+}

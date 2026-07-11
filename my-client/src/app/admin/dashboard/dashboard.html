@@ -1,0 +1,249 @@
+<div class="dashboard-container">
+
+  <!-- Header -->
+  <div class="dashboard-header">
+    <h1><i class="bi bi-bar-chart-fill"></i> Dashboard</h1>
+    <button class="refresh-btn" (click)="refreshData()">
+      <i class="bi bi-arrow-repeat"></i> Làm mới
+    </button>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <!-- Đơn hàng -->
+    <div class="kpi-card" *ngIf="!loading.overview" routerLink="/admin/order-management">
+      <div class="kpi-icon orders">
+        <i class="bi bi-bag"></i>
+      </div>
+      <div class="kpi-info">
+        <h3>Đơn hàng</h3>
+        <div class="kpi-numbers">
+          <span class="kpi-main">{{overview?.orders?.total || 0}}</span>
+          <span class="kpi-sub today">+{{overview?.orders?.today || 0}} hôm nay</span>
+        </div>
+        <span class="kpi-sub month">{{overview?.orders?.month || 0}} trong tháng</span>
+      </div>
+    </div>
+
+    <!-- Doanh thu -->
+    <div class="kpi-card" *ngIf="!loading.overview">
+      <div class="kpi-icon revenue">
+        <i class="bi bi-currency-dollar"></i>
+      </div>
+      <div class="kpi-info">
+        <h3>Doanh thu</h3>
+        <div class="kpi-numbers">
+          <span class="kpi-main">{{formatCurrency(overview?.revenue?.total || 0)}}</span>
+          <span class="kpi-sub today">+{{formatCurrency(overview?.revenue?.today || 0)}}</span>
+        </div>
+        <span class="kpi-sub month">Tháng này: {{formatCurrency(overview?.revenue?.month || 0)}}</span>
+      </div>
+    </div>
+
+    <!-- Sản phẩm -->
+    <div class="kpi-card" *ngIf="!loading.overview" routerLink="/admin/product-management">
+      <div class="kpi-icon products">
+        <i class="bi bi-box"></i>
+      </div>
+      <div class="kpi-info">
+        <h3>Sản phẩm</h3>
+        <div class="kpi-numbers">
+          <span class="kpi-main">{{overview?.products?.total || 0}}</span>
+          <span class="kpi-sub" [class.text-danger]="(overview?.products?.lowStock || 0) > 0">
+            Còn {{overview?.products?.lowStock || 0}} sp sắp hết
+          </span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar"
+            [style.width.%]="((overview?.products?.total || 0) - (overview?.products?.lowStock || 0)) / (overview?.products?.total || 1) * 100">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Người dùng -->
+    <div class="kpi-card" *ngIf="!loading.overview" routerLink="/admin/user-management">
+      <div class="kpi-icon users">
+        <i class="bi bi-people"></i>
+      </div>
+      <div class="kpi-info">
+        <h3>Khách hàng</h3>
+        <div class="kpi-numbers">
+          <span class="kpi-main">{{overview?.users?.total || 0}}</span>
+          <span class="kpi-sub month">+{{overview?.users?.newThisMonth || 0}} tháng này</span>
+        </div>
+        <span class="kpi-sub"><i class="bi bi-star-fill"></i> {{overview?.reviews?.averageRating || 0}}/5 ({{overview?.reviews?.total || 0}} đánh
+          giá)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading KPI -->
+  <div class="loading-spinner" *ngIf="loading.overview">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Biểu đồ doanh thu -->
+  <div class="chart-section" *ngIf="!loading.chart && revenueData.length > 0">
+    <h2><i class="bi bi-graph-up-arrow"></i> Doanh thu 7 ngày qua</h2>
+    <div class="chart-container">
+      <canvas id="revenueChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Two Columns: Top Products & Recent Orders -->
+  <div class="two-columns">
+    <!-- Top sản phẩm bán chạy -->
+    <div class="top-products">
+      <div class="section-header">
+        <h2>🔥 Top sản phẩm bán chạy</h2>
+        <a routerLink="/admin/product-management" class="view-all">Xem tất cả →</a>
+      </div>
+
+      <div class="loading-spinner" *ngIf="loading.topProducts">
+        <div class="spinner" style="width: 30px; height: 30px;"></div>
+      </div>
+
+      <ul class="product-list" *ngIf="!loading.topProducts && topProducts.length > 0">
+        <li *ngFor="let product of topProducts; let i = index" class="product-item">
+          <img [src]="product.image || 'assets/images/default-product.jpg'" [alt]="product.name" class="product-image"
+            onerror="this.src='assets/images/default-product.jpg'">
+          <div class="product-info">
+            <div class="product-name">{{product.name}}</div>
+            <div class="product-meta">Mã: {{product.code}} | {{formatCurrency(product.revenue)}}</div>
+          </div>
+          <div class="product-sold">{{product.totalSold}} đã bán</div>
+        </li>
+      </ul>
+
+      <div class="empty-state" *ngIf="!loading.topProducts && topProducts.length === 0">
+        <i class="bi bi-inbox"></i>
+        <p>Chưa có dữ liệu</p>
+      </div>
+    </div>
+
+    <!-- Đơn hàng gần đây -->
+    <div class="recent-orders">
+      <div class="section-header">
+        <h2><i class="bi bi-box-fill"></i> Đơn hàng gần đây</h2>
+        <a routerLink="/admin/order-management" class="view-all">Xem tất cả →</a>
+      </div>
+
+      <div class="loading-spinner" *ngIf="loading.recent">
+        <div class="spinner" style="width: 30px; height: 30px;"></div>
+      </div>
+
+      <ul class="order-list" *ngIf="!loading.recent && recentOrders.length > 0">
+        <li *ngFor="let order of recentOrders" class="order-item">
+          <div class="order-info">
+            <h4>{{order.customerName || 'Khách lẻ'}}</h4>
+            <div class="order-meta">
+              <span>{{order.id}}</span> •
+              <span>{{formatDate(order.createdAt)}}</span>
+            </div>
+          </div>
+          <div class="order-amount">{{formatCurrency(order.totalPrice)}}</div>
+          <span class="badge" [ngClass]="getStatusClass(order.status)">
+            {{order.status}}
+          </span>
+        </li>
+      </ul>
+
+      <div class="empty-state" *ngIf="!loading.recent && recentOrders.length === 0">
+        <i class="bi bi-inbox"></i>
+        <p>Chưa có đơn hàng nào</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alerts & Warnings -->
+  <div class="alerts-section" *ngIf="!loading.alerts && alerts">
+    <h2 style="color: #fb6f92; font-size: 18px; margin-bottom: 15px;"><i class="bi bi-exclamation-triangle-fill"></i> Cảnh báo & Thông báo</h2>
+
+    <div class="alerts-grid">
+      <!-- Sản phẩm sắp hết hàng -->
+      <div class="alert-card warning" routerLink="/admin/product-management">
+        <div class="alert-header warning">
+          <i class="bi bi-exclamation-triangle"></i>
+          <h3>Sắp hết hàng ({{alerts.lowStock.length}})</h3>
+        </div>
+        <div class="alert-content">
+          <div *ngFor="let product of alerts.lowStock" class="alert-item">
+            <img [src]="product.image || 'assets/images/default-product.jpg'" [alt]="product.name"
+              onerror="this.src='assets/images/default-product.jpg'">
+            <span>{{product.name}}</span>
+            <span class="alert-count">{{product.stock}} còn lại</span>
+          </div>
+          <div *ngIf="alerts.lowStock.length === 0" class="text-success">
+            ✅ Không có sản phẩm nào sắp hết hàng
+          </div>
+        </div>
+      </div>
+
+      <!-- Khuyến mãi sắp kết thúc -->
+      <div class="alert-card info" routerLink="/admin/promotion-management">
+        <div class="alert-header info">
+          <i class="bi bi-clock-history"></i>
+          <h3>KM sắp kết thúc ({{alerts.expiringPromotions.length}})</h3>
+        </div>
+        <div class="alert-content">
+          <div *ngFor="let promo of alerts.expiringPromotions" class="alert-item">
+            <i class="bi bi-tag"></i>
+            <span>{{promo.name}}</span>
+            <span class="alert-count">Hết: {{formatDate(promo.endDate)}}</span>
+          </div>
+          <div *ngIf="alerts.expiringPromotions.length === 0" class="text-success">
+            ✅ Không có khuyến mãi sắp kết thúc
+          </div>
+        </div>
+      </div>
+
+      <!-- Cần xử lý -->
+      <div class="alert-card danger">
+        <div class="alert-header danger">
+          <i class="bi bi-bell"></i>
+          <h3>Cần xử lý</h3>
+        </div>
+        <div class="alert-content">
+          <div class="alert-item">
+            <i class="bi bi-bag"></i>
+            <span>Đơn hàng chưa xử lý</span>
+            <span class="alert-count">{{alerts.pendingOrders}}</span>
+          </div>
+          <div class="alert-item">
+            <i class="bi bi-chat-square-quote"></i>
+            <span>Đánh giá chờ duyệt</span>
+            <span class="alert-count">{{alerts.pendingReviews}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Reviews -->
+  <div class="top-products" style="margin-top: 20px;" *ngIf="recentReviews.length > 0">
+    <div class="section-header">
+      <h2>💬 Đánh giá mới nhất</h2>
+      <a routerLink="/admin/review-management" class="view-all">Xem tất cả →</a>
+    </div>
+
+    <div class="reviews-list">
+      <div *ngFor="let review of recentReviews" class="review-item">
+        <img [src]="review.productImage || 'assets/images/default-product.jpg'" class="review-product-img"
+          onerror="this.src='assets/images/default-product.jpg'">
+        <div class="review-content">
+          <div class="review-header">
+            <span class="review-customer">{{review.customerName}}</span>
+            <span class="review-stars">
+              <i class="bi bi-star-fill" *ngFor="let s of [].constructor(review.rating)"></i>
+              <i class="bi bi-star" *ngFor="let s of [].constructor(5 - review.rating)"></i>
+            </span>
+          </div>
+          <div class="review-text">{{review.content}}</div>
+          <div class="review-product">Sản phẩm: {{review.productName}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,179 @@
+<div class="order-form-container" *ngIf="order">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-pink btn-sm" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i> Quay lại
+      </button>
+      <h2 class="management-title mb-0">Đơn hàng: {{ order.id }}</h2>
+     
+      <button class="btn btn-sm btn-outline-secondary rounded-pill" (click)="viewCustomerProfile()">
+  <i class="bi bi-person-badge"></i> KH: <b>{{ customerCode }}</b>
+</button>
+    </div>
+   
+    <div class="d-flex gap-2">
+      <button class="btn btn-pink shadow-sm" (click)="updateStatus()">
+        <i class="bi bi-save"></i> Lưu tất cả thay đổi
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-pink-light text-pink fw-bold">
+          <i class="bi bi-truck"></i> Thông tin giao hàng
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Họ tên người nhận</label>
+              <input type="text" class="form-control" [(ngModel)]="order.shippingAddress.fullName">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Số điện thoại</label>
+              <input type="text" class="form-control" [(ngModel)]="order.shippingAddress.phone">
+            </div>
+            <div class="col-md-12">
+              <label class="form-label small text-muted">Địa chỉ Email</label>
+              <input type="email" class="form-control" [(ngModel)]="order.shippingAddress.email">
+            </div>
+            <div class="col-md-12">
+              <label class="form-label small text-muted">Địa chỉ chi tiết</label>
+              <input type="text" class="form-control" [(ngModel)]="order.shippingAddress.address">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small text-muted">Tỉnh/TP</label>
+              <input type="text" class="form-control" [(ngModel)]="order.shippingAddress.city">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small text-muted">Quận/Huyện</label>
+              <input type="text" class="form-control" [(ngModel)]="order.shippingAddress.district">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small text-muted">Phường/Xã</label>
+              <input type="text" class="form-control" [(ngModel)]="order.shippingAddress.ward">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-pink-light text-pink fw-bold">
+          <i class="bi bi-bag-check"></i> Chi tiết sản phẩm (Có thể chỉnh sửa)
+        </div>
+        <div class="card-body p-0">
+          <table class="table align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th class="ps-3">Sản phẩm</th>
+                <th class="text-center" style="width: 130px;">Size</th>
+                <th class="text-center" style="width: 150px;">Màu sắc</th>
+                <th style="width: 100px;" class="text-center">Số lượng</th>
+                <th style="width: 150px;" class="text-end pe-3">Giá (đ)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order.items; let i = index">
+                <td class="ps-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <img [src]="item.image" width="40" height="40" class="rounded border shadow-sm">
+                    <span class="fw-bold small">{{ item.name }}</span>
+                  </div>
+                </td>
+                
+                <td class="text-center">
+                  <select class="form-select form-select-sm border-pink-soft" [(ngModel)]="item.size">
+                    <option [value]="item.originalSize">{{ item.originalSize }} (Khách đặt)</option>
+                    <option value="S" *ngIf="item.originalSize !== 'S'">S</option>
+                    <option value="M" *ngIf="item.originalSize !== 'M'">M</option>
+                    <option value="L" *ngIf="item.originalSize !== 'L'">L</option>
+                    <option value="XL" *ngIf="item.originalSize !== 'XL'">XL</option>
+                  </select>
+                </td>
+
+                <td class="text-center">
+                  <select class="form-select form-select-sm border-pink-soft" [(ngModel)]="item.color">
+                    <option [value]="item.originalColor">{{ item.originalColor }} (Khách đặt)</option>
+                    <option value="Trắng" *ngIf="item.originalColor !== 'Trắng'">Trắng</option>
+                    <option value="Đen" *ngIf="item.originalColor !== 'Đen'">Đen</option>
+                    <option value="Hồng" *ngIf="item.originalColor !== 'Hồng'">Hồng</option>
+                    <option value="Be" *ngIf="item.originalColor !== 'Be'">Be</option>
+                  </select>
+                </td>
+
+                <td>
+                  <input type="number" class="form-control form-control-sm text-center fw-bold border-pink-soft"
+                         [(ngModel)]="item.quantity" (change)="calculateTotal()" min="1">
+                </td>
+
+                <td class="pe-3">
+                  <input type="number" class="form-control form-control-sm text-end bg-light"
+                         [(ngModel)]="item.price" (change)="calculateTotal()">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+      </div>
+
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-pink-light text-pink fw-bold">
+          <i class="bi bi-chat-left-text"></i> Ghi chú đơn hàng
+        </div>
+        <div class="card-body">
+          <textarea class="form-control" rows="3" [(ngModel)]="order.note"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-pink-light text-pink fw-bold">Xử lý đơn hàng</div>
+        <div class="card-body">
+          <label class="form-label small text-muted">Trạng thái đơn hàng</label>
+          <select [(ngModel)]="order.status" class="form-select status-filter mb-3">
+            <option value="Đang xử lý">Đang xử lý</option>
+            <option value="Đang giao">Đang giao</option>
+            <option value="Đã giao">Đã giao</option>
+            <option value="Đã hủy">Đã hủy</option>
+          </select>
+         
+          <label class="form-label small text-muted">Hình thức vận chuyển</label>
+          <select [(ngModel)]="order.shippingMethod.name" class="form-select mb-3">
+            <option [ngValue]="'Giao hàng tiêu chuẩn'">Giao hàng tiêu chuẩn</option>
+            <option [ngValue]="'Giao hàng hoả tốc'">Giao hàng hoả tốc</option>
+          </select>
+
+          <label class="form-label small text-muted">Thanh toán</label>
+          <select [(ngModel)]="order.paymentId.paymentMethod" class="form-select">
+            <option value="COD">COD (Tiền mặt)</option>
+            <option value="MOMO">MoMo</option>
+            <option value="VNPAY">VNPAY</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0 p-3 bg-pink-light-soft">
+        <h5 class="text-pink fw-bold mb-3">Tổng cộng</h5>
+        <div class="row g-2 mb-3">
+          <div class="col-7 small">Phí vận chuyển:</div>
+          <div class="col-5">
+            <input type="number" class="form-control form-control-sm text-end"
+                   [(ngModel)]="order.shippingMethod.fee" (change)="calculateTotal()">
+          </div>
+          <div class="col-7 small">Giảm giá (Voucher):</div>
+          <div class="col-5">
+            <input type="number" class="form-control form-control-sm text-end text-success"
+                   [(ngModel)]="order.promotion.discountAmount" (change)="calculateTotal()">
+          </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="fw-bold">Tổng cộng:</span>
+          <span class="fw-bold text-pink fs-4">{{ order.totalPrice | number }}đ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

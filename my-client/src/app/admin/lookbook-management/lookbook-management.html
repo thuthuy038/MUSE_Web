@@ -1,0 +1,158 @@
+<div class="container-fluid p-4 bg-light min-vh-100">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold text-primary-muse mb-0">✨ Quản lý Mix & Match</h4>
+
+        <div class="d-flex gap-3 align-items-center">
+            <div class="filter-pill">
+                <button [class.active]="filterType==='all'" (click)="setFilter('all')">Tất cả</button>
+                <button [class.active]="filterType==='mixed'" (click)="setFilter('mixed')">Đã phối đồ</button>
+                <button [class.active]="filterType==='none'" (click)="setFilter('none')">Chưa phối</button>
+            </div>
+
+            <select class="form-select form-select-sm shadow-soft rounded-pill filter-select"
+                [(ngModel)]="filterCategory" (change)="applyFilter()">
+                <option value="">Tất cả danh mục</option>
+                <option *ngFor="let cat of categories" [value]="cat._id">{{ cat.name }}</option>
+            </select>
+
+            <span class="badge status-badge">
+                <span class="text-primary-muse fw-bold">{{displayList.length}}</span> món đồ
+            </span>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-soft p-3 sticky-top admin-card" style="top: 20px;">
+                <h6 class="fw-bold mb-3 text-dark border-bottom pb-2">Studio Phối Đồ Musé</h6>
+
+                <div class="selected-preview mb-3 text-center p-3 border-muse bg-muse-light rounded-lg position-relative"
+                    *ngIf="selectedMain">
+                    <button class="btn btn-sm position-absolute top-0 end-0 text-danger p-2"
+                        (click)="selectedMain = null">
+                        <i class="bi bi-x-circle-fill fs-5"></i>
+                    </button>
+                    <img [src]="getImg(selectedMain)" class="rounded mb-2 shadow-sm main-img-preview">
+                    <div class="small fw-bold text-primary-muse cursor-pointer hover-underline"
+                        (click)="goToDetail(selectedMain._id)">
+                        {{selectedMain.name}}
+                    </div>
+                    <small class="text-muted d-block">{{selectedMain.code}}</small>
+                </div>
+
+                <div class="mb-3 position-relative" *ngIf="!selectedMain">
+                    <label class="form-label small fw-bold text-muted">1. Chọn sản phẩm chính</label>
+                    <div class="input-group shadow-sm rounded-pill overflow-hidden">
+                        <span class="input-group-text bg-white border-end-0 ps-3"><i
+                                class="bi bi-search text-primary-muse"></i></span>
+                        <input type="text" class="form-control border-start-0 py-2" placeholder="Tìm tên hoặc mã..."
+                            [(ngModel)]="searchMain" (input)="filterProducts('main')">
+                    </div>
+                    <ul class="list-group mt-1 shadow search-results" *ngIf="filteredMain.length > 0">
+                        <li class="list-group-item list-group-item-action small d-flex align-items-center gap-2"
+                            *ngFor="let p of filteredMain" (click)="selectMain(p)">
+                            <img [src]="getImg(p)" width="35" height="35" class="rounded object-fit-cover">
+                            <span class="text-truncate-1 fw-medium">{{p.name}}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mb-4 position-relative">
+                    <label class="form-label small fw-bold text-muted">2. Phối thêm với</label>
+                    <div class="d-flex flex-wrap gap-2 mb-2" *ngIf="selectedMatches.length > 0">
+                        <div class="badge-match shadow-sm p-1 pe-2" *ngFor="let m of selectedMatches">
+                            <img [src]="getImg(m)" width="25" height="25" class="rounded-circle me-1 object-fit-cover">
+                            <span class="small text-truncate-1 cursor-pointer"
+                                (click)="goToDetail(m._id)">{{m.name}}</span>
+                            <i class="bi bi-x-circle-fill ms-1 cursor-pointer text-danger"
+                                (click)="removeMatch(m._id)"></i>
+                        </div>
+                    </div>
+                    <div class="input-group shadow-sm rounded-pill overflow-hidden">
+                        <span class="input-group-text bg-white border-end-0 ps-3"><i
+                                class="bi bi-plus-circle text-primary-muse"></i></span>
+                        <input type="text" class="form-control border-start-0 py-2" placeholder="Thêm đồ phối..."
+                            [(ngModel)]="searchMatch" (input)="filterProducts('match')">
+                    </div>
+                    <ul class="list-group mt-1 shadow search-results" *ngIf="filteredMatch.length > 0">
+                        <li class="list-group-item list-group-item-action small d-flex align-items-center gap-2"
+                            *ngFor="let p of filteredMatch" (click)="addMatch(p)">
+                            <img [src]="getImg(p)" width="35" height="35" class="rounded object-fit-cover">
+                            <span class="text-truncate-1 fw-medium">{{p.name}}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="d-flex flex-column gap-2">
+                    <button class="btn btn-muse w-100 py-2 rounded-pill fw-bold"
+                        [disabled]="!selectedMain || selectedMatches.length === 0" (click)="saveLookbook()">
+                        <i class="bi bi-heart-fill me-2"></i> Lưu cách phối này
+                    </button>
+
+                    <button class="btn btn-light w-100 py-2 rounded-pill fw-medium border text-muted"
+                        *ngIf="selectedMain || selectedMatches.length > 0" (click)="resetForm()">
+                        Hủy / Chọn lại
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-soft admin-card overflow-hidden">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0 align-middle">
+                        <thead>
+                            <tr class="bg-primary-muse text-white">
+                                <th class="ps-4 py-3 border-0" style="width: 40%;">Sản phẩm</th>
+                                <th class="py-3 border-0 text-center" style="width: 35%;">Đồ phối kèm</th>
+                                <th class="text-center py-3 border-0" style="width: 25%; min-width: 160px;">Thao tác
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let p of displayList">
+                                <td class="ps-4 py-3">
+                                    <div class="d-flex align-items-center">
+                                        <img [src]="getImg(p)" width="55" height="55"
+                                            class="rounded me-3 shadow-sm border object-fit-cover">
+                                        <div class="overflow-hidden">
+                                            <div class="fw-bold text-dark text-truncate-2 mb-1 cursor-pointer link-primary-muse"
+                                                (click)="goToDetail(p._id)" [title]="p.name">
+                                                {{p.name}}
+                                            </div>
+                                            <span class="badge bg-secondary-muse text-primary-muse px-2"
+                                                style="font-size: 10px;">{{p.code}}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                        <span class="badge match-badge cursor-pointer hover-underline"
+                                            *ngFor="let item of getMatchingItems(p._id)" (click)="goToDetail(item._id)">
+                                            {{item.name}}
+                                        </span>
+                                        <div *ngIf="getMatchingNames(p._id).length === 0"
+                                            class="text-muted small italic opacity-75">Chưa phối</div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex flex-column gap-2 px-3">
+                                        <button class="btn btn-sm btn-muse w-100 py-1" (click)="selectMain(p)">Phối
+                                            đồ</button>
+                                        <button class="btn btn-sm btn-match-item w-100"
+                                            *ngIf="selectedMain && selectedMain._id !== p._id" (click)="addMatch(p)">+
+                                            Phối kèm</button>
+                                        <button class="btn btn-sm btn-delete mt-1" (click)="deleteLBByProduct(p._id)"
+                                            *ngIf="getMatchingNames(p._id).length > 0">
+                                            <i class="bi bi-trash3"></i> Xóa
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

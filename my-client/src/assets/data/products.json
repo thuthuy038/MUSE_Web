@@ -1,0 +1,1274 @@
+[
+  {
+    "id": 20250001,
+    "name": "Đầm babydoll xếp ly đính nơ lụa ngọt ngào Abeline",
+    "category": "dam",
+    "price": 790000,
+    "discountPercent": 3,
+    "discountPrice": 766300,
+    "images": [
+      "assets/images/products/20250001/20250001a.jpg",
+      "assets/images/products/20250001/20250001b.jpg",
+      "assets/images/products/20250001/20250001c.jpg"
+    ],
+    "description": "Đầm babydoll xếp ly đính nơ lụa ngọt ngào Abeline",
+    "rating": 5,
+    "colors": [
+      "Hồng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Azure tơ hoa, Blue xô hoa, Cream tơ hoa",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 23,
+    "createdAt": 20250909
+  },
+  {
+    "id": 20250002,
+    "name": "Đầm kiểu voan hoa dáng suông xếp li có kèm dây Clydie nhiều màu thanh lịch nữ tính",
+    "category": "dam",
+    "price": 690000,
+    "discountPercent": 3,
+    "discountPrice": 669300,
+    "images": [
+      "assets/images/products/20250002/20250002a.jpg",
+      "assets/images/products/20250002/20250002b.jpg",
+      "assets/images/products/20250002/20250002c.jpg"
+    ],
+    "description": "Đầm kiểu voan hoa dáng suông xếp li có kèm dây Clydie nhiều màu thanh lịch nữ tính",
+    "rating": 4.9,
+    "colors": [
+      "Trắng kem",
+      "Hồng pastel"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Azure tơ hoa, Blue xô hoa, Cream tơ hoa",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 20,
+    "createdAt": 20250909
+  },
+  {
+    "id": 20250003,
+    "name": "Đầm kiểu voan hoa dáng suông xếp li có kèm dây Bettina nhiều màu thanh lịch nữ tính",
+    "category": "dam",
+    "price": 890000,
+    "discountPercent": 5,
+    "discountPrice": 845500,
+    "images": [
+      "assets/images/products/20250003/20250003a.jpg",
+      "assets/images/products/20250003/20250003b.jpg",
+      "assets/images/products/20250003/20250003c.jpg"
+    ],
+    "description": "Đầm kiểu voan hoa dáng suông xếp li có kèm dây Bettina nhiều màu thanh lịch nữ tính",
+    "rating": 5,
+    "colors": [
+      "Hồng",
+      "Kem",
+      "Xanh lá"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "voan",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 85,
+    "createdAt": 20250909
+  },
+  {
+    "id": 20250004,
+    "name": "Đầm kiểu tơ hoa babydoll xếp li Fiorella trẻ trung nữ tính",
+    "category": "dam",
+    "price": 790000,
+    "discountPercent": 5,
+    "discountPrice": 750500,
+    "images": [
+      "assets/images/products/20250004/20250004a.jpg",
+      "assets/images/products/20250004/20250004b.jpg",
+      "assets/images/products/20250004/20250004c.jpg"
+    ],
+    "description": "Đầm kiểu tơ hoa babydoll xếp li Fiorella trẻ trung nữ tính",
+    "rating": 4.9,
+    "colors": [
+      "Hoa kem",
+      "Hoa vàng đậm"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Tơ hoa",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 12,
+    "createdAt": 20250909
+  },
+  {
+    "id": 20250005,
+    "name": "Đầm suông hoa cổ trụ cột nơ thanh lịch dễ thương Sierra nhiều màu phù hợp đi làm đi chơi",
+    "category": "dam",
+    "price": 720000,
+    "discountPercent": 3,
+    "discountPrice": 698400,
+    "images": [
+      "assets/images/products/20250005/20250005a.jpg",
+      "assets/images/products/20250005/20250005b.jpg",
+      "assets/images/products/20250005/20250005c.jpg"
+    ],
+    "description": "Đầm suông hoa cổ trụ cột nơ thanh lịch dễ thương Sierra nhiều màu phù hợp đi làm đi chơi",
+    "rating": 4.8,
+    "colors": [
+      "Kem",
+      "Trắng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Tơ hoa",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 100,
+    "createdAt": 20250909
+  },
+  {
+    "id": 20250006,
+    "name": "Đầm babydoll ngắn tay phồng hoa đính nổi dễ thương Franny phù hợp đi chơi đi cà phê",
+    "category": "dam",
+    "price": 790000,
+    "discountPercent": 3,
+    "discountPrice": 766300,
+    "images": [
+      "assets/images/products/20250006/20250006a.jpg",
+      "assets/images/products/20250006/20250006b.jpg",
+      "assets/images/products/20250006/20250006c.jpg"
+    ],
+    "description": "Đầm babydoll ngắn tay phồng hoa đính nổi dễ thương Franny phù hợp đi chơi đi cà phê",
+    "rating": 4.9,
+    "colors": [
+      "Trắng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "voan",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 127,
+    "createdAt": 20250909
+  },
+  {
+    "id": 20250007,
+    "name": "Đầm babydoll hoa tay dài dáng bồng xòe phù hợp đi chơi Freya Loose Dress",
+    "category": "dam",
+    "price": 990000,
+    "discountPercent": 3,
+    "discountPrice": 960300,
+    "images": [
+      "assets/images/products/20250007/20250007a.jpg",
+      "assets/images/products/20250007/20250007b.jpg",
+      "assets/images/products/20250007/20250007c.jpg"
+    ],
+    "description": "Đầm babydoll hoa tay dài dáng bồng xòe phù hợp đi chơi Freya Loose Dress",
+    "rating": 5,
+    "colors": [
+      "Kem"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Voan tơ",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 107,
+    "createdAt": 20250909
+  },
+  {
+    "id": 20250008,
+    "name": "Đầm kiểu nữ babydoll dáng ngắn Bellona và White Puff Sleeve Layered Babydoll Dress trẻ trung",
+    "category": "dam",
+    "price": 690000,
+    "discountPercent": 5,
+    "discountPrice": 655500,
+    "images": [
+      "assets/images/products/20250008/20250008a.jpg",
+      "assets/images/products/20250008/20250008b.jpg",
+      "assets/images/products/20250008/20250008c.jpg"
+    ],
+    "description": "Đầm kiểu nữ babydoll dáng ngắn Bellona và White Puff Sleeve Layered Babydoll Dress trẻ trung",
+    "rating": 4.9,
+    "colors": [
+      "Hoa",
+      "Xanh dương",
+      "Trắng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Cotton ren",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 127,
+    "createdAt": 20250909
+  },
+  {
+    "id": 20250009,
+    "name": "Đầm kiểu linen hoa dáng chữ A Gilda phù hợp đi làm đi chơi",
+    "category": "dam",
+    "price": 590000,
+    "discountPercent": 3,
+    "discountPrice": 572300,
+    "images": [
+      "assets/images/products/20250009/20250009a.jpg",
+      "assets/images/products/20250009/20250009b.jpg",
+      "assets/images/products/20250009/20250009c.jpg"
+    ],
+    "description": "Đầm kiểu linen hoa dáng chữ A Gilda phù hợp đi làm đi chơi",
+    "rating": 4.9,
+    "colors": [
+      "Kem"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Linen",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 87,
+    "createdAt": 20250915
+  },
+  {
+    "id": 20250010,
+    "name": "Đầm suông cổ bèo to phối nơ Apolline nhiều màu dễ thương ngọt ngào phù hợp đi chơi dạo phố",
+    "category": "dam",
+    "price": 720000,
+    "discountPercent": 15,
+    "discountPrice": 612000,
+    "images": [
+      "assets/images/products/20250010/20250010a.jpg",
+      "assets/images/products/20250010/20250010b.jpg",
+      "assets/images/products/20250010/20250010c.jpg"
+    ],
+    "description": "Đầm suông cổ bèo to phối nơ Apolline nhiều màu dễ thương ngọt ngào phù hợp đi chơi dạo phố",
+    "rating": 5,
+    "colors": [
+      "Kem",
+      "Đen"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Linen",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 50,
+    "createdAt": 20250915
+  },
+  {
+    "id": 20250011,
+    "name": "Đầm hoa sơ mi dáng suông cổ bèo tiểu thư Jream phù hợp đi chơi đi biển ",
+    "category": "dam",
+    "price": 620000,
+    "discountPercent": 3,
+    "discountPrice": 601400,
+    "images": [
+      "assets/images/products/20250011/20250011a.jpg",
+      "assets/images/products/20250011/20250011b.jpg",
+      "assets/images/products/20250011/20250011c.jpg"
+    ],
+    "description": "Đầm hoa sơ mi dáng suông cổ bèo tiểu thư Jream phù hợp đi chơi đi biển",
+    "rating": 4.9,
+    "colors": [
+      "Kem"
+    ],
+    "sizes": [
+      "S",
+      "M"
+    ],
+    "material": "Tafta in hoa",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 157,
+    "createdAt": 20250915
+  },
+  {
+    "id": 20250012,
+    "name": "Đầm babydoll xếp ly tay phồng tiểu thư Marcella phù hợp đi chơi đi cà phê",
+    "category": "dam",
+    "price": 790000,
+    "discountPercent": 3,
+    "discountPrice": 766300,
+    "images": [
+      "assets/images/products/20250012/20250012a.jpg",
+      "assets/images/products/20250012/20250012b.jpg",
+      "assets/images/products/20250012/20250012c.jpg"
+    ],
+    "description": "Đầm babydoll xếp ly tay phồng tiểu thư Marcella phù hợp đi chơi đi cà phê",
+    "rating": 4.9,
+    "colors": [
+      "Hoa Kem"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Voan",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 90,
+    "createdAt": 20250915
+  },
+  {
+    "id": 20250013,
+    "name": "Áo dài dáng suông cổ trụ đính nút nhẹ nhàng Hạ Miên phù hợp đi chơi lễ tết (Không kèm quần)",
+    "category": "aodai",
+    "price": 790000,
+    "discountPercent": 3,
+    "discountPrice": 766300,
+    "images": [
+      "assets/images/products/20250013/20250013a.png",
+      "assets/images/products/20250013/20250013b.png",
+      "assets/images/products/20250013/20250013c.png"
+    ],
+    "description": "(Không kèm quần) Áo dài dáng suông cổ trụ đính nút nhẹ nhàng Hạ Miên phù hợp đi chơi lễ tết",
+    "rating": 5,
+    "colors": [
+      "Hồng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Voan",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 56,
+    "createdAt": 20250915
+  },
+  {
+    "id": 20250014,
+    "name": "Áo dài tay lỡ họa tiết hoa nổi dịu dàng tinh tế Giai Thi phù hợp mặc lễ Tết (Không kèm quần)",
+    "category": "aodai",
+    "price": 790000,
+    "discountPercent": 5,
+    "discountPrice": 750500,
+    "images": [
+      "assets/images/products/20250014/20250014a.png",
+      "assets/images/products/20250014/20250014b.png",
+      "assets/images/products/20250014/20250014c.png",
+      "assets/images/products/20250014/20250014d.png"
+    ],
+    "description": "(Không kèm quần) Áo dài tay lỡ họa tiết hoa nổi dịu dàng tinh tế Giai Thi phù hợp mặc lễ Tết",
+    "rating": 4.9,
+    "colors": [
+      "Xanh"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Voan",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 90,
+    "createdAt": 20250930
+  },
+  {
+    "id": 20250015,
+    "name": "Áo dài cổ trụ tay lửng đính nơ dễ thương Diệp Liên phù hợp mặc lễ tết (Không kèm quần)",
+    "category": "aodai",
+    "price": 790000,
+    "discountPercent": 10,
+    "discountPrice": 711000,
+    "images": [
+      "assets/images/products/20250015/20250015a.png",
+      "assets/images/products/20250015/20250015b.png",
+      "assets/images/products/20250015/20250015c.png",
+      "assets/images/products/20250015/20250015d.png"
+    ],
+    "description": "(Không kèm quần) Áo dài cổ trụ tay lửng đính nơ dễ thương Diệp Liên phù hợp mặc lễ tết",
+    "rating": 4.8,
+    "colors": [
+      "Hồng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Voan",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 20,
+    "createdAt": 20250930
+  },
+  {
+    "id": 20250016,
+    "name": "Áo dài họa tiết trái lựu cổ tròn tay dài tinh tế Hân Nghiên phù chơi lễ tết (Không kèm quần)",
+    "category": "aodai",
+    "price": 790000,
+    "discountPercent": 10,
+    "discountPrice": 711000,
+    "images": [
+      "assets/images/products/20250016/20250016a.png",
+      "assets/images/products/20250016/20250016b.png",
+      "assets/images/products/20250016/20250016c.png"
+    ],
+    "description": "(Không kèm quần) Áo dài cổ trụ tay lửng đính nơ dễ thương Diệp Liên phù hợp mặc lễ tết",
+    "rating": 4.8,
+    "colors": [
+      "Kem"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Cotton lụa",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 30,
+    "createdAt": 20250930
+  },
+  {
+    "id": 20250017,
+    "name": "Áo dài yếm cổ cao dáng suông truyền thống Vân Diễm phù hợp đi chơi lễ tết (Không kèm quần)",
+    "category": "aodai",
+    "price": 690000,
+    "discountPercent": 5,
+    "discountPrice": 655500,
+    "images": [
+      "assets/images/products/20250017/20250017a.png",
+      "assets/images/products/20250017/20250017b.png",
+      "assets/images/products/20250017/20250017c.png",
+      "assets/images/products/20250017/20250017d.png"
+    ],
+    "description": "(Không kèm quần) Áo dài yếm cổ cao dáng suông truyền thống Vân Diễm phù hợp đi chơi lễ tết ",
+    "rating": 5,
+    "colors": [
+      "Đỏ"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Linen",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 87,
+    "createdAt": 20250930
+  },
+  {
+    "id": 20250018,
+    "name": "Áo dài cổ yếm ren hoa nữ tính Liên Dung và Lạc Anh phù hợp dịp lễ tết (Không kèm quần)",
+    "category": "aodai",
+    "price": 790000,
+    "discountPercent": 5,
+    "discountPrice": 750500,
+    "images": [
+      "assets/images/products/20250018/20250018a.png",
+      "assets/images/products/20250018/20250018b.png",
+      "assets/images/products/20250018/20250018c.png",
+      "assets/images/products/20250018/20250018d.png"
+    ],
+    "description": "(Không kèm quần) Áo dài cổ yếm ren hoa nữ tính Liên Dung và Lạc Anh phù hợp dịp lễ tết",
+    "rating": 4.8,
+    "colors": [
+      "Lạc Anh",
+      "Liên Dung"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Ren hoa",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100
+  },
+  {
+    "id": 20250019,
+    "name": "Áo kiểu nữ suông tay bồng Babydoll Puff Sleeve Shirt nhiều màu dễ thương trẻ trung",
+    "category": "ao",
+    "price": 420000,
+    "discountPercent": 5,
+    "discountPrice": 399000,
+    "images": [
+      "assets/images/products/20250019/20250019a.png",
+      "assets/images/products/20250019/20250019b.png",
+      "assets/images/products/20250019/20250019c.png",
+      "assets/images/products/20250019/20250019d.png",
+      "assets/images/products/20250019/20250019e.png"
+    ],
+    "description": "Áo kiểu nữ suông tay bồng Babydoll Puff Sleeve Shirt nhiều màu dễ thương trẻ trung",
+    "rating": 5,
+    "colors": [
+      "Trắng",
+      "Xanh"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Cotton",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 13,
+    "createdAt": 20251003
+  },
+  {
+    "id": 20250020,
+    "name": "Áo kiểu 2 dây croptop đi biển Gwyneth Top 2 màu",
+    "category": "ao",
+    "price": 420000,
+    "discountPercent": 5,
+    "discountPrice": 399000,
+    "images": [
+      "assets/images/products/20250020/20250020a.png",
+      "assets/images/products/20250020/20250020b.png",
+      "assets/images/products/20250020/20250020c.png",
+      "assets/images/products/20250020/20250020d.png",
+      "assets/images/products/20250020/20250020e.png"
+    ],
+    "description": "Áo kiểu 2 dây croptop đi biển Gwyneth Top 2 màu",
+    "rating": 4.8,
+    "colors": [
+      "Trắng",
+      "Kem"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Kate",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 78,
+    "createdAt": 20251003
+  },
+  {
+    "id": 20250021,
+    "name": "Áo sơ mi kẻ sọc tay dài phồng trẻ trung năng động Alula nhiều màu phù hợp đi làm đi chơi",
+    "category": "ao",
+    "price": 490000,
+    "discountPercent": 10,
+    "discountPrice": 441000,
+    "images": [
+      "assets/images/products/20250021/20250021a.png",
+      "assets/images/products/20250021/20250021b.png",
+      "assets/images/products/20250021/20250021c.png",
+      "assets/images/products/20250021/20250021d.png",
+      "assets/images/products/20250021/20250021e.png"
+    ],
+    "description": "Áo sơ mi kẻ sọc tay dài phồng trẻ trung năng động Alula nhiều màu phù hợp đi làm đi chơi",
+    "rating": 4.9,
+    "colors": [
+      "Xanh navy",
+      "Xanh blue"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Cotton hơi nhăn",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 129,
+    "createdAt": 20251003
+  },
+  {
+    "id": 20250022,
+    "name": "Áo bí babydoll tay phồng dáng rộng dễ thương Cotton Puff Short Sleeve Top phù hợp đi chơi",
+    "category": "ao",
+    "price": 390000,
+    "discountPercent": 10,
+    "discountPrice": 351000,
+    "images": [
+      "assets/images/products/20250022/20250022a.png",
+      "assets/images/products/20250022/20250022a.png",
+      "assets/images/products/20250022/20250022c.png",
+      "assets/images/products/20250022/20250022d.png",
+      "assets/images/products/20250022/20250022e.png"
+    ],
+    "description": "Áo bí babydoll tay phồng dáng rộng dễ thương Cotton Puff Short Sleeve Top phù hợp đi chơi",
+    "rating": 5,
+    "colors": [
+      "Trắng",
+      "Vàng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Dù",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 136,
+    "createdAt": 20251015
+  },
+  {
+    "id": 20250023,
+    "name": "Áo thun vai nhún in họa tiết dễ thương trẻ trung Rebel nhiều màu phù hợp đi chơi đi làm",
+    "category": "ao",
+    "price": 290000,
+    "discountPercent": 40,
+    "discountPrice": 174000,
+    "images": [
+      "assets/images/products/20250023/20250023a.png",
+      "assets/images/products/20250023/20250023b.png",
+      "assets/images/products/20250023/20250023c.png",
+      "assets/images/products/20250023/20250023d.png",
+      "assets/images/products/20250023/20250023e.png"
+    ],
+    "description": "Áo thun vai nhún in họa tiết dễ thương trẻ trung Rebel nhiều màu phù hợp đi chơi đi làm",
+    "rating": 5,
+    "colors": [
+      "Be loang",
+      "Đen loang",
+      "Nơ trắng",
+      "Nơ đen",
+      "Đen trơn"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Thun",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 106,
+    "createdAt": 20251015
+  },
+  {
+    "id": 20250024,
+    "name": "Áo babydoll cột nơ dễ thương Drawstring Ruffle Babydoll Shirt nhiều màu phù hợp đi chơi ",
+    "category": "ao",
+    "price": 420000,
+    "discountPercent": 5,
+    "discountPrice": 389000,
+    "images": [
+      "assets/images/products/20250024/20250024a.png",
+      "assets/images/products/20250024/20250024b.png",
+      "assets/images/products/20250024/20250024c.png",
+      "assets/images/products/20250024/20250024d.png",
+      "assets/images/products/20250024/20250024e.png"
+    ],
+    "description": "Áo babydoll cột nơ dễ thương Drawstring Ruffle Babydoll Shirt nhiều màu phù hợp đi chơi ",
+    "rating": 5,
+    "colors": [
+      "Trắng",
+      "Xanh"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Cotton",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 127,
+    "createdAt": 20251020
+  },
+  {
+    "id": 20250025,
+    "name": "Áo kiểu nữ phối bèo cổ V White Muslin Tiered Ruffled V Neck Top trendy trẻ trung",
+    "category": "ao",
+    "price": 490000,
+    "discountPercent": 5,
+    "discountPrice": 465500,
+    "images": [
+      "assets/images/products/20250025/20250025a.png",
+      "assets/images/products/20250025/20250025b.png",
+      "assets/images/products/20250025/20250025c.png"
+    ],
+    "description": "Áo kiểu nữ phối bèo cổ V White Muslin Tiered Ruffled V Neck Top trendy trẻ trung",
+    "rating": 5,
+    "colors": [
+      "Trắng"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Xô",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 94,
+    "createdAt": 20251020
+  },
+  {
+    "id": 20250026,
+    "name": "Áo babydoll kiểu nữ đính nơ Blue Kate Striped Puff Sleeve Shirt ngọt ngào trẻ trung",
+    "category": "ao",
+    "price": 490000,
+    "discountPercent": 5,
+    "discountPrice": 465500,
+    "images": [
+      "assets/images/products/20250026/20250026a.png",
+      "assets/images/products/20250026/20250026b.png",
+      "assets/images/products/20250026/20250026c.png"
+    ],
+    "description": "Áo babydoll kiểu nữ đính nơ Blue Kate Striped Puff Sleeve Shirt ngọt ngào trẻ trung",
+    "rating": 5,
+    "colors": [
+      "Xanh"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Kate",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 87,
+    "createdAt": 20251020
+  },
+  {
+    "id": 20250027,
+    "name": "Áo kiểu nữ cột nơ babydoll dáng suông đi chơi Floralie họa tiết hoa nhiều màu",
+    "category": "ao",
+    "price": 420000,
+    "discountPercent": 10,
+    "discountPrice": 367000,
+    "images": [
+      "assets/images/products/20250027/20250027a.png",
+      "assets/images/products/20250027/20250027b.png",
+      "assets/images/products/20250027/20250027c.png",
+      "assets/images/products/20250027/20250027d.png",
+      "assets/images/products/20250027/20250027e.png",
+      "assets/images/products/20250027/20250027f.png",
+      "assets/images/products/20250027/20250027g.png"
+    ],
+    "description": "Áo kiểu nữ cột nơ babydoll dáng suông đi chơi Floralie họa tiết hoa nhiều màu",
+    "rating": 5,
+    "colors": [
+      "Xanh",
+      "Kem nơ đỏ",
+      "Xanh laong",
+      "Đỏ",
+      "Nâu"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "voan",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 131,
+    "createdAt": 20251020
+  },
+  {
+    "id": 20250028,
+    "name": "Chân váy xếp ly dáng ngắn cạp trễ Inez nhiều màu trẻ trung phù hợp đi chơi đi học ",
+    "category": "chanvay",
+    "price": 490000,
+    "discountPercent": 15,
+    "discountPrice": 416500,
+    "images": [
+      "assets/images/products/20250028/20250028a.png",
+      "assets/images/products/20250028/20250028b.png",
+      "assets/images/products/20250028/20250028c.png",
+      "assets/images/products/20250028/20250028d.png",
+      "assets/images/products/20250028/20250028e.png"
+    ],
+    "description": "Chân váy xếp ly dáng ngắn cạp trễ Inez nhiều màu trẻ trung phù hợp đi chơi đi học ",
+    "rating": 4.8,
+    "colors": [
+      "Đen",
+      "Xanh navy",
+      "Nâu",
+      "Sọc caro",
+      "Xám"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Da lộn",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 72,
+    "createdAt": 20251031
+  },
+  {
+    "id": 20250029,
+    "name": "Chân váy cotton chữ A basic trẻ trung White Cotton Midi Flared Skirt phù hợp mọi dịp",
+    "category": "chanvay",
+    "price": 420000,
+    "discountPercent": 5,
+    "discountPrice": 389000,
+    "images": [
+      "assets/images/products/20250029/20250029a.png",
+      "assets/images/products/20250029/20250029b.png",
+      "assets/images/products/20250029/20250029c.png"
+    ],
+    "description": "Chân váy cotton chữ A basic trẻ trung White Cotton Midi Flared Skirt phù hợp mọi dịp",
+    "rating": 5,
+    "colors": [
+      "Trắng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Cotton",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 10,
+    "createdAt": 20251031
+  },
+  {
+    "id": 20250031,
+    "name": "Chân váy chữ A dáng trơn đơn giản trẻ trung Cotton A Line Skirt nhiều màu phù hợp đi làm đi chơi",
+    "category": "chanvay",
+    "price": 450000,
+    "discountPercent": 10,
+    "discountPrice": 405000,
+    "images": [
+      "assets/images/products/20250031/20250031a.png",
+      "assets/images/products/20250031/20250031b.png",
+      "assets/images/products/20250031/20250031c.png",
+      "assets/images/products/20250031/20250031d.png",
+      "assets/images/products/20250031/20250031e.png"
+    ],
+    "description": "Chân váy chữ A dáng trơn đơn giản trẻ trung Cotton A Line Skirt nhiều màu phù hợp đi làm đi chơi ",
+    "rating": 5,
+    "colors": [
+      "Trắng",
+      "Đen"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Kaki",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 26,
+    "createdAt": 20251013
+  },
+  {
+    "id": 20250032,
+    "name": "Chân váy dài đi biển Alie dáng xòe chất mềm bồng bềnh nhiều màu",
+    "category": "chanvay",
+    "price": 490000,
+    "discountPercent": 10,
+    "discountPrice": 441000,
+    "images": [
+      "assets/images/products/20250032/20250032a.png",
+      "assets/images/products/20250032/20250032b.png",
+      "assets/images/products/20250032/20250032c.png",
+      "assets/images/products/20250032/20250032d.png",
+      "assets/images/products/20250032/20250032e.png"
+    ],
+    "description": "Chân váy dài đi biển Alie dáng xòe chất mềm bồng bềnh nhiều màu",
+    "rating": 5,
+    "colors": [
+      "Trắng",
+      "Đen",
+      "Kem",
+      "Xanh navy"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "voan",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 60,
+    "createdAt": 20251013
+  },
+  {
+    "id": 20250033,
+    "name": "Chân váy chấm bi midi trẻ trung White Cotton Polka Dot Midi Skirt phù hợp đi chơi đi học",
+    "category": "chanvay",
+    "price": 320000,
+    "discountPercent": 10,
+    "discountPrice": 288000,
+    "images": [
+      "assets/images/products/20250033/20250033a.png",
+      "assets/images/products/20250033/20250033b.png",
+      "assets/images/products/20250033/20250033c.png"
+    ],
+    "description": "Chân váy chấm bi midi trẻ trung White Cotton Polka Dot Midi Skirt phù hợp đi chơi đi học",
+    "rating": 5,
+    "colors": [
+      "Trắng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "Cotton",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 76,
+    "createdAt": 20251013
+  },
+  {
+    "id": 20250034,
+    "name": "Chân váy ren dáng ngắn tầng bèo trẻ trung Elilta phù hợp đi chơi đi biển",
+    "category": "chanvay",
+    "price": 420000,
+    "discountPercent": 10,
+    "discountPrice": 378000,
+    "images": [
+      "assets/images/products/20250034/20250034a.png",
+      "assets/images/products/20250034/20250034b.png",
+      "assets/images/products/20250034/20250034c.png"
+    ],
+    "description": "Chân váy ren dáng ngắn tầng bèo trẻ trung Elilta phù hợp đi chơi đi biển",
+    "rating": 4.8,
+    "colors": [
+      "Trắng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "material": "ren",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 35,
+    "createdAt": 20251013
+  },
+  {
+    "id": 20250035,
+    "name": "Chân váy xòe midi Maude dáng basic trẻ trung phù hợp mọi dịp",
+    "category": "chanvay",
+    "price": 490000,
+    "discountPercent": 15,
+    "discountPrice": 416500,
+    "images": [
+      "assets/images/products/20250035/20250035a.png",
+      "assets/images/products/20250035/20250035b.png",
+      "assets/images/products/20250035/20250035c.png"
+    ],
+    "description": "Chân váy xòe midi Maude dáng basic trẻ trung phù hợp mọi dịp",
+    "rating": 5,
+    "colors": [
+      "Đen"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Kaki xước",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 97,
+    "createdAt": 20251013
+  },
+  {
+    "id": 20250036,
+    "name": "Chân váy ngắn có chun dáng xếp tầng bồng xòe Cicely nhiều màu dễ phối phù hợp đi chơi ",
+    "category": "chanvay",
+    "price": 450000,
+    "discountPercent": 10,
+    "discountPrice": 405000,
+    "images": [
+      "assets/images/products/20250036/20250036a.png",
+      "assets/images/products/20250036/20250036b.png",
+      "assets/images/products/20250036/20250036c.png",
+      "assets/images/products/20250036/20250036d.png"
+    ],
+    "description": "Chân váy xòe midi Maude dáng basic trẻ trung phù hợp mọi dịp",
+    "rating": 5,
+    "colors": [
+      "Đen",
+      "Trắng",
+      "Cream"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Linen",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 6,
+    "createdAt": 20251013
+  },
+  {
+    "id": 20250037,
+    "name": "Quần dài kẻ sọc lưng phối màu trẻ trung trendy Drawstring nhiều màu phù hợp đi chơi ",
+    "category": "quan",
+    "price": 450000,
+    "discountPercent": 3,
+    "discountPrice": 436500,
+    "images": [
+      "assets/images/products/20250037/20250037a.jpg",
+      "assets/images/products/20250037/20250037b.jpg",
+      "assets/images/products/20250037/20250037c.jpg",
+      "assets/images/products/20250037/20250037d.jpg"
+    ],
+    "description": "Quần dài kẻ sọc lưng phối màu trẻ trung trendy Drawstring nhiều màu phù hợp đi chơi ",
+    "rating": 5,
+    "colors": [
+      "Navy", "Blue", "Tan"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L", 
+      "XL"
+    ],
+    "material": "Cotton, Linen",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 23,
+    "createdAt": 20251105
+  },
+  {
+    "id": 20250038,
+    "name": "Quần short kaki Leni nhiều màu phù hợp đi học đi chơi",
+    "category": "quan",
+    "price": 420000,
+    "discountPercent": 3,
+    "discountPrice": 407400,
+    "images": [
+      "assets/images/products/20250038/20250038a.jpg",
+      "assets/images/products/20250038/20250038b.jpg",
+      "assets/images/products/20250038/20250038c.jpg",
+      "assets/images/products/20250038/20250038d.jpg",
+      "assets/images/products/20250038/20250038e.jpg"
+    ],
+    "description": "Quần short kaki Leni nhiều màu phù hợp đi học đi chơi",
+    "rating": 5,
+    "colors": [
+      "White",
+      "Brown",
+      "Tortilla"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Kaki",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 36,
+    "createdAt": 20251105
+  },
+  {
+    "id": 20250039,
+    "name": "Quần ống rộng trẻ trung năng động Kaki Denim Wide Leg Pants nhiều màu phù hợp đi học đi chơi",
+    "category": "quan",
+    "price": 490000,
+    "discountPercent": 3,
+    "discountPrice": 475300,
+    "images": [
+      "assets/images/products/20250039/20250039a.jpg",
+      "assets/images/products/20250039/20250039b.jpg",
+      "assets/images/products/20250039/20250039c.jpg"
+    ],
+    "description": "Quần ống rộng trẻ trung năng động Kaki Denim Wide Leg Pants nhiều màu phù hợp đi học đi chơi",
+    "rating": 5,
+    "colors": [
+      "Đen",
+      "Trắng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Denim",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 10,
+    "createdAt": 20251105
+  },
+  {
+    "id": 20250040,
+    "name": "Quần suông ống rộng lưng cao tối giản Zarela phù hợp đi làm đi chơi thanh lịch ",
+    "category": "quan",
+    "price": 490000,
+    "discountPercent": 3,
+    "discountPrice": 475300,
+    "images": [
+      "assets/images/products/20250040/20250040a.jpg",
+      "assets/images/products/20250040/20250040b.jpg",
+      "assets/images/products/20250040/20250040c.jpg"
+    ],
+    "description": "Quần suông ống rộng lưng cao tối giản Zarela phù hợp đi làm đi chơi thanh lịch ",
+    "rating": 5,
+    "colors": [
+      "Đen",
+      "Trắng"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Kaki",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 18,
+    "createdAt": 20251106
+  },
+  {
+    "id": 20250041,
+    "name": "Quần ống suông đũi thoáng mát trẻ trung Marlowe phù hợp mặc thường ngày",
+    "category": "quan",
+    "price": 450000,
+    "discountPercent": 3,
+    "discountPrice": 436500,
+    "images": [
+      "assets/images/products/20250041/20250041a.jpg",
+      "assets/images/products/20250041/20250041b.jpg",
+      "assets/images/products/20250041/20250041c.jpg",
+      "assets/images/products/20250041/20250041d.jpg"
+    ],
+    "description": "Quần ống suông đũi thoáng mát trẻ trung Marlowe phù hợp mặc thường ngày",
+    "rating": 4.9,
+    "colors": [
+      "Trắng kem",
+      "Trắng sọc"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Kaki",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 21,
+    "createdAt": 20251106
+  },
+  {
+    "id": 20250042,
+    "name": "Quần đũi ống rộng xếp li có dây buộc Brisa nhiều màu phù hợp đi chơi",
+    "category": "quan",
+    "price": 490000,
+    "discountPercent": 3,
+    "discountPrice": 475300,
+    "images": [
+      "assets/images/products/20250042/20250042a.jpg",
+      "assets/images/products/20250042/20250042b.jpg",
+      "assets/images/products/20250042/20250042c.jpg",
+      "assets/images/products/20250042/20250042d.jpg"
+    ],
+    "description": "Quần đũi ống rộng xếp li có dây buộc Brisa nhiều màu phù hợp đi chơi",
+    "rating": 4.7,
+    "colors": [
+      "Đen",
+      "Nâu"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Đũi",
+    "isNew": true,
+    "isBestSeller": false,
+    "inventory": 100,
+    "sold": 16,
+    "createdAt": 20251106
+  }
+]

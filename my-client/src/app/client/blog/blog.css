@@ -1,0 +1,133 @@
+body {
+    background-color: #fff;
+    color: #333;
+}
+
+/* --- MAIN BLOG --- */
+
+.blog-post {
+    transition: transform 0.3s ease;
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
+}
+
+/* ẢNH BLOG */
+.blog-post img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.blog-post img:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+}
+
+/* TITLE */
+.blog-post .post-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c2c2c;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+.post-title a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.post-title a:hover {
+    color: #FB6F92;
+}
+
+/* META */
+.blog-post .post-meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 8px 0 12px;
+}
+
+/* CONTENT */
+.blog-post p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555;
+}
+
+/* --- SIDEBAR --- */
+
+.sidebar-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #FB6F92;
+    text-align: center;
+    padding-bottom: 10px;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #fce4ec;
+}
+
+/* ITEM */
+.sidebar-post-list .popular-post {
+    padding: 12px 0;
+    border-bottom: 1px solid #fce4ec;
+    transition: transform 0.2s ease;
+}
+
+.sidebar-post-list .popular-post:hover {
+    transform: translateX(5px);
+}
+
+/* ẢNH SIDEBAR */
+.popular-post-img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    /* sidebar vẫn nên crop cho gọn */
+    border-radius: 10px;
+}
+
+/* TITLE SIDEBAR */
+.popular-post-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #444;
+    transition: color 0.3s ease;
+}
+
+.popular-post:hover .popular-post-title {
+    color: #FB6F92;
+}
+
+/* --- KHOẢNG CÁCH --- */
+
+.blog-post+.blog-post {
+    margin-top: 30px;
+}
+
+/* --- RESPONSIVE --- */
+
+@media (max-width: 768px) {
+    .blog-post img {
+        max-height: 350px;
+    }
+
+    .blog-post .post-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .popular-post-title {
+        font-size: 0.85rem;
+    }
+
+    .popular-post-img {
+        width: 65px;
+        height: 65px;
+    }
+}

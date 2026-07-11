@@ -1,0 +1,192 @@
+<div class="container account-container my-5">
+  <h1 class="main-title text-center mb-4">Tài khoản của bạn</h1>
+
+  <div class="row">
+    <!-- SIDEBAR -->
+    <div class="col-lg-3">
+      <aside class="sidebar-menu">
+        <div class="avatar-wrapper mx-auto mb-3"> 
+          <img [src]="avatarSrc" alt="Avatar" class="content-avatar" (error)="avatarSrc = 'assets/images/account/Generic_avatar.png'">
+        </div>
+        <div class="text-center mb-3">
+          <h5 class="mt-2">{{ user.name || 'Cập nhật tài khoản' }}</h5>
+        </div>
+
+        <h5 class="mt-4">Thông tin tài khoản</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a routerLink="/loyalty" class="nav-link">Khách hàng thân thiết</a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="/account" class="nav-link active">Thay đổi thông tin tài khoản</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/change-address" class="nav-link">Thay đổi địa chỉ giao hàng</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/resetpassword" class="nav-link">Thay đổi mật khẩu</a>
+          </li>
+        </ul>
+
+        <h5 class="mt-4">Sản phẩm yêu thích</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a routerLink="/wishlist" class="nav-link">Sản phẩm yêu thích</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/ordertracking" class="nav-link">Lịch sử order</a>
+          </li>
+        </ul>
+        <hr class="my-3">
+        <button type="button" class="btn btn-outline-danger w-100" (click)="logout()">
+          Đăng xuất
+        </button>
+        <small class="text-muted d-block mt-1">Thoát tài khoản, yêu cầu đăng nhập lại.</small>
+      </aside>
+    </div>
+
+    <!-- MIDDLE COLUMN (PROFILE FORM) -->
+    <div class="col-lg-5 middle-column">
+      <section class="content-section h-100">
+        <h5>Thông tin tài khoản</h5>
+
+        <div class="text-center">
+          <div class="avatar-wrapper mx-auto mb-3">
+            <img [src]="avatarSrc" alt="Avatar" class="content-avatar" (error)="avatarSrc = 'assets/images/account/Generic_avatar.png'">
+            <button type="button" class="avatar-upload-btn" (click)="fileInput.click()" aria-label="Thay đổi ảnh">
+              <i class="bi bi-plus-lg" aria-hidden="true"></i>
+            </button>
+            <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" hidden>
+          </div>
+        </div>
+
+        <form (ngSubmit)="updateProfile()">
+          <div class="mb-3">
+            <label for="email" class="form-label visually-hidden">Email</label>
+            <input id="email" name="email" type="email" class="form-control mb-3" [(ngModel)]="user.email"
+              placeholder="Email">
+          </div>
+
+          <div class="mb-3">
+            <label for="fullname" class="form-label visually-hidden">Họ và tên</label>
+            <input id="fullname" name="fullname" type="text" class="form-control mb-3" [(ngModel)]="user.name"
+              placeholder="Họ và tên">
+          </div>
+
+          <div class="d-flex align-items-center mb-3">
+            <span class="me-3">Giới tính:</span>
+            <div class="form-check me-3">
+              <input class="form-check-input" type="radio" name="gender" id="male" value="male"
+                [(ngModel)]="user.gender">
+              <label class="form-check-label" for="male">Nam</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="female" value="female"
+                [(ngModel)]="user.gender">
+              <label class="form-check-label" for="female">Nữ</label>
+            </div>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <label class="col-12">Ngày sinh:</label>
+            <div class="col">
+              <select class="form-select" name="bday" [(ngModel)]="birthDay" (change)="onBirthdayChange()">
+                <option [ngValue]="null" disabled>Ngày</option>
+                <option *ngFor="let d of days" [ngValue]="d">{{ d }}</option>
+              </select>
+            </div>
+            <div class="col">
+              <select class="form-select" name="bmonth" [(ngModel)]="birthMonth" (change)="onBirthdayChange()">
+                <option [ngValue]="null" disabled>Tháng</option>
+                <option *ngFor="let m of months" [ngValue]="m">{{ m }}</option>
+              </select>
+            </div>
+            <div class="col">
+              <select class="form-select" name="byear" [(ngModel)]="birthYear" (change)="onBirthdayChange()">
+                <option [ngValue]="null" disabled>Năm</option>
+                <option *ngFor="let y of years" [ngValue]="y">{{ y }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-check mb-2 d-flex align-items-center">
+            <input class="form-check-input me-2" type="checkbox" id="newsletter" name="newsletter">
+            <label class="form-check-label" for="newsletter">Nhận thông tin khuyến mãi qua e-mail</label>
+          </div>
+
+          <div class="form-check mb-3 d-flex align-items-start">
+            <input class="form-check-input me-2 mt-1" type="checkbox" id="policy" name="policy">
+            <label class="form-check-label" for="policy">
+              Tôi đồng ý với <a routerLink="/privacy-policy">chính sách xử lý dữ liệu cá nhân</a> của Musé
+            </label>
+          </div>
+
+          <div class="text-end mt-4">
+            <button type="submit" class="btn btn-update" [disabled]="loading">Cập nhật</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <!-- RIGHT COLUMN (SUPPORT INFO) -->
+    <div class="col-lg-4 d-flex flex-column">
+      <div class="content-section mb-4">
+        <h5 class="mb-4">Số điện thoại và Địa chỉ</h5>
+
+        <div class="info-row">
+          <div class="info-col">
+            <i class="bi bi-telephone icon" aria-hidden="true"></i>
+            <div>
+              <strong>Số điện thoại</strong>
+              <input type="text" class="form-control form-control-sm border-0 bg-transparent" [(ngModel)]="user.phone"
+                placeholder="Cập nhật số điện thoại">
+            </div>
+          </div>
+          <button type="button" class="btn btn-update" (click)="updateProfile()">Cập nhật</button>
+        </div>
+
+        <div class="info-row">
+          <div class="info-col">
+            <i class="bi bi-geo-alt icon" aria-hidden="true"></i>
+            <div>
+              <strong>Địa chỉ mặc định</strong>
+              <p class="mb-0">{{ defaultAddressString }}</p>
+            </div>
+          </div>
+          <button type="button" class="btn btn-update" routerLink="/change-address">Thay đổi</button>
+        </div>
+      </div>
+
+      <div class="content-section mb-4">
+        <h5 class="mb-4">Bảo mật</h5>
+
+        <div class="info-row">
+          <div class="info-col">
+            <i class="bi bi-lock icon" aria-hidden="true"></i>
+            <div>
+              <strong>Mật khẩu</strong>
+              <p>Đổi mật khẩu mới</p>
+            </div>
+          </div>
+          <button type="button" class="btn btn-update" routerLink="/resetpassword">Cập nhật</button>
+        </div>
+      </div>
+
+      <div class="content-section flex-grow-1">
+        <h5 class="mb-4">Liên kết mạng xã hội</h5>
+
+
+        <div class="info-row">
+          <div class="info-col">
+            <i class="bi bi-google icon" aria-hidden="true"></i>
+            <div><strong>Google</strong></div>
+          </div>
+          <button type="button" class="btn btn-update btn-secondary" [disabled]="true">
+            {{ user.googleId ? 'Đã liên kết' : 'Liên kết' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

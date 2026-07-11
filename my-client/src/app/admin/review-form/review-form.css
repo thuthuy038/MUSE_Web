@@ -1,0 +1,227 @@
+/* ================= PAGE ================= */
+.page-wrapper {
+    max-width: 900px;
+    margin: 80px auto;
+    position: relative;
+}
+
+.comment-form-page {
+    background: white;
+    padding: 24px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* ================= BACK BUTTON ================= */
+.back-wrapper {
+    position: absolute;
+    left: -150px;
+}
+
+.back-btn {
+    border: 1px solid #FB6F92;
+    background: white;
+    color: #FB6F92;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.back-btn:hover {
+    background: #FFE5EC;
+}
+
+/* ================= PRODUCT ================= */
+.product-box {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.product-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-info .name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.meta {
+    color: #666;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+/* ================= BUTTON ================= */
+.view-order-btn {
+    border: none;
+    background: #FB6F92;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    margin-left: 6px;
+    transition: 0.25s;
+}
+
+.view-order-btn:hover {
+    background: #e85c83;
+}
+
+/* ================= TITLE ================= */
+.review-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 25px 0 12px;
+}
+
+/* ================= RATING ================= */
+.rating-box {
+    background: #fff1f5;
+    border: 1px solid #ffd6e0;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.score {
+    font-size: 30px;
+    font-weight: 700;
+    color: #FB6F92;
+}
+
+.over {
+    color: #666;
+}
+
+.stars {
+    font-size: 18px;
+}
+
+/* ================= REVIEW ================= */
+.review-box {
+    background: #fafafa;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.customer {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.time {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.content {
+    margin-top: 8px;
+    line-height: 1.6;
+}
+
+/* ================= REVIEW IMAGES ================= */
+.review-images {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.review-img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.review-img:hover {
+    transform: scale(1.05);
+}
+
+/* ================= REPLY ================= */
+.reply-box textarea {
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    border: 1px solid #ffd1dc;
+    padding: 12px;
+    resize: none;
+    margin-top: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.send-btn {
+    margin-top: 14px;
+    background: #FB6F92;
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.send-btn:hover {
+    background: #e85c83;
+}
+
+.admin-reply {
+    background: #fff1f5;
+    border: 1px solid #ffd6e0;
+    padding: 16px;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+
+.edit-btn {
+    margin-top: 10px;
+    background: #e65b7a;
+    border: none;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.edit-btn:hover {
+    background: #d94c70;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .back-wrapper {
+        position: relative;
+        left: 0;
+        margin-bottom: 10px;
+    }
+
+    .product-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-img {
+        width: 100px;
+        height: 100px;
+    }
+}

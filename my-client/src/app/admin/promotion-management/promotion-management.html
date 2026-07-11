@@ -1,0 +1,179 @@
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="title">Danh sách khuyến mãi</h3>
+
+        <button routerLink="/admin/promotion-add" class="btn btn-danger">
+            Thêm khuyến mãi
+        </button>
+    </div>
+
+    <!-- CARD -->
+    <div class="card promotion-card">
+
+        <!-- TOP BAR -->
+        <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+
+            <div class="d-flex gap-2 mt-2 mt-md-0">
+
+                <!-- SEARCH -->
+                <div class="input-group search-box">
+
+                    <input type="text" class="form-control" placeholder="Tìm theo tên, mã..." [(ngModel)]="keyword"
+                        (input)="onSearch()">
+
+                    <button class="btn btn-danger" (click)="onSearch()">
+                        <i class="bi bi-search"></i>
+                    </button>
+
+                </div>
+
+                <!-- FILTER TYPE -->
+                <div class="dropdown custom-dropdown">
+                    <span class="label">Loại:</span>
+
+                    <button class="btn dropdown-toggle filter-btn" data-bs-toggle="dropdown">
+                        {{ selectedType === '' ? 'Tất cả' :
+                        selectedType === 'order' ? 'Danh mục' : 'Voucher' }}
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li (click)="filterType('')"><a class="dropdown-item">Tất cả</a></li>
+                        <li (click)="filterType('order')"><a class="dropdown-item">Chương trình khuyến mãi</a></li>
+                        <li (click)="filterType('product')"><a class="dropdown-item">Voucher</a></li>
+                    </ul>
+                </div>
+
+                <!-- FILTER STATUS -->
+                <div class="dropdown custom-dropdown">
+                    <span class="label">Trạng thái:</span>
+
+                    <button class="btn dropdown-toggle filter-btn" data-bs-toggle="dropdown">
+                        {{ selectedStatus === '' ? 'Tất cả' :
+                        selectedStatus === 'active' ? 'Kích hoạt' : 'Ngừng kích hoạt' }}
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li (click)="filterStatus('')"><a class="dropdown-item">Tất cả</a></li>
+                        <li (click)="filterStatus('active')"><a class="dropdown-item">Kích hoạt</a></li>
+                        <li (click)="filterStatus('inactive')"><a class="dropdown-item">Ngừng kích hoạt</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+                    <tr>
+                        <th>Mã</th>
+
+                        <th (click)="sort('name')">
+                            Tên khuyến mãi <i class="bi bi-arrow-down-up"></i>
+                        </th>
+
+                        <th>Loại</th>
+
+                        <th>Hình thức</th>
+
+                        <th (click)="sort('startDate')">
+                            Bắt đầu <i class="bi bi-arrow-down-up"></i>
+                        </th>
+
+                        <th (click)="sort('endDate')">
+                            Kết thúc <i class="bi bi-arrow-down-up"></i>
+                        </th>
+
+                        <th>Trạng thái</th>
+
+                        <th>Chỉnh sửa</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let p of displayPromotions">
+
+                        <td>{{p.code}}</td>
+
+                        <td class="promotion-name" [title]="p.name">
+                            {{p.name}}
+                        </td>
+
+                        <td>
+                            <span *ngIf="p.promotionType === 'order'">Đơn hàng</span>
+                            <span *ngIf="p.promotionType === 'product'">Hàng hóa</span>
+                        </td>
+
+                        <td>{{formatMethod(p.promotionMethod)}}</td>
+
+                        <td>{{p.startDate | date:'dd/MM/yyyy'}}</td>
+                        <td>{{p.endDate | date:'dd/MM/yyyy'}}</td>
+
+                        <td>
+                            <span *ngIf="p.status==='active'" class="status active">
+                                Hoạt động
+                            </span>
+
+                            <span *ngIf="p.status==='inactive'" class="status disabled">
+                                Đã tắt
+                            </span>
+                        </td>
+
+                        <td class="action-icons">
+
+                            <a [routerLink]="['/admin/promotion-edit', p._id]">
+                                <i class="bi bi-pencil-square text-dark"></i>
+                            </a>
+
+                            <i class="bi bi-trash text-danger" (click)="deletePromotion(p._id)">
+                            </i>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="d-flex justify-content-center py-3">
+
+            <ul class="pagination">
+
+                <li class="page-item">
+                    <a class="page-link" (click)="changePage(currentPage - 1)">
+                        <i class="bi bi-chevron-left"></i>
+                    </a>
+                </li>
+
+                <li class="page-item" *ngFor="let p of pages" [class.active]="p === currentPage">
+
+                    <a class="page-link" (click)="changePage(p)">
+                        {{p}}
+                    </a>
+
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" (click)="changePage(currentPage + 1)">
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>

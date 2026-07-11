@@ -1,0 +1,157 @@
+/* ====== WRAPPER & CARD ====== */
+.filter-wrap {
+  padding: 10px;
+}
+
+.filter-card {
+  width: 260px;
+  background: #FFE5EC;
+  border-radius: 14px;
+  padding: 18px;
+  color: var(--primary-color);
+  box-sizing: border-box;
+}
+
+/* ====== HEADER ====== */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.icon {
+  color: #9aa0a6;
+  font-size: 16px;
+}
+
+/* ====== SECTION ====== */
+.section {
+  margin-bottom: 10px;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.small-icon {
+  color: #9aa0a6;
+  font-size: 14px;
+}
+
+/* ====== CATEGORY CHECKBOX ====== */
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.form-check-label {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: #FB6F92;
+  border-color: #FB6F92;
+}
+
+/* ====== DIVIDER ====== */
+.divider {
+  height: 1px;
+  background: #e8e8e8;
+  margin: 10px 0;
+  border-radius: 2px;
+}
+
+/* ====== PRICE INPUT ====== */
+.price-filter {
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.section .d-flex span {
+  font-weight: 500;
+}
+
+/* ====== SIZE PILL BUTTONS ====== */
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.size-pill {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: #f0f0f0;
+  color: #666;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.size-pill:hover {
+  transform: translateY(-2px);
+}
+
+.size-pill.active {
+  background: #111;
+  color: #fff;
+}
+
+/* ====== ACTION BUTTONS ====== */
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 22px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn.reset,
+.btn.apply {
+  background: #FB6F92;
+  color: #fff;
+  border: 1px solid #f0c9d2;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 480px) {
+  .filter-card {
+    width: 100%;
+  }
+}

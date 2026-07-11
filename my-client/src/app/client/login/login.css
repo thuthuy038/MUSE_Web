@@ -1,0 +1,181 @@
+
+/* Sử dụng font Roboto Serif */
+
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    max-width: 900px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Cột trái */
+.login-title-wrapper {
+    padding-right: 2rem;
+}
+
+.login-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    border-bottom: 4px solid #000;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    letter-spacing: 2px;
+}
+
+/* Cột phải */
+.login-form-wrapper {
+    padding: 3rem;
+    border-left: 1px solid #dee2e6;
+}
+
+/* Tùy chỉnh input */
+.form-control {
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    border-radius: 0;
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #000;
+}
+
+/* Nút Đăng nhập và Đăng ký */
+.btn-login,
+.btn-register {
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-weight: bold;
+    border: none;
+    color: white;
+}
+
+.btn-login {
+    background-color: #FB6F92;
+}
+
+.btn-register {
+    background-color: #FB6F92;
+}
+
+
+/* Link quên mật khẩu */
+.forgot-password {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Dòng kẻ và chữ ở giữa */
+.social-login-divider {
+    text-align: center;
+    position: relative;
+}
+
+.social-login-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #ced4da;
+    z-index: 1;
+}
+
+.social-login-divider span {
+    background-color: #fff;
+    padding: 0 10px;
+    position: relative;
+    z-index: 2;
+    color: #6c757d;
+}
+
+/* Nút mạng xã hội */
+.btn-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    /* Bo tròn nhiều hơn */
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    min-width: 160px;
+}
+
+
+/* Google */
+.btn-google {
+    background-color: white;
+    color: #444;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-google:hover {
+    background-color: #f8f8f8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon bên trong nút */
+.btn-social i {
+    font-size: 1.2rem;
+}
+
+/* Điều chỉnh riêng cho icon Google (nếu dùng biểu tượng G) */
+.btn-google i {
+    color: #db4437;
+    /* Màu đỏ Google */
+}
+
+/* Nút Admin */
+.btn-admin {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.btn-admin:hover {
+    background-color: #c82333;
+    transition: all 0.3s ease;
+}
+
+/* Thêm class cho vùng chứa mật khẩu */
+.position-relative {
+    position: relative;
+}
+
+/* Icon eye */
+.bi-eye, .bi-eye-slash {
+    font-size: 1.2rem;
+    color: #6c757d;
+    transition: color 0.2s;
+}
+
+.bi-eye:hover, .bi-eye-slash:hover {
+    color: #000;
+}

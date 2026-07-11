@@ -1,0 +1,126 @@
+<div class="container mt-4">
+
+    <!-- TITLE -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="page-title">Quản lý khách hàng</h3>
+        <button routerLink="/admin/user-add" class="btn btn-pink">
+            <i class="bi bi-person-plus"></i> Thêm khách hàng
+        </button>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+
+        <!-- Bulk Action -->
+        <div class="bulk-action">
+            <select class="form-select" [(ngModel)]="bulkAction">
+                <option value="">-- Hành động hàng loạt --</option>
+                <option value="export">Xuất danh sách khách hàng</option>
+                <option value="delete">Xóa các khách hàng</option>
+                <option value="lock">Khóa các tài khoản</option>
+                <option value="activate">Kích hoạt tài khoản</option>
+            </select>
+            <button class="btn btn-danger" (click)="executeBulkAction()">Thực thi</button>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="search-box">
+            <div class="input-group">
+                <input class="form-control" placeholder="Tìm kiếm..." [(ngModel)]="searchKeyword"
+                    (input)="searchUsers()" />
+                <button class="btn btn-pink">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- STATUS -->
+        <div class="filter-item">
+            <label>Trạng thái</label>
+            <select class="form-select status-select" [(ngModel)]="statusFilter" (change)="filterByStatus()">
+                <option value="all">Tất cả</option>
+                <option value="active">Đã kích hoạt</option>
+                <option value="inactive">Đã khóa</option>
+            </select>
+        </div>
+
+    </div>
+
+    <!-- THÊM: Thông báo số lượng đã chọn -->
+    <div *ngIf="hasSelected()" class="alert alert-info py-2 mb-3">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        Đã chọn <strong>{{ getSelectedCount() }}</strong> khách hàng
+        <button class="btn btn-sm btn-outline-danger float-end" (click)="selectedUserIds.clear()">Bỏ chọn tất
+            cả</button>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-container">
+        <div class="table-wrapper">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">
+                            <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($event)">
+                        </th>
+                        <th>Mã khách hàng</th>
+                        <th>Tên</th>
+                        <th>Email</th>
+                        <th>Số điện thoại</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày tạo</th>
+                        <th style="width: 100px;">Chỉnh sửa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of displayUsers; let i = index"
+                        [class.selected]="selectedUserIds.has(user._id)">
+                        <td class="text-center">
+                            <input type="checkbox" [checked]="selectedUserIds.has(user._id)"
+                                (change)="toggleSelect(user._id, $event)">
+                        </td>
+                        <td>{{ user.code }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phone || '-' }}</td>
+                        <td>
+                            <span class="badge" [ngClass]="user.status === 'active' ? 'bg-success' : 'bg-secondary'">
+                                {{ user.status === 'active' ? 'Hoạt động' : 'Đã khóa' }}
+                            </span>
+                        </td>
+                        <td>{{ user.createdAt | date:'dd/MM/yyyy' }}</td>
+                        <td class="action-icons text-center">
+                            <a [routerLink]="['/admin/user-edit', user._id]">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <i class="bi bi-trash" (click)="deleteUser(user._id)"></i>
+                        </td>
+                    </tr>
+                    <tr *ngIf="displayUsers.length === 0">
+                        <td colspan="8" class="text-center text-muted py-4">
+                            Không có dữ liệu
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center py-3">
+        <nav>
+            <ul class="pagination">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="changePage(currentPage - 1)">&lt;</a>
+                </li>
+                <li class="page-item" *ngFor="let p of pages" [class.active]="p === currentPage">
+                    <a class="page-link" (click)="changePage(p)">{{ p }}</a>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                    <a class="page-link" (click)="changePage(currentPage + 1)">&gt;</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</div>

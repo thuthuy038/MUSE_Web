@@ -1,0 +1,60 @@
+<div class="container mt-4 mt-md-5" style="max-width: 960px;">
+    <h1 class="main-title text-center mb-4">Sản phẩm yêu thích</h1>
+
+    <div *ngIf="pagedWishlist.length; else empty">
+        <div *ngFor="let product of pagedWishlist" class="wishlist-card">
+            <div class="wishlist-card-img">
+                <img [src]="getImageUrl(product.images[0])" [alt]="product.name" />
+            </div>
+
+            <div class="wishlist-card-body">
+                <div class="wishlist-card-title">{{ product.name }}</div>
+                <div class="wishlist-card-price">
+                    <span class="wishlist-price-new">
+                        {{ (product.discountPrice > 0 ? product.discountPrice : product.price) |
+                        currency:'VND':'symbol':'1.0-0' }}
+                    </span>
+                    <span *ngIf="product.discountPercent > 0" class="wishlist-price-old">
+                        {{ product.price | currency:'VND':'symbol':'1.0-0' }}
+                    </span>
+                </div>
+                <div class="wishlist-card-rating">
+                    <span class="star">★</span>
+                    <span class="rating-value">{{ product.rating | number:'1.1-1' }}</span>
+                    <span class="divider">|</span>
+                    <span class="review-count">Đánh giá: 195</span>
+                </div>
+            </div>
+
+            <div class="wishlist-card-action">
+                <button class="wishlist-remove-btn" (click)="removeFromWishlist(product)"
+                    aria-label="Xóa khỏi yêu thích">XÓA</button>
+                <button class="wishlist-buy-btn" (click)="goToDetail(product)">MUA NGAY</button>
+            </div>
+        </div>
+
+        <nav aria-label="Page navigation" class="mt-4" *ngIf="totalPages.length > 1">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                    <button class="page-link" (click)="goToPage(currentPage - 1)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </button>
+                </li>
+                <li class="page-item" *ngFor="let p of totalPages" [class.active]="p === currentPage">
+                    <button class="page-link" (click)="goToPage(p)">{{ p }}</button>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+                    <button class="page-link" (click)="goToPage(currentPage + 1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <ng-template #empty>
+        <div class="wishlist-empty text-center">Chưa có sản phẩm yêu thích nào.</div>
+    </ng-template>
+
+    <h4 class="signature text-center mt-4">Musé. Be Your Own Muse.</h4>
+</div>

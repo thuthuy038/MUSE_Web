@@ -1,0 +1,48 @@
+<div class="blog-form">
+
+    <h2>Blog Form</h2>
+
+    <form (ngSubmit)="saveBlog()">
+
+        <div class="form-group">
+            <label>Tiêu đề</label>
+            <input 
+            type="text" 
+            [(ngModel)]="blog.title" 
+            name="title"
+            required>
+        </div>
+
+        <div class="form-group">
+            <label>Nội dung</label>
+            <textarea
+            [(ngModel)]="blog.content"
+            name="content"
+            rows="5"
+            required>
+            </textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Ảnh</label>
+            <input
+            type="text"
+            [(ngModel)]="blog.image"
+            name="image">
+        </div>
+
+        <div class="form-group">
+            <label>Ngày</label>
+            <input
+            type="date"
+            [(ngModel)]="blog.date"
+            name="date">
+        </div>
+
+        <button type="submit">
+            Lưu bài viết
+        </button>
+
+    </form>
+
+</div>

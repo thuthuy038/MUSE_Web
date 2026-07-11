@@ -1,0 +1,309 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css');
+
+/* ------------------------------
+   GENERAL STYLING (scoped)
+--------------------------------*/
+.avatar-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+.avatar-wrapper .content-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 2px solid rgba(0,0,0,0.08);
+}
+
+.avatar-upload-btn {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background-color: #0d6efd;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(13,110,253,0.24);
+  cursor: pointer;
+  transition: background-color 0.12s ease, transform 0.08s ease;
+}
+.avatar-upload-btn i { font-size: 16px; line-height: 1; }
+.avatar-upload-btn:hover { background-color: #0b5ed7; transform: translateY(-1px); }
+
+.account-container {
+  background-color: #fff;
+  color: #333;
+}
+
+.account-container .main-title {
+  font-weight: 600;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  padding: 10px 0;
+  display: block;
+  text-align: center;
+}
+
+/* ------------------------------
+    LAYOUT CONTAINER
+--------------------------------*/
+.account-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+/* ===== CẢI TIẾN: ĐẢM BẢO CÁC CỘT CÓ CHIỀU CAO BẰNG NHAU ===== */
+.account-container .row {
+  display: flex;
+  align-items: stretch;
+  margin: 0 -15px; /* Bù lại padding của col */
+}
+
+.account-container .col-lg-3,
+.account-container .middle-column,
+.account-container .col-lg-4 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px; /* Khoảng cách giữa các cột */
+  height: auto;
+}
+
+/* Các khối nội dung chính bên trong cột sẽ co giãn để lấp đầy chiều cao */
+.account-container .sidebar-menu,
+.account-container .content-section {
+  flex: 1 1 auto;
+  width: 100%;
+  margin-bottom: 0; /* Xóa margin dưới nếu có để tránh khoảng trống thừa */
+}
+
+/* Xóa margin-bottom của khối cuối trong cột phải */
+.account-container .col-lg-4 .content-section:last-child {
+  margin-bottom: 0;
+}
+
+/* ------------------------------
+   SIDEBAR (CỘT TRÁI)
+--------------------------------*/
+.account-container .sidebar-menu {
+  background-color: #ffe5ec;
+  padding: 25px;
+  border-radius: 10px;
+  height: 100%;
+  border-right: none;
+}
+
+.account-container .sidebar-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(0,0,0,0.08);
+}
+
+.account-container .sidebar-menu h5 {
+  font-weight: 600;
+  border-bottom: 2px solid #000;
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+.account-container .sidebar-menu .nav-link {
+  color: #555;
+  padding: 8px 0;
+}
+
+.account-container .sidebar-menu .nav-link.active {
+  font-weight: 700;
+  color: #000;
+}
+
+/* ------------------------------
+   MIDDLE COLUMN (CỘT GIỮA)
+--------------------------------*/
+.account-container .middle-column {
+  border-right: 1px solid #eee;
+  padding: 0 20px;
+}
+
+.account-container .content-section {
+  background-color: #ffe5ec;
+  padding: 25px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.account-container .content-section h5 {
+  font-weight: 600;
+}
+
+.account-container .content-avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 10px auto;
+}
+
+.account-container .form-control {
+  background-color: #ffe5ec;
+  border: solid 1px black;
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+
+.account-container .form-control::placeholder {
+  color: #999;
+}
+
+.account-container .form-control:focus {
+  background-color: #ffe5ec;
+  box-shadow: none;
+  border: solid 1px rgb(129, 224, 235);
+}
+
+/* ------------------------------
+  CHECKBOX / RADIO
+--------------------------------*/
+.account-container .form-check-input {
+  border: 1px solid #ddd;
+}
+
+.account-container .form-check-input:checked {
+  background-color: #ee92a8;
+  border-color: #ee92a8;
+}
+
+.account-container .form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(238, 146, 168, 0.25);
+}
+
+.account-container .form-check-label a {
+  color: rgb(0, 187, 255);
+  text-decoration: none;
+}
+
+/* ------------------------------
+  RIGHT COLUMN (CỘT PHẢI)
+--------------------------------*/
+
+.account-container .col-lg-4 .content-section {
+  background-color: #ffe6eb;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  flex: 1 1 auto; /* Đảm bảo các khối co giãn đều */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------------------------------
+  INFO ROWS (Phone, Email, etc.)
+--------------------------------*/
+.account-container .info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: nowrap;
+}
+
+.account-container .info-col {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1; /* Cho phép co giãn */
+  min-width: 0; /* Tránh tràn */
+}
+
+.account-container .info-col .icon {
+  font-size: 22px;
+  color: #ee92a8;
+  width: 30px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.account-container .info-col strong {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.account-container .info-col p {
+  margin: 0;
+  color: #777;
+  font-size: 0.9em;
+  word-break: break-word;
+}
+
+.account-container .info-col input {
+  width: 100%;
+  min-width: 150px;
+}
+
+/* ------------------------------
+  BUTTONS
+--------------------------------*/
+.account-container .btn-update {
+  background-color: #ff99b9;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  min-width: 100px; /* Đồng bộ kích thước nút */
+  text-align: center;
+}
+.btn-update:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.account-container .btn-update:hover:not(:disabled) {
+  background-color: #ff7fa6;
+  color: #fff;
+}
+
+/* ------------------------------
+  RESPONSIVE DESIGN (scoped)
+--------------------------------*/
+@media (max-width: 991.98px) {
+  .account-container .row {
+    display: block;
+    margin: 0;
+  }
+
+  .account-container .col-lg-3,
+  .account-container .middle-column,
+  .account-container .col-lg-4 {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+
+  .account-container .middle-column {
+    border-right: none;
+    padding: 0;
+  }
+
+  .account-container .sidebar-menu,
+  .account-container .content-section {
+    margin-bottom: 0;
+  }
+
+  .account-container .col-lg-4 .content-section:last-child {
+    margin-bottom: 0;
+  }
+}

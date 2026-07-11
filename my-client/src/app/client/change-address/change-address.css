@@ -1,0 +1,323 @@
+/* Kế thừa style từ account.css */
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css');
+
+.address-container {
+  background: #f5e7ea;
+  padding: 30px;
+  border-radius: 10px;
+  width: 700px;
+}
+
+/* Container chính giống account */
+.account-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 30px;
+  background-color: #fff;
+  color: #333;
+}
+
+.main-title {
+  font-weight: 600;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  padding: 10px 0;
+  display: block;
+  text-align: center;
+}
+
+/* Sidebar */
+.sidebar-menu {
+  background-color: #ffe5ec;
+  padding: 25px;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.sidebar-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-menu h5 {
+  font-weight: 600;
+  border-bottom: 2px solid #000;
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+.sidebar-menu .nav-link {
+  color: #555;
+  padding: 8px 0;
+}
+
+.sidebar-menu .nav-link.active {
+  font-weight: 700;
+  color: #000;
+}
+
+/* Content section chính */
+.content-section {
+  background-color: #ffe5ec;
+  padding: 25px;
+  border-radius: 10px;
+  min-height: 100%;
+}
+
+.section-title {
+  color: #fb6f92;
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Form elements */
+.custom-input {
+  border-radius: 8px;
+  border: 1px solid #000;
+  background-color: #ffe5ec;
+  padding: 12px 15px;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.custom-input:focus {
+  border-color: #ff8fab;
+  box-shadow: 0 0 0 0.2rem rgba(251, 111, 146, 0.15);
+  background-color: #fff;
+  outline: none;
+}
+
+.form-label {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: #444;
+  font-weight: 600;
+}
+
+/* Button group cho loại địa chỉ */
+.address-type-btn {
+  background-color: #ffe5ec;
+  border: 1px solid #ff99b9;
+  color: #ff7f9c;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+}
+
+.address-type-btn.active {
+  background-color: #ff7f9c;
+  border-color: #ff7f9c;
+  color: white;
+}
+
+.address-type-btn:hover {
+  background-color: #ff99b9;
+  color: white;
+}
+
+/* Checkbox tùy chỉnh */
+.form-check-input {
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: #ee92a8;
+  border-color: #ee92a8;
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(238, 146, 168, 0.25);
+}
+
+.form-check-label {
+  cursor: pointer;
+}
+
+/* Nút cập nhật */
+.btn-update {
+  background-color: #ff99b9;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 10px 30px;
+  transition: all 0.3s ease;
+}
+
+.btn-update:hover:not(:disabled) {
+  background-color: #ff7fa6;
+  color: #fff;
+}
+
+.btn-update:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Responsive cơ bản (cũ) */
+@media (max-width: 991.98px) {
+  .account-container .row {
+    display: block;
+  }
+
+  .sidebar-menu {
+    margin-bottom: 20px;
+  }
+}
+
+/* ===== RESPONSIVE NÂNG CAO ===== */
+
+/* Tablet (max-width: 991px) */
+@media (max-width: 991px) {
+  .account-container {
+    padding: 0 20px;
+  }
+
+  .account-container .row {
+    margin: 0 -10px;
+  }
+
+  .account-container .col-lg-3,
+  .account-container .col-lg-9 {
+    padding: 0 10px;
+  }
+
+  .sidebar-menu,
+  .content-section {
+    padding: 20px;
+  }
+
+  .sidebar-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .section-title {
+    font-size: 22px;
+  }
+
+  .btn-update {
+    padding: 8px 20px;
+  }
+}
+
+/* Mobile (max-width: 767px) */
+@media (max-width: 767px) {
+  .account-container {
+    padding: 0 15px;
+  }
+
+  .account-container .row {
+    display: block;
+    margin: 0;
+  }
+
+  .account-container .col-lg-3,
+  .account-container .col-lg-9 {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-menu {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .sidebar-avatar {
+    width: 70px;
+    height: 70px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .sidebar-menu h5 {
+    text-align: center;
+    display: block;
+  }
+
+  .sidebar-menu .nav {
+    align-items: center;
+  }
+
+  .sidebar-menu .nav-link {
+    text-align: center;
+    width: 100%;
+  }
+
+  .sidebar-menu .btn-outline-danger {
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .content-section {
+    padding: 20px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .form-label {
+    font-size: 0.9rem;
+  }
+
+  .custom-input {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .btn-group {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .address-type-btn {
+    margin-right: 0;
+    flex: 1 1 auto;
+    min-width: 120px;
+  }
+
+  .btn-update {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+/* Mobile nhỏ (max-width: 480px) */
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 24px;
+    padding: 8px 0;
+  }
+
+  .sidebar-avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .address-type-btn {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .form-check-label {
+    font-size: 13px;
+  }
+}

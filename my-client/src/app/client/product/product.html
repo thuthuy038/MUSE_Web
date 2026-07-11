@@ -1,0 +1,44 @@
+<div *ngIf="product" class="card h-100 border-0 shadow-sm product-card">
+
+  <div *ngIf="product.discountPercent > 0" class="discount-badge">
+    -{{ product.discountPercent }}%
+  </div>
+
+  <div class="product-image-container">
+    <img *ngIf="product.images && product.images.length" [src]="getImageUrl(product.images[0])" class="card-img-top primary-img" />
+
+    <img *ngIf="product.images && product.images.length > 1" [src]="getImageUrl(product.images[1])" class="card-img-top secondary-img" />
+  </div>
+
+  <div class="card-body text-start">
+    <h5 class="card-title product-name">{{ product.name }}</h5>
+
+    <p class="card-text product-price">
+      <span class="current-price me-2">
+        {{ (product.discountPrice > 0 ? product.discountPrice : product.price) | currency:'VND':'symbol':'1.0-0' }}
+      </span>
+
+      <span *ngIf="product.discountPercent > 0" class="original-price">
+        {{ product.price | currency:'VND':'symbol':'1.0-0' }}
+      </span>
+    </p>
+
+    <div class="product-bottom d-flex align-items-center justify-content-between">
+      <div class="single-rating">
+        <ng-container *ngIf="product.reviewCount && product.reviewCount > 0; else noRating">
+          <i class="bi bi-star-fill text-warning me-1"></i>
+          <span class="rating-value">{{ product.rating | number:'1.1-1' }}</span>
+        </ng-container>
+        
+        <ng-template #noRating>
+          <span class="text-muted fst-italic" style="font-size: 11px;">Chưa có đánh giá</span>
+        </ng-template>
+      </div>
+
+      <button class="wishlist-btn" (click)="toggleFavorite($event)" [class.active]="isFavorite" aria-label="Yêu thích">
+        <i class="bi" [ngClass]="isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
+      </button>
+    </div>
+
+  </div>
+</div>

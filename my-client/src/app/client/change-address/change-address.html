@@ -1,0 +1,154 @@
+<div class="container account-container my-5">
+    <h1 class="main-title text-center mb-4">Thêm địa chỉ mới</h1>
+  
+    <div class="row">
+      <!-- SIDEBAR (giống account) -->
+      <div class="col-lg-3">
+        <aside class="sidebar-menu">
+          <div class="text-center mb-3">
+        <img [src]="avatarSrc" alt="Avatar" class="sidebar-avatar">
+        <h5 class="mt-2">Cập nhật tài khoản</h5>
+      </div>
+  
+          <h5 class="mt-4">Thông tin tài khoản</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a routerLink="/loyalty" class="nav-link">Khách hàng thân thiết</a>
+            </li>
+            
+            <li class="nav-item">
+              <a routerLink="/account" class="nav-link">Thay đổi thông tin tài khoản</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/change-address" class="nav-link active">Thay đổi địa chỉ giao hàng</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/resetpassword" class="nav-link">Thay đổi mật khẩu</a>
+            </li>
+          </ul>
+  
+          <h5 class="mt-4">Sản phẩm yêu thích</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a routerLink="/wishlist" class="nav-link">Sản phẩm yêu thích</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/ordertracking" class="nav-link">Lịch sử order</a>
+            </li>
+          </ul>
+          <hr class="my-3">
+          <button type="button" class="btn btn-outline-danger w-100" (click)="logout()">
+            Đăng xuất
+          </button>
+        </aside>
+      </div>
+  
+      <!-- NỘI DUNG CHÍNH (THÊM ĐỊA CHỈ) -->
+      <div class="col-lg-9">
+        <div class="content-section p-4">
+          <h2 class="section-title mb-4">Thêm địa chỉ mới</h2>
+  
+          <form #addressForm="ngForm" (ngSubmit)="addAddress()">
+            <!-- Số điện thoại -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">Số điện thoại</label>
+              <input type="text" class="form-control custom-input" 
+                     placeholder="Nhập số điện thoại" 
+                     [(ngModel)]="phone" name="phone" 
+                     required>
+            </div>
+  
+            <!-- Họ và tên -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">Họ và tên</label>
+              <input type="text" class="form-control custom-input" 
+                     placeholder="Nhập họ và tên" 
+                     [(ngModel)]="fullName" name="fullName" 
+                     required>
+            </div>
+  
+            <!-- Tỉnh/Thành phố -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">Chọn Tỉnh / Thành phố</label>
+              <select class="form-control custom-input" 
+                      [(ngModel)]="selectedProvince" 
+                      (ngModelChange)="onProvinceChange()" 
+                      name="province" required>
+                <option [ngValue]="null" disabled selected>-- Chọn Tỉnh / Thành phố --</option>
+                <option *ngFor="let p of provinces" [ngValue]="p">{{ p.name }}</option>
+              </select>
+            </div>
+  
+            <!-- Quận/Huyện -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">Chọn Quận / Huyện</label>
+              <select class="form-control custom-input" 
+                      [(ngModel)]="selectedDistrict" 
+                      (ngModelChange)="onDistrictChange()" 
+                      name="district" required
+                      [disabled]="!selectedProvince">
+                <option [ngValue]="null" disabled selected>-- Chọn Quận / Huyện --</option>
+                <option *ngFor="let d of districts" [ngValue]="d">{{ d.name }}</option>
+              </select>
+            </div>
+  
+            <!-- Phường/Xã -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">Chọn Phường / Xã</label>
+              <select class="form-control custom-input" 
+                      [(ngModel)]="selectedWard" 
+                      name="ward" required
+                      [disabled]="!selectedDistrict">
+                <option [ngValue]="null" disabled selected>-- Chọn Phường / Xã --</option>
+                <option *ngFor="let w of wards" [ngValue]="w">{{ w.name }}</option>
+              </select>
+            </div>
+  
+            <!-- Số nhà + tên đường -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">Số nhà + Tên đường</label>
+              <input type="text" class="form-control custom-input" 
+                     placeholder="Ví dụ: 123 Nguyễn Văn Linh" 
+                     [(ngModel)]="street" name="street" 
+                     required>
+            </div>
+  
+            <!-- Loại địa chỉ -->
+            <div class="mb-4">
+              <label class="form-label fw-bold d-block">Chọn loại địa chỉ:</label>
+              <div class="btn-group" role="group">
+                <button type="button" 
+                        class="btn address-type-btn" 
+                        [class.active]="type === 'nha_rieng'" 
+                        (click)="type='nha_rieng'">
+                  Nhà riêng
+                </button>
+                <button type="button" 
+                        class="btn address-type-btn" 
+                        [class.active]="type === 'van_phong'" 
+                        (click)="type='van_phong'">
+                  Văn phòng
+                </button>
+              </div>
+            </div>
+  
+            <!-- Đặt làm mặc định -->
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" id="isDefault" 
+                     [(ngModel)]="isDefault" name="isDefault">
+              <label class="form-check-label" for="isDefault">
+                Đặt làm địa chỉ mặc định
+              </label>
+            </div>
+  
+            <!-- Nút Cập nhật -->
+            <div class="text-end">
+              <button type="submit" class="btn btn-update" [disabled]="addressForm.invalid">
+                Cập nhật
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

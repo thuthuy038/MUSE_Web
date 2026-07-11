@@ -1,0 +1,249 @@
+<div class="banner-page">
+
+<h2 class="title">Quản lý banner</h2>
+
+<div class="top-bar">
+
+<div class="search-box">
+
+<input
+type="text"
+placeholder="Tìm kiếm banner..."
+[(ngModel)]="searchText"
+(ngModelChange)="applyFilters()"
+class="search-input"
+/>
+
+<button class="search-btn">
+<i class="bi bi-search"></i>
+</button>
+
+</div>
+
+<div class="status-filter">
+
+<span>Trạng thái:</span>
+
+<select (change)="filterStatus($any($event.target).value)">
+
+<option value="all">Tất cả</option>
+<option value="active">Đang hiển thị</option>
+<option value="hidden">Đã bị ẩn</option>
+
+</select>
+
+</div>
+
+<div class="select-all" *ngIf="filteredBanners.length > 0">
+
+<label>
+
+<input
+type="checkbox"
+(change)="toggleSelectAll($event)"
+>
+
+Chọn tất cả
+
+</label>
+
+</div>
+
+<button
+class="delete-selected-btn"
+*ngIf="selectedBanners.length > 0"
+(click)="deleteSelected()"
+>
+
+Xóa ({{selectedBanners.length}})
+
+</button>
+
+<button class="add-btn" (click)="addBanner()">
+Thêm banner <i class="bi bi-plus-circle"></i>
+</button>
+
+</div>
+
+<div class="empty-banner" *ngIf="filteredBanners.length===0">
+Chưa có banner nào được thêm vào
+</div>
+
+<!-- BANNER GRID -->
+
+<div class="banner-grid">
+
+<div
+class="banner-card"
+*ngFor="let banner of paginatedBanners"
+>
+
+<div class="select-checkbox">
+
+<input
+type="checkbox"
+[checked]="selectedBanners.includes(banner._id)"
+(change)="toggleSelect(banner._id,$event)"
+>
+
+</div>
+
+<!-- IMAGE -->
+
+<img
+[src]="'http://localhost:3000/api/images/' + banner.image"
+class="banner-img"
+onerror="this.src='assets/no-image.png'"
+/>
+
+<div class="banner-title">
+{{banner.title}}
+</div>
+
+<div class="banner-bottom">
+
+<span
+class="status active"
+*ngIf="banner.status==='active'"
+>
+
+Đang hiển thị
+
+</span>
+
+<span
+class="status hidden"
+*ngIf="banner.status==='hidden'"
+>
+
+Đã bị ẩn
+
+</span>
+
+<div class="actions">
+
+<i
+class="bi bi-pencil"
+(click)="editBanner(banner)"
+></i>
+
+<i
+class="bi bi-trash"
+(click)="deleteBanner(banner._id)"
+></i>
+
+<i
+class="bi"
+[ngClass]="banner.status === 'active' ? 'bi-eye' : 'bi-eye-slash'"
+(click)="toggleStatus(banner)"
+></i>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="page-info"
+*ngIf="filteredBanners.length > 0"
+>
+
+Hiển thị {{startItem}} - {{endItem}} / {{filteredBanners.length}} banner
+
+</div>
+
+<div class="pagination" *ngIf="totalPages >= 1">
+
+<button class="page-btn" (click)="prevPage()">
+‹
+</button>
+
+<button
+class="page-btn"
+*ngFor="let page of pages"
+[class.active]="currentPage === page"
+(click)="changePage(page)"
+>
+
+{{page}}
+
+</button>
+
+<button class="page-btn" (click)="nextPage()">
+›
+</button>
+
+</div>
+
+<!-- FORM POPUP -->
+
+<div
+class="popup-overlay"
+*ngIf="showForm"
+>
+
+<div class="form-popup">
+
+<app-banner-form
+[banner]="selectedBanner"
+(close)="closeForm()"
+></app-banner-form>
+
+</div>
+
+</div>
+
+<!-- DELETE POPUP -->
+
+<div
+class="popup-overlay"
+*ngIf="showDeletePopup"
+>
+
+<div class="delete-popup">
+
+<h3>Xác nhận xóa</h3>
+
+<p>Bạn có chắc muốn xóa banner này?</p>
+
+<div class="popup-buttons">
+
+<button
+class="cancel-btn"
+(click)="cancelDelete()"
+>
+
+Hủy
+
+</button>
+
+<button
+class="confirm-btn"
+(click)="confirmDelete()"
+>
+
+Xóa
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- TOAST -->
+
+<div
+class="toast"
+*ngIf="showToast"
+>
+
+{{toastMessage}}
+
+</div>
+
+</div>

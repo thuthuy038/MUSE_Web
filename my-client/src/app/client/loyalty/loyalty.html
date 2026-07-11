@@ -1,0 +1,98 @@
+<div class="container account-container my-5">
+    <h1 class="main-title text-center mb-4">Khách hàng thân thiết</h1>
+  
+    <div class="row">
+      <!-- SIDEBAR (giống change-address) -->
+      <div class="col-lg-3">
+        <aside class="sidebar-menu">
+          <div class="text-center mb-3">
+            <img [src]="avatarSrc" alt="Avatar" class="sidebar-avatar">
+            <h5 class="mt-2">Cập nhật tài khoản</h5>
+          </div>
+  
+          <h5 class="mt-4">Thông tin tài khoản</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a routerLink="/loyalty" class="nav-link active">Khách hàng thân thiết</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/account" class="nav-link">Thay đổi thông tin tài khoản</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/change-address" class="nav-link">Thay đổi địa chỉ giao hàng</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/resetpassword" class="nav-link">Thay đổi mật khẩu</a>
+            </li>
+          </ul>
+  
+          <h5 class="mt-4">Sản phẩm yêu thích</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a routerLink="/wishlist" class="nav-link">Sản phẩm yêu thích</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/ordertracking" class="nav-link">Lịch sử order</a>
+            </li>
+          </ul>
+          <hr class="my-3">
+          <button type="button" class="btn btn-outline-danger w-100" (click)="logout()">
+            Đăng xuất
+          </button>
+        </aside>
+      </div>
+  
+      <!-- NỘI DUNG CHÍNH (KHÁCH HÀNG THÂN THIẾT) -->
+      <div class="col-lg-9">
+        <div class="content-section p-4">
+  
+          <div class="loyalty-info">
+            <!-- Cấp độ khách hàng -->
+            <div class="info-row mb-3">
+              <span class="fw-bold" style="width: 180px;">Cấp độ khách hàng:</span>
+              <div class="info-box">
+                {{ level }}
+              </div>
+            </div>
+  
+            <!-- Chi tiêu tích lũy -->
+            <div class="info-row mb-3">
+              <span class="fw-bold" style="width: 180px;">Chi tiêu tích lũy:</span>
+              <div class="info-box">
+                {{ totalSpent | number }}đ
+              </div>
+            </div>
+          </div>
+  
+          <h3 class="mt-4 mb-3">Lịch sử tích lũy:</h3>
+  
+          <div class="table-responsive">
+            <table class="table table-bordered text-center align-middle history-table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Mã đơn hàng</th>
+                  <th>Thời gian đặt</th>
+                  <th>Sản phẩm</th>
+                  <th>Số lượng</th>
+                  <th>Tổng tiền</th>
+                  <th>Điểm tích lũy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of orders; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ order.code }}</td>
+                  <td>{{ order.date }}</td>
+                  <td>{{ order.product }}</td>
+                  <td>{{ order.quantity }}</td>
+                  <td>{{ order.total | number }}đ</td>
+                  <td>{{ order.point }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

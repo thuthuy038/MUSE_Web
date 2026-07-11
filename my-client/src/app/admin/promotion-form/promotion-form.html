@@ -1,0 +1,413 @@
+<div class="container-fluid p-4">
+
+    <h3 class="title mb-4">
+        {{ promotionId ? 'Cập nhật khuyến mãi' : 'Thêm khuyến mãi' }}
+    </h3>
+
+    <div class="card p-4 shadow-sm">
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+
+                <label>Mã khuyến mãi</label>
+
+                <input class="form-control" [value]="promotion.code || 'Tự động tạo khi lưu'" disabled>
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label>Ghi chú</label>
+
+                <textarea class="form-control" [(ngModel)]="promotion.description"></textarea>
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+
+                <label>Tên khuyến mãi</label>
+
+                <input class="form-control" [(ngModel)]="promotion.name">
+
+            </div>
+
+            <div class="col-md-2 mb-3">
+
+                <label>Trạng thái</label>
+
+                <select class="form-select" [(ngModel)]="promotion.status">
+                    <option value="active">Kích hoạt</option>
+                    <option value="inactive">Ngừng kích hoạt</option>
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <hr>
+
+        <h6>Hình thức khuyến mãi</h6>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <label>Khuyến mãi theo</label>
+
+                <select class="form-select" [(ngModel)]="promotionType" (change)="onChangePromotionType()">
+
+                    <option value="order">Đơn hàng</option>
+                    <option value="product">Hàng hóa</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <label>Hình thức</label>
+
+                <select class="form-select" [(ngModel)]="promotionMethod" (change)="onChangeMethod()">
+
+                    <!-- ORDER -->
+
+                    <ng-container *ngIf="promotionType === 'order'">
+
+                        <option value="discountOrder">Giảm giá đơn hàng</option>
+                        <option value="giftOrder">Tặng món/quà</option>
+
+                    </ng-container>
+
+
+                    <!-- PRODUCT -->
+
+                    <ng-container *ngIf="promotionType === 'product'">
+
+                        <option value="buyXGetY">Mua hàng khuyến mãi hàng</option>
+                        <option value="quantityDiscount">Giảm giá/đồng giá theo SL mua</option>
+
+                    </ng-container>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <hr>
+
+        <!-- ================= ORDER GIFT ================= -->
+
+        <div *ngIf="promotionType==='order' && promotionMethod==='giftOrder'">
+
+            <div *ngFor="let c of conditions; let i = index" class="condition-box">
+
+                <div class="row mt-3">
+
+                    <div class="col-md-3">
+                        <label>Tổng tiền hàng từ</label>
+                        <input class="form-control" type="number" [(ngModel)]="c.minOrderValue">
+                    </div>
+
+                    <div class="col-md-2">
+                        <label>Tặng tổng</label>
+                        <input class="form-control" [(ngModel)]="c.quantity">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Hàng / Nhóm hàng</label>
+                        <input class="form-control" [value]="c.giftProduct?.name" placeholder="Chọn sản phẩm" readonly
+                            (click)="openProductPopup(i, 'giftProduct')">
+                    </div>
+
+                    <div class="col-md-2">
+                        <button class="btn btn-danger" (click)="removeCondition(i)">
+                            🗑
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-add mt-3" (click)="addCondition()">
+                + Thêm điều kiện
+            </button>
+
+        </div>
+
+        <!-- ================= ORDER DISCOUNT ================= -->
+
+        <div *ngIf="promotionType==='order' && promotionMethod==='discountOrder'">
+
+            <div *ngFor="let c of conditions; let i = index" class="condition-box">
+
+                <div class="row mt-3 align-items-end">
+
+                    <div class="col-md-4">
+                        <label>Tổng tiền hàng từ</label>
+                        <input type="number" class="form-control" [(ngModel)]="c.minOrderValue">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Giảm giá</label>
+
+                        <div class="input-group">
+
+                            <input class="form-control" type="number" [(ngModel)]="c.discountValue">
+
+                            <button type="button" class="btn toggle-btn"
+                                [ngClass]="c.discountType === 'vnd' ? 'active' : ''" (click)="c.discountType = 'vnd'">
+                                VND
+                            </button>
+
+                            <button type="button" class="btn toggle-btn"
+                                [ngClass]="c.discountType === 'percent' ? 'active' : ''"
+                                (click)="c.discountType = 'percent'">
+                                %
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button class="btn btn-danger" (click)="removeCondition(i)">
+                            🗑
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-add mt-3" (click)="addCondition()">
+                + Thêm điều kiện
+            </button>
+
+        </div>
+
+        <!-- ================= PRODUCT BUY X GET Y ================= -->
+
+        <div *ngIf="promotionType==='product' && promotionMethod==='buyXGetY'">
+
+            <div *ngFor="let c of conditions; let i = index" class="condition-box">
+
+                <div class="row mt-3 align-items-end">
+
+                    <div class="col-md-4">
+                        <label>Hàng mua</label>
+                        <input class="form-control" [(ngModel)]="c.buyProduct">
+                    </div>
+
+                    <div class="col-md-1 text-center">=</div>
+
+                    <div class="col-md-4">
+                        <label>Hàng tặng</label>
+                        <input class="form-control" [value]="c.giftProduct?.name" placeholder="Chọn sản phẩm" readonly
+                            (click)="openProductPopup(i, 'giftProduct')">
+                    </div>
+
+                    <div class="col-md-2">
+                        <button class="btn btn-danger" (click)="removeCondition(i)">
+                            🗑
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-add mt-3" (click)="addCondition()">
+                + Thêm điều kiện
+            </button>
+
+        </div>
+
+        <div class="modal fade show d-block" *ngIf="showProductPopup">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5>Chọn sản phẩm</h5>
+                        <button class="btn-close" (click)="closePopup()"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <input class="form-control mb-3" placeholder="Tìm sản phẩm..." [(ngModel)]="keyword">
+
+                        <div class="product-list">
+                            <div class="product-item" *ngFor="let p of filteredProducts()" (click)="selectProduct(p)">
+
+                                {{ p.name }} - {{ p.price | number }}đ
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PRODUCT QUANTITY DISCOUNT ================= -->
+
+        <div *ngIf="promotionType==='product' && promotionMethod==='quantityDiscount'">
+
+            <div *ngFor="let c of conditions; let i = index" class="condition-box">
+
+                <div class="row mt-3 align-items-end">
+
+                    <div class="col-md-4">
+                        <label>Khi mua (Hàng)</label>
+                        <input class="form-control" [(ngModel)]="c.buyProduct">
+                    </div>
+
+                    <div class="col-md-2">
+                        <label>Số lượng từ</label>
+                        <input class="form-control" [(ngModel)]="c.quantity">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Giá bán</label>
+                        <input class="form-control" [(ngModel)]="c.price">
+                    </div>
+
+                    <div class="col-md-2">
+                        <label>Giảm giá</label>
+                        <input class="form-control" [(ngModel)]="c.discountValue">
+                    </div>
+
+                    <div class="col-md-1">
+                        <button class="btn btn-danger" (click)="removeCondition(i)">
+                            🗑
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-add mt-3" (click)="addCondition()">
+                + Thêm điều kiện
+            </button>
+
+        </div>
+
+
+        <hr>
+
+        <h6>Thời gian áp dụng</h6>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <label>Hiệu lực từ</label>
+
+                <input type="date" class="form-control" [(ngModel)]="promotion.startDate">
+
+            </div>
+
+            <div class="col-md-3">
+
+                <label>Đến</label>
+
+                <input type="date" class="form-control" [(ngModel)]="promotion.endDate">
+
+            </div>
+
+        </div>
+
+
+        <hr>
+        <!-- Khởi tạo voucher -->
+        <h6>Khởi tạo voucher</h6>
+
+        <div class="row">
+
+            <div class="row align-items-end">
+
+                <div class="col-md-2">
+                    <label>Số lượng</label>
+                    <input class="form-control" type="number" [(ngModel)]="voucherConfig.quantity">
+                </div>
+
+                <div class="col-md-2">
+                    <label>Ký tự bắt đầu (2 ký tự)</label>
+                    <input class="form-control" [(ngModel)]="voucherConfig.prefix">
+                </div>
+
+                <div class="col-md-2">
+                    <label>Ký tự kết thúc (2 ký tự)</label>
+                    <input class="form-control" [(ngModel)]="voucherConfig.suffix">
+                </div>
+
+                <div class="col-md-6 d-flex align-items-end">
+                    <small class="text-muted">
+                        Voucher sẽ được tạo tự động khi lưu
+                    </small>
+                </div>
+
+            </div>
+
+            <div *ngIf="vouchers.length > 0" class="mt-4">
+
+                <h6>Danh sách voucher</h6>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Mã voucher</th>
+                            <th>Trạng thái</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Ngày sử dụng</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let v of vouchers">
+
+                            <td>{{ v.code }}</td>
+
+                            <td>
+                                <span [ngClass]="v.status === 'unused' ? 'text-success' : 'text-danger'">
+                                    {{ v.status === 'unused' ? 'Chưa dùng' : 'Đã dùng' }}
+                                </span>
+                            </td>
+
+                            <td>{{ v.orderId || '-' }}</td>
+                            <td>{{ v.usedDate || '-' }}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+
+        <div class="mt-4 text-end">
+
+            <button class="btn btn-save me-2" (click)="savePromotion()">
+                <i class="bi bi-check"></i>
+                Lưu
+            </button>
+
+            <button class="btn btn-cancel" (click)="cancel()">
+                Hủy
+            </button>
+
+        </div> 
+
+    </div>
+
+</div>

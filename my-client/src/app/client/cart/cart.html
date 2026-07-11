@@ -1,0 +1,247 @@
+<div class="container">
+    <app-breadcrumb></app-breadcrumb>
+
+    <ng-container *ngIf="totals$ | async as totals">
+
+        <main *ngIf="(selectableCartItems$ | async)?.length; else emptyCart" class="cart-layout">
+
+            <section class="freeship-progress-bar-container">
+                <div class="freeship-text">
+                    <ng-container *ngIf="totals.remainingForFreeship > 0; else freeshipReached">
+                        Bạn còn thiếu <strong>{{ totals.remainingForFreeship | currency:'VND' }}</strong> nữa để được
+                        Freeship!
+                    </ng-container>
+                    <ng-template #freeshipReached>
+                        Chúc mừng! Đơn hàng của bạn đã đủ điều kiện Freeship!
+                    </ng-template>
+                </div>
+                <div class="freeship-bar-bg">
+                    <div class="freeship-bar-fill" [style.width.%]="totals.freeshipProgress"
+                        [class.full]="totals.freeshipProgress >= 100">
+                    </div>
+                </div>
+            </section>
+
+            <section class="cart-items-list">
+
+                <div class="select-all-container custom-checkbox-container">
+                    <input type="checkbox" id="selectAllCheckbox" [checked]="allSelected$ | async"
+                        (change)="toggleSelectAll($event)">
+                    <label for="selectAllCheckbox">
+                        <i class="bi bi-circle check-icon-unchecked"></i>
+                        <i class="bi bi-check-circle-fill check-icon-checked"></i>
+                        <span>Chọn tất cả</span>
+                    </label>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="select-col">Chọn</th>
+                            <th>Sản Phẩm</th>
+                            <th>Đơn Giá</th>
+                            <th>Số Lượng</th>
+                            <th>Tạm Tính</th>
+                            <th>Xoá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of (selectableCartItems$ | async)">
+
+                            <td class="select-col custom-checkbox-container" data-label="Chọn">
+                                <input type="checkbox" id="item-check-{{item.id}}-{{item.size}}-{{item.color}}"
+                                    [checked]="item.isSelected"
+                                    (change)="toggleSelection(item.id, item.size, item.color, $event)">
+                                <label for="item-check-{{item.id}}-{{item.size}}-{{item.color}}">
+                                    <i class="bi bi-circle check-icon-unchecked"></i>
+                                    <i class="bi bi-check-circle-fill check-icon-checked"></i>
+                                </label>
+                            </td>
+
+                            <td class="td-product-info">
+                                <div class="product-info">
+                                    <a [routerLink]="['/productdetail', item.id]">
+                                        <img [src]="item.image" [alt]="item.name">
+                                    </a>
+                                    <div>
+                                        <div class="product-name-wrapper">
+                                            <div class="name">
+                                                <a [routerLink]="['/productdetail', item.id]">{{ item.name }}</a>
+                                            </div>
+                                        </div>
+                                        <div class="meta">{{ item.size }} - {{ item.color }}</div>
+                                        <div *ngIf="item.appliedPromotion" class="item-promotion">
+                                            {{ item.appliedPromotion }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td data-label="Đơn Giá">
+                                <div class="price-cell">
+                                    <span class="final-price">{{ item.finalPrice | currency:'VND' }}</span>
+                                    <span *ngIf="item.finalPrice < item.originalPrice" class="original-price-striked">
+                                        {{ item.originalPrice | currency:'VND' }}
+                                    </span>
+                                </div>
+                            </td>
+
+                            <td data-label="Số Lượng">
+                                <div class="quantity-control">
+                                    <button class="btn-quantity-minus"
+                                        (click)="updateQuantity(item.id, item.size, item.color, item.quantity - 1)">-</button>
+                                    <span class="quantity">{{ item.quantity }}</span>
+                                    <button class="btn-quantity-plus"
+                                        (click)="updateQuantity(item.id, item.size, item.color, item.quantity + 1)">+</button>
+                                </div>
+                            </td>
+
+                            <td data-label="Tạm Tính">
+                                {{ (item.finalPrice * item.quantity) | currency:'VND' }}
+                            </td>
+
+                            <td data-label="Xoá">
+                                <button class="btn-remove" (click)="removeItem(item.id, item.size, item.color)">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <aside class="cart-summary">
+                <h2>Tóm tắt đơn hàng</h2>
+                <div class="summary-line">
+                    <span>Tạm tính các món đã chọn:</span> <span id="summary-subtotal">{{ totals.selectedSubtotal |
+                        currency:'VND' }}</span>
+                </div>
+
+                <div class="summary-line">
+                    <span>
+                        Giảm giá <strong *ngIf="totals.discountPercentage > 0">({{ totals.discountPercentage
+                            }}%)</strong>:
+                    </span>
+                    <span id="summary-discount" class="text-success">{{ (totals.discountAmount * -1) | currency:'VND'
+                        }}</span>
+                </div>
+
+                <div class="summary-line">
+                    <span>Phí vận chuyển:</span>
+                    <span id="summary-shipping">
+                        <ng-container *ngIf="totals.shippingFee > 0; else freeShipping">
+                            {{ totals.shippingFee | currency:'VND' }}
+                        </ng-container>
+                        <ng-template #freeShipping>
+                            Miễn phí
+                        </ng-template>
+                    </span>
+                </div>
+                <hr>
+
+                <div class="discount-section">
+                    <div class="voucher-row-1"
+                        style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+
+                        <span class="summary-label"
+                            style="font-weight: bold; font-size: 1rem; padding-top: 5px; flex-shrink: 0;">Voucher</span>
+
+                        <div class="mb-3" style="flex-grow: 1; margin: 0;">
+                            <div *ngIf="appliedVoucher$ | async as voucher; else showVoucherList">
+                                <div class="alert alert-success d-flex justify-content-between align-items-center p-2"
+                                    role="alert">
+                                    <span class="small">
+                                        <i class="bi bi-check-circle-fill me-2"></i><strong>{{ voucher.code }}</strong>
+                                    </span>
+                                    <button (click)="removeVoucher()" class="btn btn-cancel-voucher">Hủy</button>
+                                </div>
+                            </div>
+
+                            <ng-template #showVoucherList>
+                                <div *ngIf="voucherList$ | async as list">
+                                    <div class="voucher-list-container" *ngIf="list.eligible.length > 0">
+                                        <ul class="list-group list-group-flush">
+                                            <li *ngFor="let v of list.eligible"
+                                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2"
+                                                (click)="selectVoucher(v.code)">
+                                                <div class="voucher-info w-100">
+                                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                                        <div>
+                                                            <i class="bi bi-ticket-perforated me-2 text-primary"></i>
+                                                            <span class="fw-bold small">{{ v.code }}</span>
+                                                            <span class="badge bg-info-subtle text-info ms-2"
+                                                                *ngIf="v.promotionId?.conditions?.[0]?.discountValue"
+                                                                style="font-size: 0.7rem;">
+                                                                -{{ v.promotionId.conditions[0].discountValue }}{{
+                                                                v.promotionId.conditions[0].discountType === 'percent' ?
+                                                                '%' : 'đ' }}
+                                                            </span>
+                                                        </div>
+                                                        <span class="small text-danger" style="font-size: 0.75rem;">
+                                                            HSD: {{ v.promotionId?.endDate | date:'dd/MM/yyyy' }}
+                                                        </span>
+                                                    </div>
+                                                    <div class="small text-muted ms-4">{{ v.description }}</div>
+                                                </div>
+                                                <i class="bi bi-chevron-right ms-2"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div *ngIf="list.ineligible.length > 0 && list.eligible.length === 0"
+                                        class="text-muted small">
+                                        Bạn có {{ list.ineligible.length }} voucher chưa đủ điều kiện.
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-sm" placeholder="Nhập mã voucher"
+                            #discountInput>
+                        <button class="btn btn-secondary btn-sm" type="button"
+                            (click)="applyDiscountFromInput(discountInput)">
+                            Áp dụng
+                        </button>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="summary-line total">
+                    <span>Tổng thanh toán:</span>
+                    <span id="summary-total">{{ totals.total | currency:'VND' }}</span>
+                </div>
+                <button class="btn btn-primary btn-checkout" routerLink="/checkout"
+                    [disabled]="totals.total === 0">Thanh toán</button>
+            </aside>
+        </main>
+
+        <ng-template #emptyCart>
+            <main id="cart-empty-state" class="cart-empty-layout">
+                <div class="empty-cart-content">
+                    <img src="assets/images/cart/trong.png" alt="Giỏ hàng rỗng" class="empty-cart-img"
+                        style="max-width: 250px; margin-bottom: 20px;">
+                    <h2>“Hổng” có gì trong giỏ hết</h2>
+                    <p>Về trang cửa hàng để chọn mua sản phẩm bạn nhé!!</p>
+                    <a href="/product-list" class="btn btn-primary">Mua sắm ngay</a>
+                </div>
+            </main>
+        </ng-template>
+
+    </ng-container>
+
+    <section id="recommendations-section">
+        <h2 class="mb-4 fw-bold">Có thể bạn sẽ thích</h2>
+        <div class="recommendations-wrapper">
+            <div class="row g-4" *ngIf="recommendations$ | async as recs">
+
+                <div class="col-6 col-md-4 col-lg-3" *ngFor="let product of recs">
+                    <div [routerLink]="['/productdetail', product._id]" style="cursor: pointer;" class="h-100">
+                        <app-product [product]="product"></app-product>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>

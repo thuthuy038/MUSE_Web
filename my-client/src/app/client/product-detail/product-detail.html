@@ -1,0 +1,293 @@
+<div class="container product-detail py-4" *ngIf="product">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb small mb-3">
+    Trang chủ <i class="bi bi-chevron-right"></i>
+    Sản phẩm <i class="bi bi-chevron-right"></i>
+    <span class="text-primary-muse">{{ product.name }}</span>
+  </div>
+
+  <div class="row g-4">
+
+    <!-- IMAGE -->
+    <div class="col-lg-5 col-md-6">
+      <img class="main-img" [src]="selectedImage">
+
+      <div class="thumb-list mt-3">
+        <img *ngFor="let img of images" [src]="img" (click)="selectedImage = img" [class.active]="img === selectedImage"
+          class="thumb">
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="col-lg-7 col-md-6">
+
+      <h1 class="title">{{ product.name }}</h1>
+
+      <div class="rating mb-2 d-flex align-items-center">
+
+        <ng-container *ngIf="reviewStats.total > 0; else noReviewsTop">
+          <i class="bi bi-star-fill text-warning"></i>
+          <span class="ms-2 fw-bold" style="font-size: 16px;">{{ reviewStats.average.toFixed(1) }}</span>
+          <span class="ms-1 text-muted" style="font-size: 14px;">({{ reviewStats.total }} đánh giá)</span>
+        </ng-container>
+
+        <ng-template #noReviewsTop>
+          <span class="text-muted small fst-italic">Chưa có đánh giá</span>
+        </ng-template>
+
+        <span class="mx-2 text-muted">|</span>
+        <span class="text-muted">{{ product.sold || 0 }} đã bán</span>
+      </div>
+
+      <!-- PRICE -->
+      <div class="price-box mb-3">
+        <span class="price">₫ {{ getFinalPrice() | number }}</span>
+
+        <span class="old-price" *ngIf="product.discountPercent > 0">
+          ₫ {{ product.price | number }}
+        </span>
+      </div>
+
+      <!-- COLOR -->
+      <div class="section">
+        <div class="label">Màu sắc</div>
+        <button *ngFor="let c of colors" (click)="selectedColor = c" [class.active]="c === selectedColor"
+          class="option small">
+          {{ c }}
+        </button>
+      </div>
+
+      <!-- SIZE -->
+      <div class="section">
+        <div class="label">Size</div>
+        <button *ngFor="let s of sizes" (click)="selectedSize = s" [disabled]="!isSizeAvailable(s)"
+          [class.active]="s === selectedSize" class="option small">
+          {{ s }}
+        </button>
+      </div>
+
+      <!-- QUANTITY -->
+      <div class="section d-flex align-items-center gap-3">
+        <div class="quantity">
+          <button type="button" (click)="decrease()">-</button>
+          <input [value]="quantity" readonly>
+          <button type="button" (click)="increase()">+</button>
+        </div>
+
+        <span>
+          {{ getStock() > 0 ? ('Còn ' + getStock()) : 'Hết hàng' }}
+        </span>
+      </div>
+
+      <!-- ACTION -->
+      <div class="mt-3 d-flex gap-2">
+        <button class="btn btn-add-cart" (click)="addToCart()" [disabled]="getStock() === 0">
+          <i class="bi bi-cart-plus fs-5"></i>
+          Thêm vào giỏ
+        </button>
+
+        <button class="btn btn-buy-now" (click)="buyNow()" [disabled]="getStock() === 0">
+          Mua ngay
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="detail-box mt-5" *ngIf="product">
+    <!-- Lookbook -->
+    <div class="lookbook-section mt-4 mb-4" *ngIf="lookbookProducts && lookbookProducts.length > 0">
+      <h6 class="lookbook-title">✨ MIX & MATCH: GỢI Ý PHỐI ĐỒ</h6>
+      <div class="lookbook-list">
+        <div class="lookbook-item" *ngFor="let item of lookbookProducts" [routerLink]="['/productdetail', item._id]">
+          <div class="lb-img-box">
+            <img [src]="item.displayImage" class="lb-img">
+            <div class="lb-overlay">Xem ngay</div>
+          </div>
+          <div class="lb-info">
+            <div class="lb-name">{{item.name}}</div>
+            <div class="lb-price">₫ {{ (item.discountPrice || item.price) | number }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h5>CHI TIẾT SẢN PHẨM</h5>
+
+    <table class="table table-borderless">
+
+      <tr>
+        <td class="label">Danh mục</td>
+        <td>{{ product.category }}</td>
+      </tr>
+
+      <tr>
+        <td class="label">Kho</td>
+        <td>
+          <span *ngIf="product.stock > 0" class="text-success">
+            Còn hàng ({{ product.stock }})
+          </span>
+          <span *ngIf="product.stock === 0" class="text-danger">
+            Hết hàng
+          </span>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="label">Chất liệu</td>
+        <td>{{ product.material }}</td>
+      </tr>
+
+      <tr>
+        <td class="label">Xuất xứ</td>
+        <td>Việt Nam</td>
+      </tr>
+
+      <tr>
+        <td class="label">Gửi từ</td>
+        <td>Thành phố Hồ Chí Minh</td>
+      </tr>
+
+    </table>
+
+    <!-- MÔ TẢ -->
+    <h5 class="mt-4">MÔ TẢ SẢN PHẨM</h5>
+    <div class="product-description" [innerHTML]="product.description | safeHtml"></div>
+
+    <div class="reviews-section mt-5">
+      <h5 class="mb-3">ĐÁNH GIÁ SẢN PHẨM</h5>
+
+      <div class="text-center py-4" *ngIf="reviewLoading">
+        <div class="spinner-border text-primary-muse" role="status">
+          <span class="visually-hidden">Đang tải...</span>
+        </div>
+      </div>
+      <!-- Đánh giá -->
+      <div *ngIf="!reviewLoading && reviews.length > 0">
+        <div class="review-summary mb-4">
+          <div class="row align-items-center">
+            <div class="col-md-4 text-center text-md-start">
+              <div class="average-rating">
+                <span class="rating-number">{{ reviewStats.average.toFixed(1) }}</span>
+                <span class="rating-max">/5</span>
+                <div class="stars mt-1 text-warning">
+                  <i class="bi bi-star-fill" *ngFor="let i of range(getFullStars(reviewStats.average))"></i> <i
+                    class="bi bi-star-half" *ngIf="reviewStats.average % 1 >= 0.5"></i>
+                  <i class="bi bi-star-half" *ngIf="hasHalfStar(reviewStats.average)"></i>
+                </div>
+                <span class="total-reviews">{{ reviewStats.total }} đánh giá</span>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="rating-bars">
+                <div *ngFor="let rating of [5,4,3,2,1]" class="rating-bar-item d-flex align-items-center gap-2 mb-1">
+                  <span class="rating-label" style="width: 40px;">{{ rating }} sao</span>
+                  <div class="progress flex-grow-1" style="height: 8px;">
+                    <div class="progress-bar bg-warning" [style.width.%]="getRatingPercentage(rating)"></div>
+                  </div>
+                  <span class="rating-count" style="width: 40px;">{{ reviewStats.distribution[rating] }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-filters mb-4">
+          <button class="filter-btn" [class.active]="reviewFilter === 'all'" (click)="setReviewFilter('all')">
+            Tất cả
+          </button>
+          <button class="filter-btn" [class.active]="reviewFilter === '5'" (click)="setReviewFilter('5')">
+            5 sao
+          </button>
+          <button class="filter-btn" [class.active]="reviewFilter === '4'" (click)="setReviewFilter('4')">
+            4 sao
+          </button>
+          <button class="filter-btn" [class.active]="reviewFilter === '3'" (click)="setReviewFilter('3')">
+            3 sao
+          </button>
+          <button class="filter-btn" [class.active]="reviewFilter === '2'" (click)="setReviewFilter('2')">
+            2 sao
+          </button>
+          <button class="filter-btn" [class.active]="reviewFilter === '1'" (click)="setReviewFilter('1')">
+            1 sao
+          </button>
+          <button class="filter-btn" [class.active]="reviewFilter === 'photo'" (click)="setReviewFilter('photo')">
+            Có hình ảnh
+          </button>
+        </div>
+
+        <div class="reviews-list">
+          <div *ngFor="let review of filteredReviews | slice:0:displayLimit"
+            class="review-card mb-3 p-3 border rounded shadow-sm">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <div class="reviewer-name fw-bold">{{ review.customerName }}</div>
+                <div class="review-stars text-warning">
+                  <i class="bi bi-star-fill" *ngFor="let s of [].constructor(review.rating)"></i>
+                  <i class="bi bi-star" *ngFor="let s of [].constructor(5 - review.rating)"></i>
+                </div>
+              </div>
+              <div class="review-date text-muted small">{{ review.createdAt | date:'dd/MM/yyyy HH:mm' }}</div>
+            </div>
+            <div class="review-variant text-muted small mb-2" *ngIf="review.size || review.color">
+              Phân loại: {{ review.color }} / {{ review.size }}
+            </div>
+            <div class="review-content">{{ review.content }}</div>
+            <div class="review-images mt-2" *ngIf="review.images && review.images.length > 0">
+              <img *ngFor="let img of review.images" [src]="'http://localhost:3000' + img" class="review-img me-2"
+                style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer;"
+                (click)="openImageModal(img)">
+            </div>
+
+            <div class="admin-reply mt-3 p-3 bg-light rounded border-start border-3 border-danger"
+              *ngIf="review.adminReply">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <div>
+                  <i class="bi bi-chat-right-dots-fill text-danger me-1"></i>
+                  <strong class="text-dark">Phản hồi từ shop:</strong>
+                </div>
+                <span class="text-muted" style="font-size: 11px;">
+                  {{ review.adminReplyAt | date:'dd/MM/yyyy HH:mm' }}
+                </span>
+              </div>
+              <p class="mb-0 mt-1 small text-dark">{{ review.adminReply }}</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="text-center mt-4" *ngIf="filteredReviews.length > displayLimit">
+          <button class="btn btn-outline-danger rounded-pill px-4 py-2" (click)="loadMoreReviews()">
+            Xem thêm đánh giá ({{ filteredReviews.length - displayLimit }})
+            <i class="bi bi-chevron-down ms-1"></i>
+          </button>
+        </div>
+
+        <div *ngIf="filteredReviews.length === 0" class="text-center text-muted py-4">
+          <i class="bi bi-chat-dots fs-1"></i>
+          <p class="mt-2">Chưa có đánh giá nào phù hợp với bộ lọc</p>
+        </div>
+      </div>
+
+      <div *ngIf="!reviewLoading && reviews.length === 0" class="text-center text-muted py-4">
+        <i class="bi bi-chat-dots fs-1"></i>
+        <p class="mt-2">Chưa có đánh giá nào cho sản phẩm này</p>
+        <p class="small">Hãy là người đầu tiên đánh giá sản phẩm!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED -->
+  <div class="mt-5">
+    <h5>Sản phẩm tương tự</h5>
+
+    <div class="row g-3">
+      <div class="col-6 col-md-3 col-lg-2" *ngFor="let item of relatedProducts">
+        <app-product [product]="item" [routerLink]="['/productdetail', item._id]"></app-product>
+      </div>
+    </div>
+
+  </div>
+
+</div>

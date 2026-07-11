@@ -1,0 +1,95 @@
+<div class="banner-form">
+
+<h3 class="form-title">
+{{ banner ? 'Sửa banner' : 'Thêm banner' }}
+</h3>
+
+
+<label>Tên banner</label>
+
+<input
+type="text"
+[(ngModel)]="bannerForm.title"
+class="banner-input"
+placeholder="Nhập tên banner"
+/>
+
+<label>Link khi click banner</label>
+
+<input
+  type="text"
+  [(ngModel)]="bannerForm.link"
+  class="banner-input"
+  placeholder="/productlist hoặc /productdetail/ID"
+/>
+
+
+<label>Trạng thái</label>
+
+<select
+[(ngModel)]="bannerForm.status"
+class="banner-select"
+
+>
+
+<option value="active">Đang hiển thị</option>
+<option value="hidden">Ẩn banner</option>
+</select>
+
+
+<label>Ảnh banner</label>
+
+<div class="upload-box">
+
+<img
+*ngIf="previewImage"
+[src]="previewImage"
+class="preview-img"
+/>
+
+<div
+*ngIf="!previewImage"
+class="upload-placeholder"
+>
+Chọn ảnh banner
+</div>
+
+<input
+type="file"
+accept="image/*"
+(change)="onFileSelected($event)"
+/>
+
+</div>
+
+
+<div class="form-buttons">
+
+<button
+class="save-btn"
+(click)="saveBanner()"
+[disabled]="uploading || saving"
+
+>
+
+{{ banner ? 'Cập nhật' : 'Lưu' }} </button>
+
+<button
+class="cancel-btn"
+(click)="cancel()"
+
+>
+
+Hủy </button>
+
+</div>
+
+
+<div
+class="toast"
+*ngIf="showToast"
+>
+{{ toastMessage }}
+</div>
+
+</div>

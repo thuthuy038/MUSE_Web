@@ -1,0 +1,66 @@
+<div class="page-wrapper">
+  <div class="back-wrapper">
+    <button class="back-btn" (click)="goBack()">← Quay lại</button>
+  </div>
+
+  <div class="comment-form-page">
+    <div class="top-section">
+      <div class="product-box">
+        <img class="product-img" [src]="comment?.productImage" *ngIf="comment?.productImage" />
+
+        <div class="product-info">
+          <div class="name"><b>{{comment?.productName}}</b></div>
+          <div class="meta">
+            Mã đánh giá: {{comment?.feedbackId}} <br>
+            Phân loại hàng: {{comment?.color}}, {{comment?.size}} <br>
+            Đơn hàng: {{comment?.orderId}}
+            <button class="view-order-btn" (click)="viewOrderDetail(comment?.orderDbId)">
+              Xem chi tiết đơn ➜
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="review-title">ĐÁNH GIÁ SẢN PHẨM</h3>
+
+    <div class="rating-box">
+      <span class="score">{{comment?.rating || 0}}.0</span>
+      <span class="over">trên 5</span>
+      <div class="stars">
+        <span *ngFor="let s of [].constructor(comment?.rating || 0)">⭐</span>
+      </div>
+    </div>
+
+    <div class="review-box">
+      <div class="customer">{{comment?.customerName}}</div>
+      <div class="stars">
+        <span *ngFor="let s of [].constructor(comment?.rating || 0)">⭐</span>
+      </div>
+      <div class="time">{{comment?.createdAt | date:'dd-MM-yyyy HH:mm'}}</div>
+      <p class="content">{{comment?.content}}</p>
+
+      <div class="review-images" *ngIf="comment?.images?.length">
+        <div *ngFor="let img of comment.images">
+          <img *ngIf="img?.url" [src]="'http://localhost:3000' + img.url" class="review-img" />
+          <img *ngIf="!img?.url && img" [src]="'http://localhost:3000' + img" class="review-img" />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isReplied && !isEditing; else replyForm" class="admin-reply">
+      <b>Shop phản hồi:</b>
+      <p>{{ replyContent }}</p>
+      <button class="edit-btn" (click)="enableEdit()">Chỉnh sửa</button>
+    </div>
+
+    <ng-template #replyForm>
+      <div class="reply-box">
+        <textarea placeholder="Nhập lời phản hồi ..." [(ngModel)]="replyContent"></textarea>
+        <button (click)="submitReply()" class="send-btn">
+          {{ isEditing ? 'Cập nhật' : 'Gửi' }}
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>

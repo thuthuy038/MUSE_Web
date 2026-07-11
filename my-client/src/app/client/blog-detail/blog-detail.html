@@ -1,0 +1,32 @@
+<div class="container blog-detail mt-5" *ngIf="blog">
+
+  <!-- TITLE -->
+  <h1 class="blog-title">
+    {{ blog.title }}
+  </h1>
+
+  <!-- META -->
+  <p class="blog-meta">
+    {{ blog.date }} • {{ blog.author }}
+  </p>
+
+  <!-- IMAGE -->
+  <div class="blog-image">
+    <img [src]="getImage(blog.image)" class="img-fluid">
+  </div>
+
+  <!-- CONTENT -->
+  <div class="blog-content">
+    <p *ngFor="let line of blog.content.split('\n')">
+      {{ line }}
+    </p>
+  </div>
+
+  <!-- BUTTON BACK -->
+  <div class="back-wrapper">
+    <button class="btn-back" (click)="goBack()">
+      ← Quay lại
+    </button>
+  </div>
+
+</div>

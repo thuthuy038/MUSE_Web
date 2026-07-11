@@ -1,0 +1,243 @@
+<div class="container-checkout">
+
+    <nav class="breadcrumb">
+        <a routerLink="/cart">Giỏ hàng</a> /
+        <span>Thanh toán</span>
+    </nav>
+
+    <main class="checkout-layout">
+        <section class="customer-info">
+
+            <h2>Thông tin giao hàng</h2>
+
+            <!-- Radio chọn loại địa chỉ (chỉ hiện nếu có địa chỉ) -->
+            <div class="form-group" *ngIf="userAddresses.length > 0">
+                <div class="radio-options-group" style="margin-bottom: 10px;">
+                    <div class="radio-option" style="margin-right: 20px;">
+                        <input type="radio" name="addressChoice" id="addrDefault" [value]="'default'"
+                            [formControl]="addressChoiceControl">
+                        <label for="addrDefault">Giao đến địa chỉ mặc định</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="addressChoice" id="addrOther" [value]="'other'"
+                            [formControl]="addressChoiceControl">
+                        <label for="addrOther">Giao đến địa chỉ khác</label>
+                    </div>
+                </div>
+
+                <!-- Dropdown chọn địa chỉ khác (chỉ hiện khi chọn 'other') -->
+                <div class="form-group" *ngIf="addressChoiceControl.value === 'other'">
+                    <label for="address-select">Chọn địa chỉ đã lưu</label>
+                    <select id="address-select" class="form-control" [formControl]="addressIdControl">
+                        <option value="">-- Chọn địa chỉ --</option>
+                        <option *ngFor="let addr of userAddresses" [value]="addr._id || addr.id">
+                            {{ addr.street }}, {{ addr.ward }}, {{ addr.district }}, {{ addr.province }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <form id="checkout-form" [formGroup]="checkoutForm" (ngSubmit)="handlePlaceOrder()">
+                <div class="form-group">
+                    <input type="email" id="email" class="form-control" placeholder="Địa chỉ Email"
+                        formControlName="email" [class.invalid-field]="isFieldInvalid('email')">
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <input type="text" id="ho-ten" class="form-control" placeholder="Họ và tên"
+                            formControlName="name" required [class.invalid-field]="isFieldInvalid('name')">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="sdt" class="form-control" placeholder="Số điện thoại"
+                            formControlName="phone" required [class.invalid-field]="isFieldInvalid('phone')">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="dia-chi" class="form-control" placeholder="Địa chỉ (Ví dụ: Số 20, ngõ 90)"
+                        formControlName="address" required [class.invalid-field]="isFieldInvalid('address')">
+                </div>
+
+                <div class="form-grid-3">
+                    <div class="form-group">
+                        <select id="tinh-tp" class="form-control" formControlName="province" required
+                            [class.invalid-field]="isFieldInvalid('province')">
+                            <option value="">Chọn Tỉnh/TP</option>
+                            <option *ngFor="let p of (provinces$ | async)" [value]="p.code">{{ p.name }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="quan-huyen" class="form-control" formControlName="district" required
+                            [class.invalid-field]="isFieldInvalid('district')">
+                            <option value="">Chọn Quận/Huyện</option>
+                            <option *ngFor="let d of (districts$ | async)" [value]="d.code">{{ d.name }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="phuong-xa" class="form-control" formControlName="ward" required
+                            [class.invalid-field]="isFieldInvalid('ward')">
+                            <option value="">Chọn Phường/Xã</option>
+                            <option *ngFor="let w of (wards$ | async)" [value]="w.code">{{ w.name }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <textarea id="ghi-chu" class="form-control" placeholder="Ghi chú (Tùy chọn)"
+                        formControlName="note"></textarea>
+                </div>
+
+                <h2 class="section-title">Phương thức vận chuyển</h2>
+                <div class="radio-options-group" id="shipping-options-group" *ngIf="totals$ | async as totals">
+                    <div class="radio-option">
+                        <input type="radio" name="shipping" id="ship-tieu-chuan" value="standard"
+                            formControlName="shipping">
+                        <label for="ship-tieu-chuan">
+                            <span class="radio-icon"><i class="bi bi-box2-fill"></i></span>
+                            <span class="radio-title">Giao hàng tiêu chuẩn</span>
+                            <span class="radio-price">{{ totals.shippingFee === 0 ? 'Miễn phí' : '23.000 VNĐ' }}</span>
+                        </label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="shipping" id="ship-hoa-toc" value="express"
+                            formControlName="shipping">
+                        <label for="ship-hoa-toc">
+                            <span class="radio-icon"><i class="bi bi-truck"></i></span>
+                            <span class="radio-title">Giao hàng hoả tốc</span>
+                            <span class="radio-price">{{ totals.shippingFee === 0 ? 'Miễn phí' : '40.000 VNĐ' }}</span>
+                        </label>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Phương thức thanh toán</h2>
+                <div class="radio-options-group" id="payment-options-group">
+                    <div class="radio-option">
+                        <input type="radio" name="payment" id="payment-cod" value="COD" formControlName="payment">
+                        <label for="payment-cod">
+                            <span class="radio-icon"><i class="bi bi-cash-stack"></i></span>
+                            <span class="radio-title">Thanh toán khi nhận hàng (COD)</span>
+                        </label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="payment" id="payment-momo" value="MOMO" formControlName="payment">
+                        <label for="payment-momo">
+                            <span class="radio-icon"><i class="bi bi-wallet-fill"></i></span>
+                            <span class="radio-title">Thanh toán qua Momo</span>
+                        </label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="payment" id="payment-vnpay" value="VNPAY" formControlName="payment">
+                        <label for="payment-vnpay">
+                            <span class="radio-icon"><i class="bi bi-qr-code-scan"></i></span>
+                            <span class="radio-title">Thanh toán qua VNPay</span>
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <aside class="order-summary" *ngIf="totals$ | async as totals">
+            <h2>Đơn hàng của bạn</h2>
+
+            <div class="summary-items-list" id="summary-items-list">
+                <div class="summary-item" *ngFor="let item of (cartItems$ | async)">
+                    <img [src]="item.image" [alt]="item.name" class="summary-item-img">
+                    <div class="summary-item-info">
+                        <div class="summary-item-name">{{ item.name }} (x{{ item.quantity }})</div>
+                        <div class="summary-item-meta">{{ item.size }} - {{item.color}}</div>
+                    </div>
+                    <span class="summary-item-price">{{ (item.finalPrice * item.quantity) | currency:'VND' }}</span>
+                </div>
+            </div>
+
+            <div class="summary-totals">
+                <div class="summary-line">
+                    <span>Tạm tính:</span>
+                    <span id="summary-subtotal">{{ totals.selectedSubtotal | currency:'VND' }}</span>
+                </div>
+                <div class="summary-line">
+                    <span>Giảm giá:</span>
+                    <span id="summary-discount">{{ (totals.discountAmount * -1) | currency:'VND' }}</span>
+                </div>
+
+                <div class="summary-line">
+                    <span>Phí vận chuyển:</span>
+                    <span id="summary-shipping">
+                        <ng-container *ngIf="totals.shippingFee === 0; else shippingCost">
+                            Miễn phí
+                        </ng-container>
+                        <ng-template #shippingCost>
+                            {{ (checkoutForm.get('shipping')?.value === 'standard' ? 23000 : 40000) | currency:'VND' }}
+                        </ng-template>
+                    </span>
+                </div>
+                <hr>
+
+                <div class="summary-line total">
+                    <span>Tổng cộng:</span>
+                    <span id="summary-total">
+                        {{ (totals.selectedSubtotal - totals.discountAmount + (totals.shippingFee === 0 ? 0 :
+                        (checkoutForm.get('shipping')?.value === 'standard' ? 23000 : 40000))) | currency:'VND' }}
+                    </span>
+                </div>
+            </div>
+
+            <button type="submit" form="checkout-form" class="btn btn-primary btn-place-order">
+                ĐẶT HÀNG NGAY
+            </button>
+            <p class="terms">
+                Bằng cách nhấn Đặt hàng, bạn đồng ý với
+                <a href="#">Điều khoản sử dụng</a>.
+            </p>
+        </aside>
+    </main>
+</div>
+
+
+<div id="qr-modal-overlay" *ngIf="isQrModalVisible" [class.show]="isQrModalVisible" (click)="handleQrClose()">
+    <div class="qr-modal-content" (click)="$event.stopPropagation()">
+        <button id="qr-close-btn" class="qr-close-btn" (click)="handleQrClose()">&times;</button>
+        <h3>Quét mã để thanh toán</h3>
+        <p>Vui lòng sử dụng ứng dụng Momo hoặc VNPay</p>
+        <img id="qr-image" [src]="qrImageUrl" alt="Mã QR Thanh toán">
+        <div class="qr-order-info">
+            Mã đơn hàng: <strong id="qr-order-id">{{ currentOrderId }}</strong>
+        </div>
+        <p class="qr-note">Xin cảm ơn quý khách!</p>
+    </div>
+</div>
+
+<div id="validation-modal-overlay" *ngIf="isValidationModalVisible" [class.show]="isValidationModalVisible">
+    <div class="validation-modal-content" (click)="$event.stopPropagation()">
+        <div class="validation-header">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <h3>Thông tin chưa hợp lệ</h3>
+        </div>
+        <p>Vui lòng kiểm tra lại các thông tin bắt buộc:</p>
+        <ul class="validation-error-list">
+            <li *ngFor="let error of validationErrors">{{ error }}</li>
+        </ul>
+        <button class="btn btn-primary btn-validation-ok" (click)="isValidationModalVisible = false">
+            Đã hiểu
+        </button>
+    </div>
+</div>
+
+<div id="success-modal-overlay" *ngIf="isSuccessModalVisible" [class.show]="isSuccessModalVisible"
+    (click)="handleSuccessModalClose()">
+    <div class="success-modal-content" (click)="$event.stopPropagation()">
+        <div class="success-header">
+            <i class="bi bi-check-circle-fill"></i>
+            <h3>Đặt hàng thành công!</h3>
+        </div>
+        <p>Cảm ơn bạn đã mua sắm tại Muse. Đơn hàng <strong style="color: #333;">{{ currentOrderId }}</strong> đã được
+            ghi nhận.</p>
+        <p style="font-size: 14px; color: #555;">Chúng tôi sẽ liên hệ với bạn để xác nhận trong thời gian sớm nhất.</p>
+        <button class="btn btn-primary btn-success-ok" (click)="handleSuccessModalClose()">
+            Về trang chủ
+        </button>
+        <button class="btn btn-primary btn-success-ok" routerLink="/ordertracking">
+            Theo dõi đơn hàng
+        </button>
+    </div>
+</div>

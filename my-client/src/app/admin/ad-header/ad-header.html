@@ -1,0 +1,60 @@
+<header class="ad-header">
+    <div class="header-container">
+        <div class="header-left">
+            <ng-content select="[header-left]"></ng-content>
+        </div>
+
+        <div class="header-right">
+            <!-- thông báo -->
+            <app-notification></app-notification>
+
+            <!-- User info -->
+            <div class="user-wrapper" (click)="toggleUserMenu()">
+                <div class="user-avatar">
+                    <img *ngIf="adminData?.avatar" [src]="adminData?.avatar" alt="Admin avatar"
+                        (error)="onImageError()">
+                    <div class="avatar-placeholder" *ngIf="!adminData?.avatar">
+                        {{ getAvatarInitial() }}
+                    </div>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">{{ getFullName() }}</span>
+                    <i class="bi bi-chevron-down" [class.rotated]="showUserMenu"></i>
+                </div>
+
+                <!-- Dropdown user menu -->
+                <div class="user-dropdown" *ngIf="showUserMenu" (click)="$event.stopPropagation()">
+                    <div class="dropdown-user-info">
+                        <div class="dropdown-avatar">
+                           
+                            <img *ngIf="adminData?.avatar" [src]="adminData?.avatar" alt="Admin avatar"
+                                (error)="onImageError()">
+                            <div class="avatar-placeholder" *ngIf="!adminData?.avatar">
+                                {{ getAvatarInitial() }}
+                            </div>
+                        </div>
+                        <div class="dropdown-user-details">
+                            <p class="user-fullname">{{ getFullName() }}</p>
+                            <p class="user-email">{{ getEmail() }}</p>
+                            <p class="user-role">
+                                <i class="bi bi-shield-check"></i>
+                                {{ adminData?.role === 'admin' ? 'Quản trị viên' : 'Khách hàng' }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu-items">
+                        <a routerLink="/admin/account" class="menu-item" (click)="closeUserMenu()">
+                            <i class="bi bi-person"></i>
+                            <span>Thông tin tài khoản</span>
+                        </a>
+                        <div class="menu-divider"></div>
+                        <button class="menu-item logout-item" (click)="logout()">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Đăng xuất</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

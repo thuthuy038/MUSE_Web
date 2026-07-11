@@ -1,0 +1,30 @@
+.order-form-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.text-pink { color: #FB6F92; }
+.bg-pink-light-soft { background-color: rgba(255, 194, 209, 0.2); }
+
+.card-header {
+  border-bottom: none;
+}
+
+.product-img-placeholder {
+  width: 50px;
+  height: 50px;
+  background-color: #eee;
+  border-radius: 8px;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #FB6F92;
+  box-shadow: 0 0 0 0.2rem rgba(251, 111, 146, 0.25);
+}
+
+/* Tận dụng lại class từ trang quản lý */
+.btn-pink { background-color: #FB6F92; color: white; border: none; transition: 0.3s; }
+.btn-pink:hover { background-color: #f3567d; color: white; }
+.btn-outline-pink { border: 1px solid #FB6F92; color: #FB6F92; background: white; }
+.btn-outline-pink:hover { background: #FB6F92; color: white; }

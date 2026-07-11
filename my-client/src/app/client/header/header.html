@@ -1,0 +1,137 @@
+<!-- Thanh ưu đãi -->
+<div *ngIf="!isLoggedIn()" class="top-banner text-center py-1 small">
+  Nhận ưu đãi 20% cho đơn hàng đầu tiên.
+  <span class="fw-semibold text-decoration-underline">
+    <a routerLink="/sign-up" class="text-pink fw-bold">Đăng ký ngay!</a>
+  </span>
+</div>
+
+<!-- Thanh hotline -->
+<div class="hotline-bar text-white py-1 small">
+  <div class="container d-flex justify-content-between align-items-center">
+
+    <div class="moving-offer-hotline flex-grow-1 overflow-hidden me-3">
+      <div class="moving-text-content-hotline">
+        <span class="d-inline-block me-5">
+          Ưu đãi độc quyền: Giảm 15% cho đơn hàng trên 1 triệu.
+        </span>
+        <span class="d-inline-block me-5">
+          <i class="bi bi-gift-fill text-white me-1"></i>
+          Tham gia chương trình khách hàng thân thiết để nhận thêm quà tặng.
+        </span>
+        <span class="d-inline-block me-5">
+          <i class="bi bi-truck text-white me-1"></i>
+          <b>MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC</b> cho mọi đơn hàng.
+        </span>
+        <span class="d-inline-block me-5">
+          Ưu đãi độc quyền: Giảm 15% cho đơn hàng trên 1 triệu.
+        </span>
+        <span class="d-inline-block me-5">
+          <i class="bi bi-gift-fill text-white me-1"></i>
+          Tham gia chương trình khách hàng thân thiết để nhận thêm quà tặng.
+        </span>
+        <span class="d-inline-block me-5">
+          <i class="bi bi-truck text-white me-1"></i>
+          <b>MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC</b> cho mọi đơn hàng.
+        </span>
+      </div>
+    </div>
+
+    <div class="hotline-number-fixed flex-shrink-0 d-flex align-items-center">
+      <span class="d-none d-md-inline-block">(8h-12h, 13h30 - 17h30)</span>
+      <span class="mx-2 d-none d-md-inline-block">|</span>
+      Hotline: <a class="text-white" href="#"><strong class="ms-1">(+84) 948 823 163</strong></a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Navbar chính -->
+<nav class="navbar navbar-expand-lg main-navbar">
+  <div class="container d-flex align-items-center">
+
+    <button class="navbar-toggler border-0 text-pink d-lg-none" style="width: 50px;" (click)="toggleMenu()">
+      <i class="bi bi-list fs-1"></i>
+    </button>
+
+    <div class="logo-wrapper-mobile d-flex justify-content-center d-lg-block">
+      <a class="navbar-brand d-flex align-items-center mx-lg-0" routerLink="/" aria-label="Trang chủ Muse">
+        <img src="assets/images/logos/logo.png" alt="Muse" width="100px" class="me-2" />
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+      <ul class="navbar-nav text-center align-items-lg-center gap-lg-4">
+        <li class="nav-item"><a routerLink="/" class="nav-link fw-semibold">TRANG CHỦ</a></li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fw-semibold" routerLink="/productlist" id="dropdownMenu">
+            DANH MỤC SẢN PHẨM
+          </a>
+          <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenu">
+            @for (cat of categories; track cat._id) {
+            <li>
+              <a class="dropdown-item" [routerLink]="['/productlist']"
+                [queryParams]="cat._id !== 'all' ? { category: cat._id } : null">
+                {{ cat.name }}
+              </a>
+            </li>
+            }
+          </ul>
+        </li>
+
+        <li class="nav-item"><a routerLink="/blog" class="nav-link fw-semibold">BLOG</a></li>
+        <li class="nav-item"><a routerLink="/return-policy" class="nav-link fw-semibold">CHÍNH SÁCH</a></li>
+      </ul>
+    </div>
+
+    <div class="d-flex align-items-center gap-3 ms-auto">
+      <a class="text-reset" title="Tìm kiếm" aria-label="Tìm kiếm" (click)="toggleSearch()"><i
+          class="bi bi-search fs-5"></i></a>
+      <a routerLink="/try-on" class="text-reset virtual-fit-btn" title="Phòng thử đồ ảo" aria-label="Phòng thử đồ ảo">
+        <i class="bi bi-door-open fs-5"></i>
+      </a>
+      <a routerLink="/cart" class="text-reset" title="Giỏ hàng" aria-label="Giỏ hàng"><i class="bi bi-bag fs-5"></i></a>
+      <a href="#" (click)="onAccountClick($event)" class="text-reset" title="Tài khoản" aria-label="Tài khoản">
+        <i class="bi bi-person fs-5"></i>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Thanh tìm kiếm -->
+<div class="search-bar" *ngIf="showSearchBar">
+  <div class="container d-flex align-items-center gap-2 py-2">
+    <input type="text" placeholder="Tìm sản phẩm..." class="form-control search-input" [(ngModel)]="searchText"
+      (input)="onSearchInput()" (keyup.enter)="performSearch()">
+    <button class="btn btn-pink" (click)="performSearch()">Tìm kiếm</button>
+  </div>
+</div>
+
+
+<!-- MOBILE SIDEBAR MENU -->
+<div class="mobile-menu" [class.open]="isMenuOpen">
+  <a routerLink="/" (click)="closeMenu()">TRANG CHỦ</a>
+
+  <div class="mobile-dropdown-item always-open">
+    <a routerLink="/productlist" class="mobile-category-title" (click)="closeMenu()">
+      <span class="fw-semibold">DANH MỤC SẢN PHẨM</span>
+    </a>
+    
+    <div class="mobile-dropdown-menu"> 
+      @for (cat of categories; track cat._id) {
+        <a class="dropdown-item-mobile" [routerLink]="['/productlist']"
+           [queryParams]="cat._id !== 'all' ? { category: cat._id } : null"
+           (click)="closeMenu()"> 
+          {{ cat.name }}
+        </a>
+      }
+    </div>
+  </div>
+
+  <a routerLink="/blog" (click)="closeMenu()">BLOG</a>
+  <a routerLink="/return-policy" (click)="closeMenu()">CHÍNH SÁCH</a>
+</div>
+
+<!-- LỚP PHỦ -->
+<div class="menu-overlay" *ngIf="isMenuOpen" (click)="closeMenu()"></div>

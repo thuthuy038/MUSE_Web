@@ -1,0 +1,166 @@
+.title {
+    color: #FB6F92;
+    font-weight: 600;
+}
+
+table {
+    font-size: 14px;
+    min-width: 1000px;
+}
+
+.promotion-card {
+    border-radius: 15px;
+    border: 2px solid #6d4c41;
+    overflow: hidden;
+}
+
+.promotion-name {
+    max-width: 260px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    height: calc(1.8em * 2);
+}
+
+.card-header {
+    background: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-box {
+    width: 220px;
+}
+
+table {
+    font-size: 14px;
+}
+
+thead th {
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+table td {
+    padding: 8px 12px;
+    vertical-align: middle;
+}
+
+.status {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+}
+
+.status.active {
+    background: #28a745;
+}
+
+.status.disabled {
+    background: #6c757d;
+}
+
+.action-icons i {
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.action-icons i:hover {
+    color: #e91e63;
+}
+
+.pagination {
+    gap: 8px;
+}
+
+.pagination .page-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    border: 1.5px solid #f48ca5;
+
+    color: #FB6F92;
+    font-weight: 600;
+
+    background: white;
+}
+
+.pagination .page-item.active .page-link {
+    background: #FB6F92;
+    color: white;
+    border: none;
+}
+
+.pagination .page-link:hover {
+    background: #FB6F92;
+    color: white;
+}
+
+/* ===== FILTER DROPDOWN STYLE ===== */
+.custom-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.custom-dropdown .label {
+    font-weight: 500;
+    color: #444;
+}
+
+/* Nút dropdown */
+.filter-btn {
+    border-radius: 20px;
+    border: 1.5px solid #FB6F92;
+    color: #FB6F92;
+    background: white;
+    padding: 5px 14px;
+    font-weight: 500;
+    min-width: 130px;
+    text-align: left;
+}
+
+/* Hover */
+.filter-btn:hover {
+    background: #FB6F92;
+    color: white;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Item */
+.dropdown-item {
+    padding: 8px 14px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+/* Hover item */
+.dropdown-item:hover {
+    background: #ffe4ec;
+    color: #FB6F92;
+}
+
+/* SEARCH đẹp hơn */
+.search-box input {
+    border-radius: 20px 0 0 20px;
+}
+
+.search-box button {
+    border-radius: 0 20px 20px 0;
+}

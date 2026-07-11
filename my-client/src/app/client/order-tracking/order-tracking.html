@@ -1,0 +1,81 @@
+<div class="order-wrapper">
+    <h5 class="title">Theo dõi đơn hàng</h5>
+
+    <!-- Tabs -->
+    <div class="order-tabs">
+        <button class="tab" [class.active]="selectedStatus === 'Tất cả'" (click)="filterStatus('Tất cả')">
+            Tất cả</button>
+        <button class="tab" [class.active]="selectedStatus === 'Đang xử lý'" (click)="filterStatus('Đang xử lý')">
+            Chờ xác nhận</button>
+        <button class="tab" [class.active]="selectedStatus === 'Đang giao'" (click)="filterStatus('Đang giao')">
+            Giao
+            hàng</button>
+        <button class="tab" [class.active]="selectedStatus === 'Đã giao'" (click)="filterStatus('Đã giao')">
+            Hoàn
+            thành</button>
+        <button class="tab" [class.active]="selectedStatus === 'Đã hủy'" (click)="filterStatus('Đã hủy')">
+            Đã
+            huỷ</button>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="text-center py-4">
+        <div class="spinner-border text-pink" role="status">
+            <span class="visually-hidden">Đang tải...</span>
+        </div>
+    </div>
+
+    <!-- Error message -->
+    <div *ngIf="!loading && errorMessage" class="alert alert-danger text-center py-4">
+        {{ errorMessage }}
+    </div>
+
+    <!-- Empty orders -->
+    <div *ngIf="!loading && !errorMessage && filteredOrders.length === 0" class="text-center py-4">
+        Bạn chưa có đơn hàng nào.
+    </div>
+
+    <!-- Orders list -->
+    <div *ngFor="let order of filteredOrders" class="order-card">
+        <!-- Header -->
+        <div class="order-header">
+            <span class="order-code">Mã đơn hàng: {{ order.id }}</span>
+            <span class="order-status">
+                <i class="bi bi-truck"></i> {{ getStatusText(order.status) }}
+            </span>
+        </div>
+
+        <!-- Items -->
+        <div *ngFor="let item of order.items" class="order-item">
+            <img [src]="item.image || 'assets/images/no-image.png'" (click)="goToProduct(item)"
+                (error)="$event.target.src='assets/images/no-image.png'" />
+            <div class="info">
+                <div class="name link-product" (click)="goToProduct(item)">
+                    {{ item.name }}
+                </div>
+                <div class="variant">Phân loại: {{ item.color }}, {{ item.size }}</div>
+                <div class="qty">x{{ item.quantity }}</div>
+            </div>
+            <div class="price">
+                <div class="new">{{ item.price | number }}đ</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="order-footer">
+            <div class="total">Thành tiền: <span>{{ order.totalPrice | number }}đ</span></div>
+            <div class="actions">
+                <button *ngIf="order.status === 'Đã giao'" class="btn-buy"
+                    [ngClass]="{'btn-view-review': isOrderFullyReviewed(order)}" (click)="review(order)">
+                    {{ isOrderFullyReviewed(order) ? 'XEM ĐÁNH GIÁ' : 'ĐÁNH GIÁ' }}
+                </button>
+
+                <button class="btn-buy" (click)="buyAgain(order)">MUA LẠI</button>
+
+                <button class="btn-cancel" *ngIf="order.status === 'Đang xử lý'" (click)="cancelOrder(order)">
+                    HUỶ ĐƠN
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

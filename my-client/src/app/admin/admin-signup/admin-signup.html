@@ -1,0 +1,49 @@
+<div class="signup-wrapper">
+
+  <div class="signup-card">
+    <h2>Đăng ký tài khoản Admin</h2>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" placeholder="Tài khoản quản trị" [(ngModel)]="username" name="email">
+    </div>
+
+    <div class="form-group">
+      <label>Mật khẩu</label>
+      <div class="password-field">
+        <input [type]="showPassword ? 'text' : 'password'" placeholder="Mật khẩu" [(ngModel)]="password"
+          name="password">
+        <i class="bi" [ngClass]="showPassword ? 'bi-eye' : 'bi-eye-slash'" (click)="togglePasswordVisibility()"></i>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Nhập lại mật khẩu</label>
+      <div class="password-field">
+        <input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Nhập lại mật khẩu"
+          [(ngModel)]="confirmPassword" name="confirmPassword">
+        <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye' : 'bi-eye-slash'"
+          (click)="toggleConfirmPasswordVisibility()"></i>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Security Code</label>
+      <div class="password-field">
+        <input type="text" placeholder="Nhập mã nội bộ" [(ngModel)]="securityCode" name="securityCode">
+        <i class="bi bi-lock"></i>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <button class="signup-main-btn" (click)="onSubmit()">Đăng ký</button>
+
+    <div class="login-link">
+      Bạn đã có tài khoản?
+      <a (click)="goBackToLogin()">Đăng nhập</a>
+    </div>
+
+  </div>
+
+</div>

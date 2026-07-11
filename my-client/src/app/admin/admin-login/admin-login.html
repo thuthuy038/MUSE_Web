@@ -1,0 +1,34 @@
+<div class="login-wrapper">
+
+  <div class="login-card">
+    <h2>Đăng nhập tài khoản Admin</h2>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" placeholder="Tài khoản quản trị" [(ngModel)]="email" name="email">
+    </div>
+
+    <div class="form-group">
+
+      <div class="label-row">
+        <label>Mật khẩu</label>
+        <a class="forgot" (click)="goToReset()">Quên mật khẩu</a>
+      </div>
+
+      <div class="password-field">
+        <input type="password" placeholder="Mật khẩu" [(ngModel)]="password" name="password">
+        <i class="bi bi-eye-slash"></i>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="button-group">
+      <button class="login-btn" (click)="onSubmit()">Đăng nhập</button>
+      <button class="signup-btn" (click)="goToSignup()">Đăng ký</button>
+    </div>
+
+  </div>
+
+</div>

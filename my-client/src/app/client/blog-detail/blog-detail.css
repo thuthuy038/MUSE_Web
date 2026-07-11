@@ -1,0 +1,76 @@
+.blog-detail {
+    max-width: 850px;
+    margin: auto;
+    padding: 0 16px;
+}
+
+/* TITLE */
+.blog-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* META */
+.blog-meta {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* IMAGE */
+.blog-image {
+    margin-bottom: 25px;
+}
+
+.blog-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.blog-image img:hover {
+    transform: scale(1.02);
+}
+
+/* CONTENT */
+.blog-content {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #444;
+    text-align: justify;
+}
+
+.blog-content p {
+    margin-bottom: 16px;
+}
+
+/* BACK BUTTON WRAPPER */
+.back-wrapper {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    /* 🔥 cách xa footer */
+}
+
+/* BUTTON */
+.btn-back {
+    border: none;
+    background: #FB6F92;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    background: #ff4d7a;
+    transform: translateY(-2px);
+}

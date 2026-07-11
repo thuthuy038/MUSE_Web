@@ -1,0 +1,22 @@
+<div class="admin-layout" [class.sidebar-open]="isSidebarOpen">
+  <!-- Header mobile với hamburger -->
+  <div class="mobile-header">
+    <button class="menu-toggle" (click)="toggleSidebar()">
+      <i class="bi bi-list"></i>
+    </button>
+    <img src="assets/images/logos/logo.png" alt="Muse" class="mobile-logo">
+  </div>
+
+  <div class="sidebar-wrapper" [class.show]="isSidebarOpen">
+    <app-ad-sidebar></app-ad-sidebar>
+  </div>
+
+  <div class="sidebar-overlay" *ngIf="isSidebarOpen" (click)="closeSidebar()"></div>
+
+  <div class="main-content">
+    <app-ad-header></app-ad-header>
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

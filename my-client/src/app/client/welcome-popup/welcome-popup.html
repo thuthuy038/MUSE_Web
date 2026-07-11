@@ -1,0 +1,16 @@
+<div class="popup-overlay" *ngIf="isPopupVisible" (click)="closePopup()">
+
+  <div class="popup-content" (click)="$event.stopPropagation()">
+    
+    <button class="close-btn" (click)="closePopup()" aria-label="Đóng pop-up">
+      <i class="bi bi-x-lg"></i>
+    </button>
+    
+    <a (click)="navigateToProducts()" class="popup-poster-link" aria-label="Xem ưu đãi Black Friday">
+      <img src="assets/images/pop-up/Pop-up1.png" 
+           alt="Black Friday Sale Poster" 
+           class="popup-poster" />
+    </a>
+
+  </div>
+</div>

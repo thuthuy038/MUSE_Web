@@ -1,0 +1,439 @@
+/* Lấy biến màu hồng từ theme của bạn */
+:host {
+  --primary-color: #FB6F92;
+  --secondary-color: #FFC2D1;
+  --bg-light: #fffafc;
+  --border-color: #eee;
+  --text-dark: #333;
+}
+
+.vto-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 10px 15px;
+}
+
+.vto-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; 
+  gap: 15px;
+  height: calc(100vh - 180px);
+  max-height: 750px;
+}
+
+/* === CỘT BÊN TRÁI (MAIN) === */
+
+.vto-main {
+  display: flex;
+  flex-direction: column;
+  background: #f9f9f9;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+/* --- Thanh điều khiển --- */
+.vto-controls {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-color);
+  background: #fff;
+  flex-wrap: wrap;
+}
+
+.vto-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+.vto-btn:hover {
+  background-color: #e2577e;
+  transform: translateY(-2px);
+}
+.vto-btn.btn-off {
+  background-color: #777;
+}
+.vto-btn.btn-off:hover {
+  background-color: #555;
+}
+.vto-btn.active {
+  background-color: #4CAF50;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+.vto-btn.btn-capture {
+  background-color: #FF9800;
+}
+.vto-btn.btn-capture:hover {
+  background-color: #F57C00;
+}
+
+/* --- Khung hiển thị (Camera/Ảnh) --- */
+.vto-frame {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  background-color: #000;
+  max-height: calc(100vh - 280px);
+}
+
+.vto-video,
+.vto-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+.vto-video {
+  transform: scaleX(-1);
+}
+
+/* Canvas để vẽ pose skeleton */
+.pose-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.vto-placeholder {
+  color: #aaa;
+  text-align: center;
+  background: var(--bg-light);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.vto-placeholder i {
+  font-size: 80px;
+  color: var(--secondary-color);
+}
+.vto-error {
+  color: #e74c3c;
+  margin-top: 10px;
+}
+
+/* ===  LỚP PHỦ "ƯỚM" ĐỒ === */
+.vto-overlay-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  overflow: visible;
+}
+
+.try-on-item {
+  position: absolute;
+  cursor: move;
+  pointer-events: auto;
+  border: 2px dashed rgba(251, 111, 146, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease;
+  background: transparent;
+  border-radius: 8px;
+  overflow: visible;
+  user-select: none;
+  will-change: transform;
+  touch-action: none;
+}
+.try-on-item:hover {
+  box-shadow: 0 4px 20px rgba(251, 111, 146, 0.3);
+  border-color: rgba(251, 111, 146, 0.6);
+  z-index: 999 !important; 
+}
+.try-on-item img.product-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  object-fit: contain;
+}
+
+.btn-close-item {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: white;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 100;
+  padding: 0;
+  line-height: 28px;
+  transition: transform 0.2s ease;
+}
+.btn-close-item:hover {
+  transform: scale(1.1);
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Controls cho từng item */
+.item-controls {
+  position: absolute;
+  top: 50%;
+  right: -260px;
+  transform: translateY(-50%);
+  min-width: 250px;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 12px 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  border: 2px solid var(--primary-color);
+  opacity: 0;
+  transition: opacity 0.3s ease, right 0.3s ease;
+  pointer-events: auto;
+  z-index: 1000;
+}
+.try-on-item:hover .item-controls {
+  opacity: 1;
+  right: -265px;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.control-group label {
+  font-size: 16px;
+  color: var(--primary-color);
+  min-width: 24px;
+  font-weight: 600;
+}
+.control-value {
+  font-size: 12px;
+  color: var(--text-dark);
+  font-weight: 600;
+  min-width: 45px;
+  text-align: right;
+}
+.control-slider {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  outline: none;
+  -webkit-appearance: none;
+  background: linear-gradient(to right, var(--secondary-color) 0%, var(--primary-color) 100%);
+  cursor: pointer;
+}
+.control-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: grab;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 2px solid white;
+}
+.control-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.2);
+}
+.control-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+/* === KẾT THÚC LỚP PHỦ === */
+
+
+/* === CỘT BÊN PHẢI (SIDEBAR) === */
+
+.vto-sidebar {
+  background: var(--bg-light);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  overflow: hidden;
+}
+.vto-sidebar h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--secondary-color);
+  padding-bottom: 8px;
+}
+
+.vto-cart-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.vto-cart-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.vto-cart-list th {
+  background-color: var(--secondary-color);
+  color: var(--text-dark);
+  padding: 8px 6px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.vto-cart-list td {
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  font-size: 13px;
+}
+.vto-cart-list tr:last-child td {
+  border-bottom: none;
+}
+.vto-cart-list img {
+  width: 35px;
+  height: 46px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+
+/* Style cho Tên sản phẩm + Link */
+.item-name {
+  max-width: 110px;
+}
+.item-name a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: color 0.3s;
+}
+.item-name a:hover {
+  color: var(--primary-color);
+}
+.item-name span {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Nút "Ướm thử" */
+.btn-try {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.btn-try:hover:not(:disabled) {
+  background-color: #e2577e;
+  transform: translateY(-2px);
+}
+.btn-try:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.btn-try .spinner i {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.btn-remove {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.vto-cart-empty {
+  text-align: center;
+  padding: 40px 20px;
+}
+.vto-cart-empty .vto-btn {
+  text-decoration: none;
+  margin-top: 15px;
+}
+
+/* === (MỚI) CĂN GIỮA HEADER/CELL === */
+
+.vto-cart-list th.th-center {
+  text-align: center;
+}
+.vto-cart-list td.td-center {
+  text-align: center;
+}
+
+/* Responsive cho di động */
+@media (max-width: 992px) {
+  .vto-layout {
+    grid-template-columns: 1fr; 
+    height: auto;
+    max-height: none;
+  }
+  .vto-frame {
+    max-height: 400px;
+  }
+  .vto-sidebar {
+    max-height: 350px;
+  }
+  .vto-cart-list {
+    max-height: 250px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .vto-container {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  .vto-layout {
+    max-height: 850px;
+  }
+}

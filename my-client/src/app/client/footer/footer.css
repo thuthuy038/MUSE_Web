@@ -1,0 +1,95 @@
+.footer-custom {
+    color: #FB6F92;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.footer-custom h4 {
+    font-weight: 900;
+    color: #FB6F92;
+}
+
+.footer-custom h5 {
+    font-weight: 900;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    color: #FB6F92;
+}
+
+.footer-custom .list-unstyled a {
+    text-decoration: none;
+    color: #FB6F92;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.footer-custom .list-unstyled a:hover {
+    color: #ff3f73;
+    padding-left: 4px;
+}
+
+.footer-custom .btn-dark {
+    background-color: #FB6F92;
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 0.375rem;
+}
+
+.footer-custom .form-control {
+    border-radius: 0.375rem;
+}
+
+.footer-custom .form-control:focus {
+    box-shadow: none;
+    border-color: #333;
+}
+
+.social-icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #FB6F92;
+    color: white;
+    color: #000000;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.social-icons a:hover {
+    background-color: #ff3f73;
+    transform: scale(1.1);
+}
+
+.payment-logos img {
+    height: 60px;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+/* Responsive cho input group */
+@media (max-width: 576px) {
+    .footer-custom .input-group {
+        flex-direction: column;
+        
+    }
+    
+    .footer-custom .form-control {
+        border-radius: 0.375rem !important;
+        margin-bottom: 0.5rem;
+        width: 100%;
+    }
+    
+    .footer-custom .btn-dark {
+        border-radius: 0.375rem !important;
+        width: 100%;
+    }
+}

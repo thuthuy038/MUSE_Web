@@ -1,0 +1,34 @@
+<nav *ngIf="totalPages > 1" class="muse-pagination">
+  <ul class="pagination-list">
+    <li>
+      <button 
+        class="page-link"
+        [disabled]="currentPage === 1"
+        (click)="goToPage(currentPage - 1)"
+        aria-label="Trang trước">
+        <i class="bi bi-chevron-double-left"></i>
+      </button>
+    </li>
+    
+    @for (page of pages; track page) {
+      <li>
+        <button 
+          class="page-link"
+          [class.active]="page === currentPage"
+          (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      </li>
+    }
+    
+    <li>
+      <button 
+        class="page-link"
+        [disabled]="currentPage === totalPages"
+        (click)="goToPage(currentPage + 1)"
+        aria-label="Trang kế tiếp">
+        <i class="bi bi-chevron-double-right"></i>
+      </button>
+    </li>
+  </ul>
+</nav>

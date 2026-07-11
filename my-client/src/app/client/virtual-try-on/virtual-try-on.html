@@ -1,0 +1,161 @@
+<div class="vto-container">
+    <main class="vto-layout">
+
+        <section class="vto-main">
+            <div class="vto-controls">
+                <label for="upload-input" class="vto-btn">
+                    <i class="bi bi-upload"></i> Tải ảnh lên
+                </label>
+                <input id="upload-input" type="file" accept="image/*" (change)="onFileSelected($event)"
+                    style="display: none;">
+
+                <button *ngIf="!isCameraOn" class="vto-btn" (click)="startCamera()">
+                    <i class="bi bi-camera-video-fill"></i> Bật camera
+                </button>
+                <button *ngIf="isCameraOn" class="vto-btn btn-off" (click)="stopCamera()">
+                    <i class="bi bi-camera-video-off-fill"></i> Tắt camera
+                </button>
+
+                <button *ngIf="isCameraOn" class="vto-btn" [class.active]="showSkeleton" (click)="toggleSkeleton()">
+                    <i class="bi bi-person-bounding-box"></i> {{ showSkeleton ? 'Ẩn' : 'Hiện' }} khung xương
+                </button>
+
+                <button *ngIf="isCameraOn" class="vto-btn" [class.active]="shouldAutoPosition" (click)="toggleAutoPosition()">
+                    <i class="bi bi-crosshair"></i> Tự động định vị
+                </button>
+
+                <button class="vto-btn" [class.active]="cropProductOnly" (click)="cropProductOnly = !cropProductOnly">
+                    <i class="bi bi-crop"></i> Lấy sản phẩm
+                </button>
+
+                <button class="vto-btn" [class.active]="enableBackgroundRemoval" (click)="enableBackgroundRemoval = !enableBackgroundRemoval">
+                    <i class="bi bi-scissors"></i> Tách nền
+                </button>
+
+                <button class="vto-btn btn-capture" (click)="capturePhoto()">
+                    <i class="bi bi-camera-fill"></i> Chụp ảnh
+                </button>
+            </div>
+
+            <div class="vto-frame" #vtoFrame>
+                <video #videoElement *ngIf="isCameraOn" class="vto-video" autoplay playsinline></video>
+
+                <!-- Canvas để vẽ pose skeleton -->
+                <canvas #poseCanvas *ngIf="isCameraOn && isPoseDetectionActive" class="pose-canvas"></canvas>
+
+                <img *ngIf="uploadedImageUrl && !isCameraOn" [src]="uploadedImageUrl" class="vto-image" alt="Model">
+
+                <div *ngIf="!isCameraOn && !uploadedImageUrl" class="vto-placeholder">
+                    <i class="bi bi-person-bounding-box"></i>
+                    <p>Tải ảnh của bạn lên hoặc bật camera để thử đồ</p>
+                    <small *ngIf="cameraError" class="vto-error">{{ cameraError }}</small>
+                </div>
+
+                <div class="vto-overlay-container">
+
+                    <div *ngFor="let tryItem of activeTryOnItems" class="try-on-item" 
+                        [style.left.px]="tryItem.x"
+                        [style.top.px]="tryItem.y" 
+                        [style.width.px]="tryItem.width" 
+                        [style.zIndex]="tryItem.zIndex"
+                        [style.opacity]="tryItem.opacity"
+                        [style.transform]="'rotate(' + tryItem.rotation + 'deg) scale(' + tryItem.scale + ')'"
+                        (mousedown)="onDragStart($event, tryItem)">
+
+                        <button class="btn-close-item" (click)="onCloseTryOnItem(tryItem, $event)"
+                            (mousedown)="$event.stopPropagation()">
+                            &times;
+                        </button>
+
+                        <img [src]="tryItem.processedImage || tryItem.item.image" 
+                             alt="{{ tryItem.item.name }}" 
+                             draggable="false"
+                             class="product-image">
+
+                        <!-- Controls cho từng item -->
+                        <div class="item-controls" (mousedown)="$event.stopPropagation()">
+                            <div class="control-group">
+                                <label><i class="bi bi-transparency"></i></label>
+                                <input type="range" min="0" max="1" step="0.1" 
+                                    [(ngModel)]="tryItem.opacity" class="control-slider"
+                                    title="Độ trong suốt">
+                                <span class="control-value">{{(tryItem.opacity * 100).toFixed(0)}}%</span>
+                            </div>
+                            <div class="control-group">
+                                <label><i class="bi bi-arrow-clockwise"></i></label>
+                                <input type="range" min="-180" max="180" step="5" 
+                                    [(ngModel)]="tryItem.rotation" class="control-slider"
+                                    title="Xoay">
+                                <span class="control-value">{{tryItem.rotation}}°</span>
+                            </div>
+                            <div class="control-group">
+                                <label><i class="bi bi-zoom-in"></i></label>
+                                <input type="range" min="0.5" max="5" step="0.1" 
+                                    [(ngModel)]="tryItem.scale" class="control-slider"
+                                    title="Phóng to/thu nhỏ">
+                                <span class="control-value">{{(tryItem.scale * 100).toFixed(0)}}%</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <aside class="vto-sidebar">
+            <h2>Giỏ hàng của bạn</h2>
+
+            <div class="vto-cart-list">
+                <ng-container *ngIf="(cartItems$ | async) as items; else emptyCart">
+                    <table *ngIf="items.length > 0; else emptyCart">
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Phân loại</th>
+                                <th class="th-center">Thử</th>
+                                <th class="th-center">Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of items">
+
+                                <td class="item-name">
+                                    <a [routerLink]="['/productdetail', item.id]">
+                                        <img [src]="item.image" [alt]="item.name">
+                                        <span>{{ item.name }}</span>
+                                    </a>
+                                </td>
+
+                                <td>{{ item.size }} - {{ item.color }}</td>
+
+                                <td class="td-center">
+                                    <button class="btn-try" (click)="onTryItem(item)" [disabled]="isProcessingImage">
+                                        <span *ngIf="!isProcessingImage">Ướm thử</span>
+                                        <span *ngIf="isProcessingImage" class="spinner">
+                                            <i class="bi bi-hourglass-split"></i> AI đang xử lý...
+                                        </span>
+                                    </button>
+                                </td>
+
+                                <td class="td-center">
+                                    <button class="btn-remove" (click)="removeItem(item.id, item.size, item.color)">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-container>
+
+                <ng-template #emptyCart>
+                    <div class="vto-cart-empty">
+                        <p>Chưa có sản phẩm nào trong giỏ hàng để thử.</p>
+                        <a routerLink="/productlist" class="vto-btn">Mua sắm ngay</a>
+                    </div>
+                </ng-template>
+            </div>
+        </aside>
+
+    </main>
+</div>

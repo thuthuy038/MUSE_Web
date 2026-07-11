@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Tất cả sản phẩm",
+    "key": "all"
+  },
+  {
+    "name": "Đầm",
+    "key": "dam"
+  },
+  {
+    "name": "Áo",
+    "key": "ao"
+  },
+  {
+    "name": "Chân váy",
+    "key": "chanvay"
+  },
+  {
+    "name": "Áo dài",
+    "key": "aodai"
+  },
+  {
+    "name": "Quần",
+    "key": "quan"
+  }
+]

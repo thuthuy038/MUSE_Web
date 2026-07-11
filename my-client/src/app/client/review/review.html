@@ -1,0 +1,98 @@
+<div class="review-page-wrapper">
+
+  <div class="header-section text-center mb-4 mt-3">
+    <h1 class="header-title">ĐÁNH GIÁ ĐƠN HÀNG</h1>
+    <p class="text-muted" *ngIf="order">Mã đơn: {{ order.id }}</p>
+  </div>
+
+  <button class="btn btn-outline-secondary mb-4 ms-3" (click)="goBack()">
+    <i class="bi bi-arrow-left"></i> Quay lại đơn hàng
+  </button>
+
+  <div class="feedback-container mb-5" *ngFor="let form of forms; let i = index">
+
+    <div class="product-info-section">
+      <img [src]="form.item.image || 'assets/images/no-image.png'" class="product-thumb"
+        (click)="goToProduct(form.item)" />
+      <div class="product-details">
+        <p class="product-name fw-bold link-product" (click)="goToProduct(form.item)">
+          {{ form.item.name }}
+        </p>
+        <p class="product-category text-muted">Phân loại: {{ form.item.color }}, {{ form.item.size }}</p>
+        <span class="badge" [ngClass]="form.isReviewed ? 'bg-success' : 'bg-warning text-dark'">
+          {{ form.isReviewed ? 'Đã đánh giá' : 'Chưa đánh giá' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="rating-section">
+      <p class="fw-bold mb-2">Chất lượng sản phẩm :</p>
+      <div class="stars">
+        <span *ngFor="let star of [1,2,3,4,5]; let sIndex = index" class="star"
+          [class.filled]="sIndex < form.selectedRating" (click)="setRating(i, sIndex + 1)">★</span>
+      </div>
+    </div>
+
+    <textarea [(ngModel)]="form.comment" rows="4" class="comment-box"
+      placeholder="Hãy chia sẻ nhận xét của bạn về sản phẩm nhé..."></textarea>
+
+    <div class="tags-section">
+      <button *ngFor="let tag of availableTags" class="tag-button" [class.selected]="isTagSelected(i, tag)"
+        (click)="toggleTag(i, tag)">
+        {{ tag.text }}
+      </button>
+    </div>
+
+    <div class="upload-section">
+      <div class="upload-box" (click)="imageInput.click()">
+        <i class="bi bi-image"></i>
+        <p>Thêm ảnh</p>
+        <input #imageInput type="file" accept="image/*" multiple hidden (change)="handleImages(i, $event)" />
+      </div>
+
+      <div class="preview-multiple">
+        <div *ngFor="let img of form.oldImages; let oldImgIdx = index">
+          <img [src]="'http://localhost:3000' + img.url" class="preview-media" />
+          <button class="btn-remove" (click)="removeOldImage(i, oldImgIdx)">x</button>
+        </div>
+        <div *ngFor="let img of form.previewImages; let newImgIdx = index">
+          <img [src]="img" class="preview-media" />
+          <button class="btn-remove" (click)="removeNewImage(i, newImgIdx)">x</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="upload-section">
+      <div class="upload-box" (click)="videoInput.click()">
+        <i class="bi bi-camera-video"></i>
+        <p>Thêm video</p>
+        <input #videoInput type="file" accept="video/*" multiple hidden (change)="handleVideos(i, $event)" />
+      </div>
+
+      <div class="preview-multiple">
+        <div *ngFor="let video of form.oldVideos; let oldVidIdx = index">
+          <video [src]="'http://localhost:3000' + video.url" controls class="preview-media"></video>
+          <button class="btn-remove" (click)="removeOldVideo(i, oldVidIdx)">x</button>
+        </div>
+        <div *ngFor="let video of form.previewVideos; let newVidIdx = index">
+          <video [src]="video" controls class="preview-media"></video>
+          <button class="btn-remove" (click)="removeNewVideo(i, newVidIdx)">x</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-section d-flex gap-3 mt-3">
+      <button (click)="submitFeedback(i)" class="submit-button w-100" [disabled]="form.isSubmitting">
+        {{ form.isSubmitting ? 'Đang xử lý...' : (form.isReviewed ? 'CẬP NHẬT ĐÁNH GIÁ' : 'GỬI ĐÁNH GIÁ') }}
+      </button>
+
+      <button *ngIf="form.isReviewed" (click)="deleteFeedback(i)" class="btn btn-danger w-25"
+        [disabled]="form.isSubmitting">
+        XOÁ
+      </button>
+    </div>
+
+    <hr *ngIf="i < forms.length - 1" class="my-5 text-muted">
+
+  </div>
+</div>

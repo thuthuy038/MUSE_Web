@@ -1,0 +1,278 @@
+<div class="blog-page">
+
+    <h2 class="title">Tất cả bài viết</h2>
+
+    <div class="top-bar">
+        <div class="search-box">
+            <input type="text" class="search" placeholder="Tìm kiếm..." [(ngModel)]="searchText"
+                (input)="filterBlogs()">
+
+            <button class="search-btn">
+                <img src="assets/images/blog-management/search.png" class="icon">
+            </button>
+        </div>
+
+        <!-- FILTER -->
+        <div class="filter-box">
+
+            <button class="btn d-flex align-items-center gap-2 filter-btn">
+            <i class="bi bi-funnel"></i>
+            Lọc
+            </button>
+
+            <div class="filter-menu">
+
+                <button (click)="sortDateAsc()">
+                    Ngày tăng dần
+                </button>
+
+                <button (click)="sortDateDesc()">
+                    Ngày giảm dần
+                </button>
+
+                <button (click)="showDateFilter = true">
+                    Lọc ngày cụ thể
+                </button>
+
+                <button (click)="showYearFilter = true">
+                    Theo khoảng năm
+                </button>
+
+                <button (click)="resetFilter()">
+                    Bỏ lọc
+                </button>
+
+            </div>
+        </div>
+
+        <!-- ADD BLOG -->
+        <button class="add-btn" (click)="addBlog()">
+            <img src="assets/images/blog-management/edit.png" class="icon">
+            Thêm bài viết
+        </button>
+
+    </div>
+
+    <!-- HEADER -->
+    <div class="table-header">
+
+        <div class="title-cell">
+
+            <input type="checkbox" class="select-box" [checked]="selectedBlogs.length === blogs.length"
+                (change)="toggleSelectAll($event)">
+
+            <span>Tất cả bài viết</span>
+
+        </div>
+
+        <div>Ngày đăng</div>
+        <div>Tác giả</div>
+
+        <div class="header-actions">
+
+            <div *ngIf="selectedBlogs.length >= 2">
+                <button class="delete-many-btn" (click)="deleteSelected()">
+                    Xóa ({{selectedBlogs.length}}) bài viết
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- BLOG LIST -->
+    <div class="blog-row" *ngFor="let blog of paginatedBlogs">
+
+        <div class="title-cell">
+
+            <input type="checkbox" class="select-box" [checked]="selectedBlogs.includes(blog._id)"
+                (change)="toggleSelect(blog._id,$event)">
+
+            <img 
+  class="blog-img"
+  [src]="'http://localhost:3000/api/images/' + (blog.image?._id || blog.image)">
+            <div class="blog-info">
+
+                <div class="blog-title">
+                    {{ blog.title }}
+                </div>
+
+                <div class="blog-content">
+                    {{ blog.content }}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="blog-date">
+            {{ blog.date }}
+        </div>
+
+        <div class="blog-author">
+            {{ blog.author }}
+        </div>
+
+        <div class="actions">
+
+            <button class="edit-btn" (click)="editBlog(blog)">
+                Sửa
+            </button>
+
+            <button class="delete-btn" (click)="deleteBlog(blog._id)">
+                Xóa
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- PAGE INFO -->
+    <div class="page-info">
+        Hiển thị {{startItem}}–{{endItem}} / {{blogs.length}} bài viết
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+
+        <button class="page-nav" (click)="prevPage()" [disabled]="currentPage === 1">
+            ‹
+        </button>
+
+        <button *ngFor="let page of visiblePages" (click)="changePage(page)" [class.active]="currentPage === page">
+            {{ page }}
+        </button>
+
+        <button class="page-nav" (click)="nextPage()" [disabled]="currentPage === totalPages">
+            ›
+        </button>
+
+    </div>
+
+    <!-- ADD / EDIT POPUP -->
+    <div class="popup-overlay" *ngIf="showForm">
+
+        <div class="popup-form">
+
+            <div class="form-left">
+
+                <label>Tiêu đề</label>
+                <input type="text" [(ngModel)]="blogForm.title">
+
+                <label>Nội dung</label>
+                <textarea rows="4" [(ngModel)]="blogForm.content"></textarea>
+
+                <label>Tác giả</label>
+                <input type="text" [(ngModel)]="blogForm.author">
+
+            </div>
+
+            <div class="form-right">
+
+                <label class="upload-box">
+
+                    <input type="file" hidden (change)="onFileSelected($event)">
+
+                    <img *ngIf="!previewImage" src="assets/images/blog-management/upload.png" class="upload-icon">
+
+                    <img *ngIf="previewImage" [src]="previewImage" class="preview-img">
+
+                </label>
+
+                <button class="save-btn" (click)="saveBlog()">
+                    Lưu
+                </button>
+
+                <button class="cancel-btn" (click)="showForm = false">
+                    Hủy
+                </button>
+
+            </div>
+
+        </div>
+        
+
+    </div>
+
+    <!-- FILTER DATE POPUP -->
+    <div class="popup-overlay" *ngIf="showDateFilter">
+
+        <div class="popup-form">
+
+            <h3>Lọc theo ngày</h3>
+
+            <input type="date" [(ngModel)]="selectedDate">
+
+            <button class="save-btn" (click)="filterByDate()">
+                Lọc
+            </button>
+
+            <button class="cancel-btn" (click)="showDateFilter = false">
+                Hủy
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- FILTER YEAR RANGE -->
+    <div class="popup-overlay" *ngIf="showYearFilter">
+
+        <div class="filter-popup">
+
+            <h3>Lọc theo khoảng năm</h3>
+
+            <div class="year-inputs">
+
+                <div class="year-box">
+                    <label>Từ năm</label>
+                    <input type="number" [(ngModel)]="startYear">
+                </div>
+
+                <div class="year-box">
+                    <label>Đến năm</label>
+                    <input type="number" [(ngModel)]="endYear">
+                </div>
+
+            </div>
+
+            <div class="filter-actions">
+
+                <button class="save-btn" (click)="filterByYearRange()">
+                    Lọc
+                </button>
+
+                <button class="cancel-btn" (click)="showYearFilter = false">
+                    Hủy
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- DELETE CONFIRM POPUP -->
+    <div class="popup-overlay" *ngIf="showDeletePopup">
+
+        <div class="delete-popup">
+
+            <h3>Xác nhận xóa</h3>
+
+            <p>Bạn có chắc muốn xóa bài viết này?</p>
+
+            <div class="popup-buttons">
+
+                <button class="cancel-btn" (click)="cancelDelete()">
+                    Hủy
+                </button>
+
+                <button class="confirm-btn" (click)="confirmDelete()">
+                    Xóa
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

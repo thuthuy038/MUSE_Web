@@ -1,0 +1,163 @@
+[
+  {
+    "code": "HONGNGOC10",
+    "description": "Giảm 10% cho đơn hàng từ 500.000đ",
+    "type": "percent",
+    "value": 0.1,
+    "minSpend": 500000
+  },
+  {
+    "code": "SALE100K",
+    "description": "Giảm 100.000đ cho đơn hàng từ 1.000.000đ",
+    "type": "fixed",
+    "value": 100000,
+    "minSpend": 1000000
+  },
+  {
+    "code": "WELCOME50K",
+    "description": "Giảm 50.000đ cho đơn hàng đầu tiên (từ 250.000đ)",
+    "type": "fixed",
+    "value": 50000,
+    "minSpend": 250000
+  },
+  {
+    "code": "SIEUSALE",
+    "description": "Giảm 1.000.000đ (Yêu cầu đơn 5.000.000đ)",
+    "type": "fixed",
+    "value": 1000000,
+    "minSpend": 5000000
+  },
+  {
+    "code": "THANHVAN",
+    "description": "Giảm 15% cho đơn hàng từ 400.000đ",
+    "type": "percent",
+    "value": 0.15,
+    "minSpend": 400000
+  },
+  {
+    "code": "THUTHUY",
+    "description": "Giảm 15% cho đơn hàng từ 400.000đ",
+    "type": "percent",
+    "value": 0.15,
+    "minSpend": 400000
+  },
+  {
+    "code": "TAMNHU",
+    "description": "Giảm 15% cho đơn hàng từ 400.000đ",
+    "type": "percent",
+    "value": 0.15,
+    "minSpend": 400000
+  },
+  {
+    "code": "BICHTRAM",
+    "description": "Giảm 15% cho đơn hàng từ 400.000đ",
+    "type": "percent",
+    "value": 0.15,
+    "minSpend": 400000
+  },
+  {
+    "code": "MUSE150K",
+    "description": "Giảm 150.000đ cho đơn từ 1.200.000đ",
+    "type": "fixed",
+    "value": 150000,
+    "minSpend": 1200000
+  },
+  {
+    "code": "MUSE200K",
+    "description": "Giảm 200.000đ cho đơn từ 1.500.000đ",
+    "type": "fixed",
+    "value": 200000,
+    "minSpend": 1500000
+  },
+  {
+    "code": "MUSE300K",
+    "description": "Giảm 300.000đ cho đơn từ 2.000.000đ",
+    "type": "fixed",
+    "value": 300000,
+    "minSpend": 2000000
+  },
+  {
+    "code": "BIGSALE500",
+    "description": "Giảm 500.000đ cho đơn từ 3.000.000đ",
+    "type": "fixed",
+    "value": 500000,
+    "minSpend": 3000000
+  },
+  {
+    "code": "VIP700K",
+    "description": "Giảm 700.000đ cho đơn từ 4.000.000đ",
+    "type": "fixed",
+    "value": 700000,
+    "minSpend": 4000000
+  },
+  {
+    "code": "LOVE15",
+    "description": "Giảm 15% cho đơn từ 800.000đ",
+    "type": "percent",
+    "value": 0.15,
+    "minSpend": 800000
+  },
+  {
+    "code": "LOVE20",
+    "description": "Giảm 20% cho đơn từ 1.000.000đ",
+    "type": "percent",
+    "value": 0.2,
+    "minSpend": 1000000
+  },
+  {
+    "code": "MUSE12",
+    "description": "Giảm 12% cho đơn từ 600.000đ",
+    "type": "percent",
+    "value": 0.12,
+    "minSpend": 600000
+  },
+  {
+    "code": "ANGEL10",
+    "description": "Giảm 10% cho đơn từ 700.000đ",
+    "type": "percent",
+    "value": 0.1,
+    "minSpend": 700000
+  },
+  {
+    "code": "HAPPY20",
+    "description": "Giảm 20% cho đơn từ 1.200.000đ",
+    "type": "percent",
+    "value": 0.2,
+    "minSpend": 1200000
+  },
+  {
+    "code": "FREESHIPMAX",
+    "description": "Giảm 50.000đ (phí ship) cho đơn từ 600.000đ",
+    "type": "fixed",
+    "value": 50000,
+    "minSpend": 600000
+  },
+  {
+    "code": "EXTRA10",
+    "description": "Giảm 10% cho đơn từ 900.000đ",
+    "type": "percent",
+    "value": 0.1,
+    "minSpend": 900000
+  },
+  {
+    "code": "DEAL25",
+    "description": "Giảm 25% cho đơn từ 2.000.000đ",
+    "type": "percent",
+    "value": 0.25,
+    "minSpend": 2000000
+  },
+  {
+    "code": "WOW15",
+    "description": "Giảm 15% cho đơn từ 1.000.000đ",
+    "type": "percent",
+    "value": 0.15,
+    "minSpend": 1000000
+  },
+  {
+    "code": "LUCKY70K",
+    "description": "Giảm 70.000đ cho đơn từ 700.000đ",
+    "type": "fixed",
+    "value": 70000,
+    "minSpend": 700000
+  }
+]

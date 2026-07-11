@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <div class="row">
+
+    <!-- MAIN BLOG -->
+    <main class="col-lg-8 order-1 order-lg-2">
+
+      <article class="blog-post mb-5" *ngFor="let blog of blogs">
+
+        <!-- IMAGE -->
+        <img [src]="getImage(blog.image)" class="img-fluid rounded mb-3">
+
+        <!-- TITLE -->
+        <h2 class="post-title" (click)="goToDetail(blog._id)" style="cursor: pointer;">
+          {{ blog.title }}
+        </h2>
+
+        <!-- META -->
+        <p class="post-meta">
+          Ngày đăng: {{ blog.date }} | {{ blog.author }}
+        </p>
+
+        <!-- CONTENT -->
+        <p>
+          {{ shortContent(blog.content) }}
+        </p>
+
+      </article>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="col-lg-4 order-2 order-lg-1 mt-5 mt-lg-0">
+
+      <h3 class="sidebar-title">Bài viết nổi bật</h3>
+
+      <div class="sidebar-post-list">
+
+        <div class="popular-post d-flex align-items-center mb-3" *ngFor="let blog of blogs.slice(0,5)">
+
+          <img [src]="getImage(blog.image)" class="popular-post-img rounded">
+
+          <div class="ms-3">
+            <h4 class="popular-post-title" (click)="goToDetail(blog._id!)" style="cursor: pointer;">
+              {{ blog.title }}
+            </h4>
+          </div>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+  </div>
+</div>

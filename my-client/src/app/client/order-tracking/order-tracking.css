@@ -1,0 +1,232 @@
+.order-wrapper {
+    max-width: 900px;
+    margin: auto;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+/* Title */
+.title {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Tabs */
+.order-tabs {
+    display: flex;
+    gap: 8px;
+    background: #fce4ec;
+    padding: 10px;
+    border-radius: 8px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.tab {
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: transparent;
+    font-size: 14px;
+    color: black;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab:hover {
+    background: #ffb3c6;
+}
+
+.tab.active {
+    background: #FB6F92;
+    color: white;
+}
+
+/* Card */
+.order-card {
+    background: white;
+    border-radius: 14px;
+    padding: 15px;
+    margin-top: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.order-code {
+    color: #FB6F92;
+    font-weight: 600;
+}
+
+.order-status {
+    color: #FB6F92;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Item */
+.order-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+}
+
+.order-item:first-child {
+    border-top: none;
+}
+
+.order-item img {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+    border: 1px solid #eee;
+}
+
+.info {
+    flex: 1;
+}
+
+.name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.variant {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 2px;
+}
+
+.qty {
+    font-size: 12px;
+    color: #555;
+}
+
+/* Price */
+.price {
+    text-align: right;
+    min-width: 100px;
+}
+
+.new {
+    color: #FB6F92;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Footer */
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    margin-top: 8px;
+}
+
+.total {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.total span {
+    color: #FB6F92;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+/* Buttons */
+.actions button {
+    border: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-left: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* Nút Xem Đánh Giá */
+.btn-buy.btn-view-review {
+    background-color: #4CAF50 !important;
+    /* Nền xanh lá */
+    color: #ffffff !important;
+    /* Chữ trắng */
+    border: none;
+    /* Bỏ viền nếu class btn-buy đang có viền */
+}
+
+.btn-buy.btn-view-review:hover {
+    background-color: #45a049 !important;
+    /* Xanh đậm hơn khi lướt chuột */
+}
+
+.btn-rate {
+    background: #FFC2D1;
+    color: #FB6F92;
+}
+
+.btn-rate:hover {
+    background: #FB6F92;
+    color: white;
+}
+
+.btn-cancel {
+    background: #ffcdd2;
+    color: #d32f2f;
+}
+
+.btn-cancel:hover {
+    background: #d32f2f;
+    color: white;
+}
+
+/* Pagination (nếu có) */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 5px;
+}
+
+.pagination button {
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #eee;
+    cursor: pointer;
+}
+
+.pagination .active {
+    background: #FB6F92;
+    color: white;
+}
+
+/* Loading & Empty */
+.text-center.py-4 {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+}
+
+.link-product {
+    cursor: pointer;
+}
+
+.order-item img {
+    cursor: pointer;
+}

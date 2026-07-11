@@ -1,0 +1,21 @@
+<nav class="breadcrumb-bar" *ngIf="items && items.length > 0">
+  @for (item of items; track item.url) {
+    @if ($last) {
+      <span class="breadcrumb-current">{{ item.label }}</span>
+    } @else {
+      <a [routerLink]="item.url" class="breadcrumb-link">{{ item.label }}</a>
+      <span class="breadcrumb-separator">&gt;</span>
+    }
+  }
+</nav>
+
+<nav class="breadcrumb-bar" *ngIf="!items && (breadcrumbs$ | async) as breadcrumbs">
+  @for (item of breadcrumbs; track item.url) {
+    @if ($last) {
+      <span class="breadcrumb-current">{{ item.label }}</span>
+    } @else {
+      <a [routerLink]="item.url" class="breadcrumb-link">{{ item.label }}</a>
+      <span class="breadcrumb-separator">&gt;</span>
+    }
+  }
+</nav>

@@ -1,0 +1,83 @@
+/* ========== 1. OVERLAY (LỚP PHỦ NỀN) ========== */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+    z-index: 9999; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ========== 2. POP-UP CONTAINER VÀ NỘI DUNG ========== */
+.popup-content {
+    position: relative;
+    width: 500px; 
+    height: 500px; 
+    max-width: 90vw; 
+    max-height: 90vh;
+    border-radius: 8px;
+    overflow: hidden; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Poster Link */
+.popup-poster-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer; 
+}
+
+/* Poster Image */
+.popup-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+/* ========== 3. NÚT ĐÓNG (CLOSE BUTTON) ========== */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9); 
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10000; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.2s;
+}
+
+.close-btn:hover {
+    background: #fb6f92;
+    color: white;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ========== RESPONSIVE (Cho Mobile) ========== */
+@media (max-width: 850px) {
+    .popup-content {
+        width: 100%; 
+        height: auto;
+        border-radius: 0;
+        margin: 0;
+    }
+}

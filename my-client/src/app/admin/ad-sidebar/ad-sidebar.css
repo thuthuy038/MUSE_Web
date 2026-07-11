@@ -1,0 +1,119 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 240px;
+  background: #f6d5db;
+  padding: 20px 15px;
+  border-right: 2px solid #f0b8c3;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ff6b9a;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.menu-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.menu-title1 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  display: block;
+  padding: 8px 0px;
+  color: #444;
+  text-decoration: none;
+}
+
+.menu-title1 i {
+  margin-right: 6px;
+}
+
+.menu-title1:hover {
+  background: #ff8aa9;
+  color: white;
+}
+
+.menu-item {
+  font-size: 13px;
+  display: block;
+  padding: 8px 12px;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  color: #333;
+  text-decoration: none;
+}
+
+.menu-item i {
+  margin-right: 8px;
+}
+
+.menu-item:hover {
+  background: #ff8aa9;
+  color: white;
+}
+
+.active {
+  background: #ff6b9a;
+  color: white !important;
+}
+
+/* ===== CONTENT ===== */
+.content {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 20px;
+  overflow: auto;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 200px;
+    padding: 20px 10px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .menu-item, .menu-title1 {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .menu-item i {
+    margin-right: 6px;
+    font-size: 14px;
+  }
+}
+
+/* ===== MOBILE  ===== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 60px); 
+    position: relative;
+    border-right: none;
+  }
+}

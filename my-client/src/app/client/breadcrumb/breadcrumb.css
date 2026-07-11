@@ -1,0 +1,33 @@
+.breadcrumb-bar {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 15px 20px;
+
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.breadcrumb-link {
+  color: #555;
+  text-decoration: none;
+}
+
+.breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  margin: 0 8px;
+  color: #999;
+}
+
+.breadcrumb-current {
+  font-weight: 600;
+  color: #FB6F92;
+}
+
+@media (min-width: 992px) {
+  .breadcrumb-bar {
+    grid-area: breadcrumb;
+  }
+}

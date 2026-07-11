@@ -1,0 +1,37 @@
+<div class="chat-bubble" *ngIf="!isOpen" (click)="toggleChat()">
+  <i class="bi bi-chat-dots-fill"></i>
+</div>
+
+<div class="chat-container shadow-lg" *ngIf="isOpen">
+  <div class="chat-header">
+    <img src="assets/images/logos/logo.png" alt="Muse" style="max-width: 50px; height: auto;" />
+    <div class="chat-title">
+      <h5 class="mb-0">MUSE SUPPORT</h5>
+      <small>Chào, {{ customerName }}</small>
+    </div>
+    <button class="toggle-btn" (click)="toggleChat()"><i class="bi bi-x-lg"></i></button>
+  </div>
+
+  <!-- Chưa có tin nhắn nào: hiển thị nút bắt đầu -->
+  <div class="chat-main d-flex align-items-center justify-content-center p-4 text-center"
+    *ngIf="!isChatting && messages.length === 0">
+    <button class="btn-pink-start" (click)="startChat()">Bắt đầu trò chuyện</button>
+  </div>
+
+  <!-- Đã có tin nhắn hoặc đã bắt đầu: hiển thị khung chat -->
+  <div class="chat-main" *ngIf="isChatting || messages.length > 0">
+    <div class="messages p-3" #messageContainer>
+      <div *ngFor="let msg of messages"
+        [ngClass]="{'user-row': msg.sender !== 'admin', 'admin-row': msg.sender === 'admin'}">
+        <div class="msg-bubble shadow-sm p-2 px-3 mb-2">
+          {{ msg.content }}
+          <span class="time">{{ msg.timestamp | date:'HH:mm' }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="chat-footer">
+      <input type="text" [(ngModel)]="userMessage" (keyup.enter)="sendMessage()" placeholder="Nhập tin nhắn..." />
+      <button class="send-icon-btn" (click)="sendMessage()"><i class="bi bi-send-fill"></i></button>
+    </div>
+  </div>
+</div>

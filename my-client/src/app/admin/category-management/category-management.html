@@ -1,0 +1,114 @@
+<div class="container mt-4">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="fw-bold">Danh mục sản phẩm</h3>
+    <button routerLink="/admin/category-add" class="btn btn-danger">
+      Thêm danh mục
+    </button>
+  </div>
+
+  <!-- Filter -->
+  <div class="d-flex gap-3 mb-3 align-items-center flex-wrap">
+
+    <!-- Search -->
+    <div class="input-group" style="width:250px">
+      <input type="text" class="form-control" placeholder="Tìm kiếm..." [(ngModel)]="searchText"
+        (input)="applyFilter()" />
+      <button class="btn btn-danger">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+
+    <!-- Loại -->
+    <div class="d-flex align-items-center">
+      <label class="me-2">Loại:</label>
+      <select class="form-select w-auto" [(ngModel)]="selectedType" (change)="applyFilter()">
+        <option value="all">Tất cả</option>
+        <option value="category">Danh mục sản phẩm</option>
+        <option value="collection">Bộ sưu tập</option>
+      </select>
+    </div>
+
+    <!-- Trạng thái -->
+    <div class="d-flex align-items-center">
+      <label class="me-2">Trạng thái:</label>
+      <select class="form-select w-auto" [(ngModel)]="selectedStatus" (change)="applyFilter()">
+        <option value="all">Tất cả</option>
+        <option value="active">Đang hiển thị trên trang web</option>
+        <option value="featured">Hiển thị nổi bật</option>
+        <option value="inactive">Bị vô hiệu hóa</option>
+      </select>
+    </div>
+
+  </div>
+
+  <!-- Table -->
+  <div class="card p-3 shadow-sm">
+    <div class="table-wrapper">
+      <table class="table align-middle table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Banner</th>
+            <th>Tên</th>
+            <th>Loại</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
+            <th class="text-center">Chỉnh sửa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of paginatedCategories">
+            <td>{{ c.code }}</td>
+            <td>
+              <img *ngIf="c.banner?.length" [src]="'http://localhost:3000' + $any(c.banner[0]).url" height="60"
+                style="object-fit:cover" />
+            </td>
+            <td class="fw-semibold">{{ c.name }}</td>
+            <td>{{ c.type === 'collection' ? 'Bộ sưu tập' : 'Danh mục' }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="{
+                'status-active': c.status === 'active',
+                'status-featured': c.status === 'featured',
+                'status-inactive': c.status === 'inactive'
+              }">
+                {{ getStatusText(c.status) }}
+              </span>
+            </td>
+            <td>{{ c.createdAt | date:'dd/MM/yyyy' }}</td>
+            <td class="action-icons text-center">
+              <a [routerLink]="['/admin/category-edit', c._id]">
+                <i class="bi bi-pencil-square text-dark"></i>
+              </a>
+              <i class="icon-btn text-danger bi bi-trash" (click)="deleteCategory(c._id)"></i>
+            </td>
+          </tr>
+          <tr *ngIf="paginatedCategories.length === 0">
+            <td colspan="7" class="text-center text-muted py-4">
+              Không có dữ liệu
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-3">
+      <nav>
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="changePage(currentPage - 1)">&lt;</a>
+          </li>
+          <li class="page-item" *ngFor="let p of pages" [class.active]="p === currentPage">
+            <a class="page-link" (click)="changePage(p)">{{ p }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="changePage(currentPage + 1)">&gt;</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,66 @@
+<div class="product-list-container" [class.filter-open]="isFilterOpen">
+  <!-- Thêm Breadcrumb -->
+  <nav class="breadcrumb-bar">
+    <a [routerLink]="['/']" class="breadcrumb-link">Trang chủ</a>
+    <span class="breadcrumb-separator">&gt;</span>
+    <span class="breadcrumb-current">{{ currentCategoryParam }}</span>
+  </nav>
+  <!-- Nút mở bộ lọc -->
+  <button class="filter-toggle-btn" (click)="toggleFilter()" aria-label="Mở bộ lọc">
+    <i class="fa-solid fa-sliders"></i>
+    <span>Bộ lọc</span>
+  </button>
+  <!-- Sidebar bộ lọc -->
+  <aside class="filter-sidebar">
+    <button class="filter-close-btn" (click)="toggleFilter()" aria-label="Đóng bộ lọc">
+      <i class="fa-solid fa-times"></i>
+    </button>
+
+    <app-filter [defaultCategory]="currentCategoryParam" (applyFilters)="onApplyFilters($event)"
+      (resetFilters)="onResetFilters()">
+    </app-filter>
+  </aside>
+
+  <!-- Sắp xếp theo -->
+  <div class="sort-bar">
+    <button class="sort-btn" [class.active]="currentSort === 'newest'" (click)="sortByNewest()">
+      Mới Nhất
+    </button>
+
+    <button class="sort-btn" [class.active]="currentSort === 'bestseller'" (click)="sortByBestSeller()">
+      Bán Chạy
+    </button>
+
+    <button class="sort-btn price-btn" [class.active]="currentSort === 'price'" (click)="sortByPrice()">
+      Giá
+      <i class="bi" [ngClass]="priceSortAsc ? 'bi-arrow-up' : 'bi-arrow-down'"></i>
+    </button>
+  </div>
+
+  <!-- Lưới sản phẩm -->
+  <main class="product-grid">
+
+    @for (p of pagedProducts; track p._id) {
+    <a [routerLink]="['/productdetail', p._id]" class="product-link">
+      <app-product [product]="p"></app-product>
+    </a>
+    } @empty {
+    <p class="text-center" *ngIf="pendingSearch; else noItemsDefault">
+      Không tìm thấy kết quả cho từ khóa.
+    </p>
+    <ng-template #noItemsDefault>
+      <p class="text-center">Không có sản phẩm nào để hiển thị.</p>
+    </ng-template>
+    }
+
+  </main>
+  <!-- Các button phân trang -->
+  <div class="pagination-container">
+    <app-pagination [totalItems]="filteredProducts.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+      (pageChange)="onPageChange($event)">
+    </app-pagination>
+  </div>
+
+  <div class="filter-overlay" (click)="toggleFilter()"></div>
+
+</div>

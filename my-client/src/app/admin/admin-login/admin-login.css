@@ -1,0 +1,122 @@
+.login-wrapper {
+  min-height: calc(100vh - 70px);
+  background-color: #fff5ec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 800px;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.login-card h2 {
+  text-align: center;
+  color: #fb6f92;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #ff8fab;
+}
+
+/* Password field */
+.password-field {
+  position: relative;
+}
+
+.password-field i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #999;
+}
+
+/* Label row */
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot {
+  font-size: 13px;
+  color: #fb6f92;
+  cursor: pointer;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 25px 0;
+}
+
+/* Button */
+.button-group {
+  display: flex;
+  gap: 12px;
+}
+
+.login-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background-color: #fb6f92;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #ff8fab;
+}
+
+.signup-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background-color: #ff8fab;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.signup-btn:hover {
+  background-color: #fb6f92;
+}

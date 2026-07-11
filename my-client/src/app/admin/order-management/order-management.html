@@ -1,0 +1,139 @@
+<div class="order-management-container">
+  <h2 class="management-title">Quản lý đơn hàng</h2>
+
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <button (click)="exportToExcel()" class="btn btn-sm btn-outline-pink">In dữ liệu</button>
+      <input type="file" #fileInput style="display:none" (change)="importExcel($event)">
+      <button (click)="fileInput.click()" class="btn btn-sm btn-pink">Tải từ file</button>
+    </div>
+    <div class="toolbar-right">
+      <select [(ngModel)]="selectedTimeSort" (change)="totalPriceSort = null; onSearch()" class="form-select form-select-sm status-filter time-filter">
+        <option *ngFor="let opt of timeSortOptions" [value]="opt.value">{{ opt.label }}</option>
+      </select>
+      
+      <select [(ngModel)]="selectedDeliveryStatus" (change)="onSearch()" class="form-select form-select-sm status-filter" style="min-width: 180px;">
+        <option *ngFor="let opt of deliveryStatusOptions" [value]="opt.value">{{ opt.label }}</option>
+      </select>
+
+      <select [(ngModel)]="selectedPaymentStatus" (change)="onSearch()" class="form-select form-select-sm status-filter" style="min-width: 180px;">
+        <option *ngFor="let opt of paymentStatusOptions" [value]="opt.value">{{ opt.label }}</option>
+      </select>
+
+      <div class="input-group input-group-sm" style="width: 250px;">
+        <input type="text" [(ngModel)]="searchText" (input)="onSearch()" class="form-control" placeholder="Tìm theo tên, ID, mã đơn...">
+        <button class="btn btn-pink"><i class="bi bi-search"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle text-center">
+      <thead>
+        <tr>
+          <th style="width: 40px;"><input type="checkbox" (change)="toggleSelectAll($event)"></th>
+          <th>Thời gian</th>
+          <th>Mã Đơn</th>
+          <th>Khách hàng</th>
+          <th (click)="togglePriceSort()" style="cursor: pointer; user-select: none;">
+            Tổng tiền 
+            <i class="bi" [ngClass]="{'bi-sort-numeric-down-alt': totalPriceSort === 'desc', 'bi-sort-numeric-up': totalPriceSort === 'asc', 'bi-arrow-down-up small text-muted': !totalPriceSort}"></i>
+          </th>
+          <th>Thanh toán</th>
+          <th>Giao hàng</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of paginatedOrders" [class.row-selected]="selectedIds.has(order.id)">
+          <td>
+            <input type="checkbox" [checked]="selectedIds.has(order.id)" (change)="toggleSelect(order.id); $event.stopPropagation()">
+          </td>
+          <td>
+            <div class="small text-muted">{{ (order.createdAt || order.updatedAt) | date:'dd/MM/yyyy' }}</div>
+            <div class="fw-bold small" style="color: #FB6F92;">{{ (order.createdAt || order.updatedAt) | date:'HH:mm' }}</div>
+          </td>
+          <td>
+            <a [routerLink]="['/admin/order-edit', order.id]" class="text-decoration-none fw-bold" style="color: #FB6F92;">
+              {{ order.id }}
+            </a>
+          </td>
+
+          <ng-container *ngIf="editingId !== order.id; else editRowTemplate">
+            <td>
+              <div class="fw-bold">{{ order.shippingAddress?.fullName || order.customerName || 'Khách hàng Muse' }}</div>
+              <small class="text-muted">{{ order.customerId }}</small>
+            </td>
+            <td class="fw-bold">{{ order.totalPrice | number }}đ</td>
+            <td>
+              <span class="badge" [ngStyle]="{'background-color': getStatusColor(order.paymentId?.paymentStatus || 'Chưa thanh toán')}">
+  {{ order.paymentId?.paymentStatus || 'Chưa thanh toán' }}
+</span>
+            </td>
+            <td>
+              <span class="badge" [ngStyle]="{'background-color': getStatusColor(order.status)}">
+                {{ order.status }}
+              </span>
+            </td>
+            <td>
+              <div class="d-flex gap-2 justify-content-center">
+                <button (click)="startEdit(order)" class="btn-action-edit"><i class="bi bi-pencil"></i></button>
+                <button (click)="deleteOrder(order.id); $event.stopPropagation()" class="btn-action-delete"><i class="bi bi-trash"></i></button>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-template #editRowTemplate>
+            <td>
+              <input [(ngModel)]="editData.shippingAddress.fullName" class="form-control form-control-sm mb-1" placeholder="Tên khách">
+              <div class="small text-muted">{{ editData.customerId }}</div>
+            </td>
+            <td><input type="number" [(ngModel)]="editData.totalPrice" class="form-control form-control-sm"></td>
+            <td>
+              <select [(ngModel)]="editData.paymentStatus" class="form-select form-select-sm mb-1">
+                <option *ngFor="let opt of paymentStatusOptions.slice(1)" [value]="opt.value">{{ opt.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select [(ngModel)]="editData.status" class="form-select form-select-sm">
+                <option *ngFor="let opt of deliveryStatusOptions.slice(1)" [value]="opt.value">{{ opt.label }}</option>
+              </select>
+            </td>
+            <td>
+              <div class="d-flex gap-1 justify-content-center">
+                <button (click)="saveInlineEdit()" class="btn btn-xs btn-success">Lưu</button>
+                <button (click)="editingId = null" class="btn btn-xs btn-light">Hủy</button>
+              </div>
+            </td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <nav>
+      <ul class="pagination pagination-pink">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="setPage(currentPage - 1)">&laquo;</a>
+        </li>
+        <li class="page-item" *ngFor="let p of visiblePages" [class.active]="currentPage === p">
+          <a class="page-link" (click)="setPage(p)">{{ p }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="setPage(currentPage + 1)">&raquo;</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="bulk-action-bar" [class.show]="selectedIds.size > 0">
+    <div class="d-flex align-items-center gap-3">
+      <span class="selected-info">Đã chọn <b>{{selectedIds.size}}</b> đơn hàng</span>
+      <div class="d-flex gap-2">
+        <button (click)="deleteBulk()" class="btn btn-bulk-delete">Xóa đã chọn</button>
+        <button (click)="selectedIds.clear()" class="btn btn-bulk-cancel">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,313 @@
+/* 1. QUY TẮC CHUNG & BIẾN */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Kiểu dáng Icons chung */
+.bi {
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.bi:hover {
+  color: var(--primary-color, #fb6f92); 
+}
+
+.btn-pink {
+  background-color: #fb6f92;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: none;
+  transition: 0.2s;
+  width: 150px;
+}
+
+.btn-pink:hover {
+  background-color: #e85a7a;
+}
+
+/* 2. THANH ƯU ĐÃI (TOP BANNER) */
+.top-banner {
+  background-color: #fff;
+  color: #fb6f92;
+  font-size: 0.8rem;
+  border-bottom: 1px solid #f2f2f2;
+  font-family: 'Roboto', sans-serif;
+  padding: 0.3rem 0;
+}
+
+.top-banner a {
+  color: #fb6f92;
+  text-decoration: none;
+}
+
+.top-banner a:hover {
+  text-decoration: underline;
+}
+
+/* 3. THANH HOTLINE (HOTLINE BAR & MARQUEE) */
+
+.hotline-bar {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.4rem 0;
+  font-size: 0.85rem;
+}
+
+/* 3.1 Khung chứa nội dung ưu đãi chạy (Moving Marquee Container) */
+.moving-offer-hotline {
+  max-width: 70%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* 3.2 Nội dung di chuyển thực tế */
+.moving-text-content-hotline {
+  display: inline-block;
+  animation: marquee-hotline-move 30s linear infinite;
+}
+
+.moving-offer-hotline:hover .moving-text-content-hotline {
+  animation-play-state: paused;
+}
+
+/* 3.3 Keyframes */
+@keyframes marquee-hotline-move {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* 3.4 Cố định Hotline */
+.hotline-number-fixed {
+  color: #fff;
+}
+
+/* 4. NAVBAR CHÍNH (MAIN NAVBAR & NAV LINKS) */
+.main-navbar {
+  background-color: #fff;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0.5rem 0;
+}
+
+/* 4.1 Logo & Thương hiệu */
+.navbar-brand img {
+  vertical-align: middle;
+  max-width: 100px;
+}
+
+.brand-text {
+  font-family: "Roboto Serif", serif;
+  color: #fb6f92;
+  letter-spacing: 1px;
+}
+
+/* 4.2 Các liên kết (Nav Links) */
+.nav-link {
+  color: #111 !important;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #fb6f92 !important;
+}
+
+/* 4.3 Dropdown menu */
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.dropdown-item:hover {
+  background-color: #fde6ec;
+  color: #fb6f92;
+}
+
+/* 5. THANH TÌM KIẾM (SEARCH BAR) */
+.search-bar {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  animation: slideDown 0.25s ease;
+}
+
+.search-input {
+  border-radius: 20px;
+  padding: 6px 14px;
+  border: 1px solid #ccc;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* 6. MENU MOBILE (SIDEBAR & OVERLAY) */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 260px;
+  height: 100vh;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: 0.3s ease;
+  z-index: 1003;
+  overflow-y: auto; 
+}
+
+.mobile-menu.open {
+  left: 0;
+}
+
+/* Reset lại style mặc định của mobile-menu a */
+.mobile-menu a {
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-menu a:hover {
+  color: #fb6f92;
+}
+
+/* Lớp phủ (Overlay) */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1002;
+}
+
+.mobile-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #eee; 
+  padding-bottom: 10px; 
+}
+
+.mobile-category-title {
+    padding-bottom: 5px !important; 
+    border-bottom: none !important;
+}
+
+.mobile-dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  max-height: none; 
+  overflow: visible;
+  padding-bottom: 0; 
+}
+
+/* Từng mục con trong dropdown */
+.dropdown-item-mobile {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  padding: 8px 0 8px 10px; 
+  color: #666 !important;
+  border-bottom: none !important; 
+  transition: color 0.2s ease;
+}
+
+.dropdown-item-mobile:hover {
+  color: #fb6f92 !important;
+}
+
+
+/* 7. RESPONSIVE (MEDIA QUERIES) */
+@media (max-width: 992px) {
+
+  /* Căn chỉnh Navbar chính trên mobile */
+  .main-navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    flex-wrap: nowrap;
+    padding: 8px;
+  }
+
+  /* Căn giữa Logo tuyệt đối */
+  .logo-wrapper-mobile {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+}
+
+/* Desktop (Màn hình từ 992px trở lên) */
+@media (min-width: 992px) {
+
+  /* Ẩn menu mobile trên desktop */
+  .mobile-menu,
+  .menu-overlay {
+    display: none !important;
+  }
+  
+  /* Reset lại style mobile-menu a để không ảnh hưởng đến desktop nav-link */
+  .mobile-menu a {
+      border-bottom: none;
+  }
+  
+  /* Ẩn hoàn toàn các styles mobile dropdown trong desktop */
+  .mobile-dropdown-item,
+  .mobile-dropdown-menu,
+  .dropdown-item-mobile {
+      display: none;
+  }
+
+
+  /* Styles Dropdown HOVER Desktop */
+  .main-navbar .dropdown-menu {
+    display: block; 
+    opacity: 0;   
+    visibility: hidden; 
+    transition: opacity 0.3s, visibility 0.3s;
+    margin-top: 0; 
+  }
+
+  /* Khi rê chuột vào nav-item (mục cha), hiện dropdown-menu */
+  .main-navbar .dropdown:hover > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 0.5rem; 
+  }
+
+  /* Đảm bảo dropdown-toggle không có hành vi đặc biệt khi rê chuột */
+  .main-navbar .dropdown-toggle::after {
+    vertical-align: 0.15em;
+  }
+}

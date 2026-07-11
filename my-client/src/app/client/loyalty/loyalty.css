@@ -1,0 +1,36 @@
+/* Import các style từ change-address (kế thừa toàn bộ) */
+@import url('../change-address/change-address.css');
+
+/* Các style riêng cho loyalty */
+.loyalty-info .info-row {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Khoảng cách giữa label và box */
+  margin-bottom: 15px;
+}
+
+.loyalty-info .info-box {
+  flex: 1; /* Chiếm toàn bộ không gian còn lại */
+  background-color: #ffe5ec;
+  border: 1px solid #ff99b9;
+  border-radius: 8px;
+  padding: 12px 20px; /* Tăng padding để ô to hơn */
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.history-table {
+  background-color: #fff;
+  border: 1px solid #ff99b9;
+}
+
+.history-table th {
+  background-color: #fceef2;
+  color: #333;
+  font-weight: 600;
+}
+
+.history-table td {
+  vertical-align: middle;
+}
