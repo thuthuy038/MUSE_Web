@@ -67,10 +67,10 @@ export class Wishlist implements OnInit {
   getImageUrl(img: any): string {
     if (!img) return 'assets/images/no-image.png';
     if (typeof img === 'object' && img.url) {
-      return 'http://localhost:3000' + img.url;
+      return 'https://server-testing-ymn9.onrender.com' + img.url;
     }
     if (typeof img === 'string') {
-      return img.startsWith('http') ? img : 'http://localhost:3000' + img;
+      return img.startsWith('http') ? img : 'https://server-testing-ymn9.onrender.com' + img;
     }
     return 'assets/images/no-image.png';
   }

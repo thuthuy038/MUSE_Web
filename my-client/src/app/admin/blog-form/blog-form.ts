@@ -34,7 +34,7 @@ export class BlogForm {
 
     if(this.id){
 
-      this.http.get(`http://localhost:3000/api/blogs/${this.id}`)
+      this.http.get(`https://server-testing-ymn9.onrender.com/api/blogs/${this.id}`)
       .subscribe((data:any)=>{
         this.blog = data
       })
@@ -48,7 +48,7 @@ export class BlogForm {
     if(this.id){
 
       this.http.put(
-        `http://localhost:3000/api/blogs/${this.id}`,
+        `https://server-testing-ymn9.onrender.com/api/blogs/${this.id}`,
         this.blog
       ).subscribe(()=>{
         alert("Cập nhật thành công")
@@ -58,7 +58,7 @@ export class BlogForm {
     }else{
 
       this.http.post(
-        `http://localhost:3000/api/blogs`,
+        `https://server-testing-ymn9.onrender.com/api/blogs`,
         this.blog
       ).subscribe(()=>{
         alert("Thêm blog thành công")

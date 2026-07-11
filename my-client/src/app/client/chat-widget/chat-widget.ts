@@ -66,7 +66,7 @@ export class ChatWidget implements OnInit, AfterViewChecked, OnDestroy {
   loadChatHistory() {
     if (!this.customerId) return;
 
-    this.http.get<any[]>('http://localhost:3000/api/chats').subscribe({
+    this.http.get<any[]>('https://server-testing-ymn9.onrender.com/api/chats').subscribe({
       next: (allChats) => {
         const myChat = allChats.find(c => c.customerId === this.customerId);
         if (myChat && myChat.messages) {
@@ -94,7 +94,7 @@ export class ChatWidget implements OnInit, AfterViewChecked, OnDestroy {
       content: this.userMessage
     };
 
-    this.http.post('http://localhost:3000/api/chats/send', payload).subscribe({
+    this.http.post('https://server-testing-ymn9.onrender.com/api/chats/send', payload).subscribe({
       next: () => {
         this.userMessage = '';
         this.loadChatHistory();

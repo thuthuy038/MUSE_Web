@@ -49,7 +49,7 @@ export class AdminAccount implements OnInit {
             this.avatarUrl = data.avatar;
           } else if (data.avatar.url) {
             this.avatarUrl = data.avatar.url.startsWith('/api') 
-              ? `http://localhost:3000${data.avatar.url}` 
+              ? `https://server-testing-ymn9.onrender.com${data.avatar.url}` 
               : data.avatar.url;
           }
         } else {
@@ -86,12 +86,12 @@ export class AdminAccount implements OnInit {
     try {
       const updatedUser = await firstValueFrom(this.userService.uploadAvatar(formData));
       
-      if (updatedUser.avatar) {
+       if (updatedUser.avatar) {
         if (typeof updatedUser.avatar === 'string') {
           this.avatarUrl = updatedUser.avatar;
         } else if (updatedUser.avatar.url) {
           this.avatarUrl = updatedUser.avatar.url.startsWith('/api')
-            ? `http://localhost:3000${updatedUser.avatar.url}`
+            ? `https://server-testing-ymn9.onrender.com${updatedUser.avatar.url}`
             : updatedUser.avatar.url;
         }
       }

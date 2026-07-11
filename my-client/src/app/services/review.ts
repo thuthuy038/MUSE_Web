@@ -8,7 +8,7 @@ import { Observable } from 'rxjs'
 
 export class ReviewService {
 
-  private apiUrl = 'http://localhost:3000/api/reviews'
+  private apiUrl = 'https://server-testing-ymn9.onrender.com/api/reviews'
 
   constructor(private http: HttpClient) { }
 

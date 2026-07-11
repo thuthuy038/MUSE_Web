@@ -22,9 +22,9 @@ export class LiveChat implements OnInit, AfterViewChecked {
   newMessage: string = '';
   isLoading: boolean = false;
 
-  private apiChatUrl = 'http://localhost:3000/api/chats';
-  private apiOrderUrl = 'http://localhost:3000/api/orders';
-  private apiUserUrl = 'http://localhost:3000/api/users';
+  private apiChatUrl = 'https://server-testing-ymn9.onrender.com/api/chats';
+  private apiOrderUrl = 'https://server-testing-ymn9.onrender.com/api/orders';
+  private apiUserUrl = 'https://server-testing-ymn9.onrender.com/api/users';
 
   constructor(private http: HttpClient, private toastr: ToastrService) { }
 
@@ -110,7 +110,7 @@ export class LiveChat implements OnInit, AfterViewChecked {
       next: (user) => {
         if (user.avatar) {
           this.selectedChat.avatar = typeof user.avatar === 'object'
-            ? `http://localhost:3000${user.avatar.url}`
+            ? `https://server-testing-ymn9.onrender.com${user.avatar.url}`
             : user.avatar;
         }
       },

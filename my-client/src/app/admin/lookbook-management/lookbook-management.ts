@@ -37,9 +37,9 @@ export class LookbookManagement implements OnInit {
 
   loadInitialData() {
     forkJoin({
-      products: this.http.get<any[]>('http://localhost:3000/api/products'),
-      categories: this.http.get<any[]>('http://localhost:3000/api/categories'),
-      lookbooks: this.http.get<any[]>('http://localhost:3000/api/lookbook')
+      products: this.http.get<any[]>('https://server-testing-ymn9.onrender.com/api/products'),
+      categories: this.http.get<any[]>('https://server-testing-ymn9.onrender.com/api/categories'),
+      lookbooks: this.http.get<any[]>('https://server-testing-ymn9.onrender.com/api/lookbook')
     }).subscribe({
       next: (res: any) => {
         this.allProducts = res.products.filter((p: any) => p !== null);
@@ -98,7 +98,7 @@ export class LookbookManagement implements OnInit {
   }
 
   getImg(p: any) {
-    if (p?.images?.[0]?.url) return `http://localhost:3000${p.images[0].url}`;
+    if (p?.images?.[0]?.url) return `https://server-testing-ymn9.onrender.com${p.images[0].url}`;
     return 'assets/images/no-image.png';
   }
 
@@ -143,7 +143,7 @@ export class LookbookManagement implements OnInit {
       matchingItems: this.selectedMatches.map(m => m._id),
       matchingItemNames: this.selectedMatches.map(m => m.name)
     };
-    this.http.post('http://localhost:3000/api/lookbook', data).subscribe({
+    this.http.post('https://server-testing-ymn9.onrender.com/api/lookbook', data).subscribe({
       next: () => {
         alert('✨ Đã lưu set đồ thành công!');
         this.loadInitialData();
@@ -156,7 +156,7 @@ export class LookbookManagement implements OnInit {
   deleteLBByProduct(productId: string) {
     const lb = this.lookbookList.find(l => this.getSafeId(l.mainProductId) === productId);
     if (lb && confirm('Xóa set này nha nàng?')) {
-      this.http.delete(`http://localhost:3000/api/lookbook/${lb._id}`).subscribe(() => this.loadInitialData());
+      this.http.delete(`https://server-testing-ymn9.onrender.com/api/lookbook/${lb._id}`).subscribe(() => this.loadInitialData());
     }
   }
 

@@ -59,6 +59,6 @@ export class Product implements OnInit {
   }
 
   getImageUrl(img: any) {
-    return 'http://localhost:3000' + img.url;
+    return 'https://server-testing-ymn9.onrender.com' + img.url;
   }
 }

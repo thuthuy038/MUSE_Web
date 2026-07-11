@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LookbookService {
-  private apiUrl = 'http://localhost:3000/api/lookbook';
+  private apiUrl = 'https://server-testing-ymn9.onrender.com/api/lookbook';
  
   constructor(private http: HttpClient) {}
 

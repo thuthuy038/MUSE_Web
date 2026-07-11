@@ -74,7 +74,7 @@ export class Review implements OnInit {
 
       // Check xem đã đánh giá chưa
       try {
-        const checkRes = await fetch(`http://localhost:3000/api/reviews/check?userId=${user._id}&productId=${productId}&orderId=${this.order._id}`);
+        const checkRes = await fetch(`https://server-testing-ymn9.onrender.com/api/reviews/check?userId=${user._id}&productId=${productId}&orderId=${this.order._id}`);
         const checkData = await checkRes.json();
 
         if (checkData.exists && checkData.reviewId) {
@@ -82,7 +82,7 @@ export class Review implements OnInit {
           form.reviewId = checkData.reviewId;
 
           // Lấy chi tiết đánh giá để điền vào form
-          const detailRes = await fetch(`http://localhost:3000/api/reviews/${checkData.reviewId}`);
+          const detailRes = await fetch(`https://server-testing-ymn9.onrender.com/api/reviews/${checkData.reviewId}`);
           const detailData = await detailRes.json();
 
           form.selectedRating = detailData.rating;
@@ -169,7 +169,7 @@ export class Review implements OnInit {
       for (let file of form.imageFiles) {
         const formData = new FormData();
         formData.append('image', file);
-        const res: any = await fetch('http://localhost:3000/api/upload', { method: 'POST', body: formData }).then(r => r.json());
+        const res: any = await fetch('https://server-testing-ymn9.onrender.com/api/upload', { method: 'POST', body: formData }).then(r => r.json());
         newUploadedImages.push({ url: `/api/images/${res.fileId}`, fileId: res.fileId });
       }
 
@@ -178,7 +178,7 @@ export class Review implements OnInit {
       for (let file of form.videoFiles) {
         const formData = new FormData();
         formData.append('image', file); // API của bạn xài chung key 'image'
-        const res: any = await fetch('http://localhost:3000/api/upload', { method: 'POST', body: formData }).then(r => r.json());
+        const res: any = await fetch('https://server-testing-ymn9.onrender.com/api/upload', { method: 'POST', body: formData }).then(r => r.json());
         newUploadedVideos.push({ url: `/api/images/${res.fileId}`, fileId: res.fileId });
       }
 
@@ -200,7 +200,7 @@ export class Review implements OnInit {
 
       if (form.isReviewed && form.reviewId) {
         // GỌI API EDIT (PUT)
-        await fetch(`http://localhost:3000/api/reviews/${form.reviewId}`, {
+        await fetch(`https://server-testing-ymn9.onrender.com/api/reviews/${form.reviewId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -208,7 +208,7 @@ export class Review implements OnInit {
         alert(`Đã cập nhật đánh giá cho: ${form.item.name}`);
       } else {
         // GỌI API CREATE (POST)
-        const res = await fetch('http://localhost:3000/api/reviews', {
+        const res = await fetch('https://server-testing-ymn9.onrender.com/api/reviews', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -240,7 +240,7 @@ export class Review implements OnInit {
     if (confirm("Bạn có chắc chắn muốn xoá đánh giá này?")) {
       try {
         form.isSubmitting = true;
-        await fetch(`http://localhost:3000/api/reviews/${form.reviewId}`, { method: 'DELETE' });
+        await fetch(`https://server-testing-ymn9.onrender.com/api/reviews/${form.reviewId}`, { method: 'DELETE' });
 
         // Reset form về trạng thái chưa đánh giá
         form.isReviewed = false;

@@ -7,7 +7,7 @@ import { IProduct } from '../interfaces/product';
 
 @Injectable({ providedIn: 'root' })
 export class WishlistService {
-  private apiUrl = 'http://localhost:3000/api/users/wishlist';
+  private apiUrl = 'https://server-testing-ymn9.onrender.com/api/users/wishlist';
   private wishlistSubject = new BehaviorSubject<IProduct[]>([]);
   public wishlist$ = this.wishlistSubject.asObservable();
 

@@ -72,7 +72,7 @@ export class ProductDetail implements OnInit {
       this.product = {
         ...res,
         images: res.images?.map((img: any) =>
-          `http://localhost:3000${img.url}`
+         `https://server-testing-ymn9.onrender.com${img.url}`
         ) || []
       };
 
@@ -92,11 +92,11 @@ export class ProductDetail implements OnInit {
   // Mở ảnh lớn
   openImageModal(imageUrl: string) {
     // Có thể tạo modal hoặc mở tab mới
-    window.open('http://localhost:3000' + imageUrl, '_blank');
+   window.open('https://server-testing-ymn9.onrender.com' + imageUrl, '_blank');
   }
   loadLookbook(productId: string) {
     // Gọi đúng địa chỉ api/lookbook/recommend
-    this.http.get<any>(`http://localhost:3000/api/lookbook/recommend/${productId}`)
+   this.http.get<any>(`https://server-testing-ymn9.onrender.com/api/lookbook/recommend/${productId}`)
       .subscribe({
         next: (res) => {
           console.log('Dữ liệu từ API Lookbook:', res);
@@ -107,7 +107,7 @@ export class ProductDetail implements OnInit {
 
               // 1. Phải gán đúng tên displayImage để HTML hiển thị được ảnh
               const imgUrl = (p.images && p.images.length > 0)
-                ? `http://localhost:3000${p.images[0].url}`
+               ? `https://server-testing-ymn9.onrender.com${p.images[0].url}`
                 : 'assets/images/no-image.png';
 
               // 2. Phải tính discountPrice để HTML hiển thị được giá giảm

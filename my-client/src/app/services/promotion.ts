@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PromotionService {
-  private apiUrl = 'http://localhost:3000/api/promotions';
+  private apiUrl = 'https://server-testing-ymn9.onrender.com/api/promotions';
 
   constructor(private http: HttpClient) {}
 

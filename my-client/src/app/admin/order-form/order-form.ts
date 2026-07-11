@@ -15,7 +15,7 @@ import { UserService } from '../../services/user';
 })
 export class OrderForm implements OnInit {
   order: any = null;
-  private apiUrl = 'http://localhost:3000/api/orders';
+  private apiUrl = 'https://server-testing-ymn9.onrender.com/api/orders';
   customerCode: string = '';
 
   constructor(

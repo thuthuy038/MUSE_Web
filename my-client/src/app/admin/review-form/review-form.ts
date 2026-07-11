@@ -34,7 +34,7 @@ export class ReviewFormComponent implements OnInit {
   }
 
   loadComment() {
-    this.http.get<any>(`http://localhost:3000/api/reviews/${this.commentId}`)
+    this.http.get<any>(`https://server-testing-ymn9.onrender.com/api/reviews/${this.commentId}`)
       .subscribe({
         next: (data) => {
           this.comment = data;
@@ -59,7 +59,7 @@ export class ReviewFormComponent implements OnInit {
   submitReply() {
     if (!this.replyContent.trim()) return;
 
-    this.http.put(`http://localhost:3000/api/reviews/${this.commentId}/reply`, {
+    this.http.put(`https://server-testing-ymn9.onrender.com/api/reviews/${this.commentId}/reply`, {
       adminReply: this.replyContent
     }).subscribe({
       next: () => {

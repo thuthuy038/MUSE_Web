@@ -143,7 +143,7 @@ export class CheckOut implements OnInit, OnDestroy {
 
   private loadUserInfo(): void {
     if (!this.currentUserId) return;
-    this.http.get<any>(`http://localhost:3000/api/users/${this.currentUserId}`).subscribe({
+    this.http.get<any>(`https://server-testing-ymn9.onrender.com/api/users/${this.currentUserId}`).subscribe({
       next: async (user) => {
         console.log('User data:', user);
         this.checkoutForm.patchValue({
@@ -273,7 +273,7 @@ export class CheckOut implements OnInit, OnDestroy {
       status: 'Đang xử lý'
     };
 
-    this.http.post('http://localhost:3000/api/orders', orderPayload).subscribe({
+    this.http.post('https://server-testing-ymn9.onrender.com/api/orders', orderPayload).subscribe({
       next: (res: any) => {
         this.currentOrderId = res.id || res._id;
         if (formValue.payment === 'COD') {

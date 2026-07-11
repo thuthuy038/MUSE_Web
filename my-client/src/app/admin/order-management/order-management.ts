@@ -50,7 +50,7 @@ export class OrderManagement implements OnInit {
     { label: 'Cũ nhất', value: 'oldest' }
   ];
 
-  private apiUrl = 'http://localhost:3000/api/orders';
+  private apiUrl = 'https://server-testing-ymn9.onrender.com/api/orders';
 
   constructor(private http: HttpClient, private toastr: ToastrService, private router: Router) {}
 

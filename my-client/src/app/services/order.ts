@@ -5,7 +5,7 @@ import { IOrder } from '../interfaces/order';
 
 @Injectable({ providedIn: 'root' })
 export class OrderService {
-  private orderUrl = 'http://localhost:3000/api/orders';
+  private orderUrl = 'https://server-testing-ymn9.onrender.com/api/orders';
 
   constructor(private http: HttpClient) { }
 

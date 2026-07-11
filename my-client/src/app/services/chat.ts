@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
-  private apiUrl = 'http://localhost:3000/api/chats';
+  private apiUrl = 'https://server-testing-ymn9.onrender.com/api/chats';
 
   constructor(private http: HttpClient) {}
 

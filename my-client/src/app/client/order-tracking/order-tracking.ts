@@ -76,7 +76,7 @@ export class OrderTracking implements OnInit {
           const orderDbId = order._id;
           const key = `${orderDbId}_${productId}`;
 
-          fetch(`http://localhost:3000/api/reviews/check?userId=${userId}&productId=${productId}&orderId=${orderDbId}`)
+          fetch(`https://server-testing-ymn9.onrender.com/api/reviews/check?userId=${userId}&productId=${productId}&orderId=${orderDbId}`)
             .then(res => res.json())
             .then(data => {
               this.reviewedStatus[key] = data.exists;

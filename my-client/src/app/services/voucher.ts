@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class VoucherService {
 
-  private apiUrl = 'http://localhost:3000/api/vouchers';
+  private apiUrl = 'https://server-testing-ymn9.onrender.com/api/vouchers';
 
   constructor(private http: HttpClient) { }
 

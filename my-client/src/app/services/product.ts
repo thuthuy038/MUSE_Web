@@ -7,8 +7,8 @@ import { IProduct } from '../interfaces/product';
   providedIn: 'root'
 })
 export class ProductService {
-  private productsUrl = 'http://localhost:3000/api/products';
-  private ordersUrl = 'http://localhost:3000/api/orders';
+  private productsUrl = 'https://server-testing-ymn9.onrender.com/api/products';
+  private ordersUrl = 'https://server-testing-ymn9.onrender.com/api/orders';
 
   constructor(private http: HttpClient) { }
 
@@ -54,7 +54,7 @@ export class ProductService {
   uploadImages(productId: string, formData: FormData) {
 
     return this.http.post(
-      `http://localhost:3000/api/products/${productId}/images`,
+      `https://server-testing-ymn9.onrender.com/api/products/${productId}/images`,
       formData
     )
 
@@ -63,7 +63,7 @@ export class ProductService {
   deleteImage(productId: string, fileId: string) {
 
     return this.http.delete(
-      `http://localhost:3000/api/products/${productId}/images/${fileId}`
+      `https://server-testing-ymn9.onrender.com/api/products/${productId}/images/${fileId}`
     )
 
   }

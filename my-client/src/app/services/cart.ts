@@ -47,7 +47,7 @@ export class CartService {
   private selectedCartItems$ = new BehaviorSubject<ICartItem[]>([]);
   private promotionMessages$ = new BehaviorSubject<string[]>([]);
 
-  private apiUrl = 'http://localhost:3000/api/cart';
+  private apiUrl = 'https://server-testing-ymn9.onrender.com/api/cart';
 
   public cartItems = this.cartItems$.asObservable();
   public appliedVoucher = this.appliedVoucher$.asObservable();

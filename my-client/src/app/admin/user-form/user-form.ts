@@ -183,7 +183,7 @@ populateForm(user: any) {
   });
 
   if (user.avatar) {
-    this.avatarPreview = `http://localhost:3000${user.avatar.url}`;
+    this.avatarPreview = `https://server-testing-ymn9.onrender.com${user.avatar.url}`;
   }
 
   this.addresses.clear();
@@ -229,14 +229,14 @@ populateForm(user: any) {
     formData.append("avatar", file);
     const id = this.route.snapshot.paramMap.get('id');
 
-    fetch(`http://localhost:3000/api/users/${id}/avatar`, {
+    fetch(`https://server-testing-ymn9.onrender.com/api/users/${id}/avatar`, {
       method: "POST",
       body: formData
     })
       .then(res => res.json())
       .then(user => {
         if (user.avatar) {
-          this.avatarPreview = `http://localhost:3000${user.avatar.url}`;
+          this.avatarPreview = `https://server-testing-ymn9.onrender.com${user.avatar.url}`;
         }
       });
   }

@@ -6,7 +6,7 @@ import { ICategory } from '../interfaces/category';
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
 
-  private categoriesUrl = 'http://localhost:3000/api/categories';
+  private categoriesUrl = 'https://server-testing-ymn9.onrender.com/api/categories';
 
   constructor(private http: HttpClient) {}
 

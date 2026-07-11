@@ -54,7 +54,7 @@ export class BlogManagement {
 
   // ================= LOAD =================
   loadBlogs() {
-    this.http.get<any>('http://localhost:3000/api/blogs')
+    this.http.get<any>('https://server-testing-ymn9.onrender.com/api/blogs')
       .subscribe({
         next: (data) => {
           this.blogs = data;
@@ -71,7 +71,7 @@ export class BlogManagement {
 
     this.isUploading = true;
 
-    this.http.post<any>('http://localhost:3000/api/upload', formData)
+    this.http.post<any>('https://server-testing-ymn9.onrender.com/api/upload', formData)
       .subscribe({
         next: (res) => {
           console.log("UPLOAD RES:", res);
@@ -108,7 +108,7 @@ export class BlogManagement {
     this.blogForm = { ...blog };
 
     if (blog.image) {
-      this.previewImage = 'http://localhost:3000/api/images/' + blog.image;
+      this.previewImage = 'https://server-testing-ymn9.onrender.com/api/images/' + blog.image;
     } else {
       this.previewImage = null;
     }
@@ -160,7 +160,7 @@ export class BlogManagement {
     if (this.blogForm._id) {
 
       this.http.put(
-        `http://localhost:3000/api/blogs/${this.blogForm._id}`,
+        `https://server-testing-ymn9.onrender.com/api/blogs/${this.blogForm._id}`,
         blogData
       ).subscribe({
         next: () => {
@@ -174,7 +174,7 @@ export class BlogManagement {
     } else {
 
       this.http.post(
-        'http://localhost:3000/api/blogs',
+        'https://server-testing-ymn9.onrender.com/api/blogs',
         blogData
       ).subscribe({
         next: () => {
@@ -195,7 +195,7 @@ export class BlogManagement {
   }
 
   confirmDelete() {
-    this.http.delete(`http://localhost:3000/api/blogs/${this.blogToDelete}`)
+    this.http.delete(`https://server-testing-ymn9.onrender.com/api/blogs/${this.blogToDelete}`)
       .subscribe({
         next: () => {
           this.loadBlogs();
@@ -233,7 +233,7 @@ export class BlogManagement {
     if (!confirm('Xóa các bài viết đã chọn?')) return;
 
     this.selectedBlogs.forEach(id => {
-      this.http.delete(`http://localhost:3000/api/blogs/${id}`)
+      this.http.delete(`https://server-testing-ymn9.onrender.com/api/blogs/${id}`)
         .subscribe(() => {
           this.loadBlogs();
         });

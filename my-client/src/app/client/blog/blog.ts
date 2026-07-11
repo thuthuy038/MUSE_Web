@@ -34,7 +34,7 @@ export class Blog implements OnInit {
 
   // 🔥 image
   getImage(id: string) {
-    return `http://localhost:3000/api/images/${id}`;
+    return `https://server-testing-ymn9.onrender.com/api/images/${id}`;
   }
 
   // 🔥 cắt nội dung

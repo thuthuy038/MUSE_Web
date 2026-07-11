@@ -15,7 +15,7 @@ import { IUser } from '../../interfaces/user';
 export class AdHeaderComponent implements OnInit {
   adminData: IUser | null = null;
   showUserMenu = false;
-  apiUrl = 'http://localhost:3000';
+  apiUrl = 'https://server-testing-ymn9.onrender.com';
 
   constructor(
     private router: Router,

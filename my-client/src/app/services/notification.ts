@@ -16,7 +16,7 @@ export interface Notification {
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-    private apiUrl = 'http://localhost:3000/api/notifications';
+    private apiUrl = 'https://server-testing-ymn9.onrender.com/api/notifications';
     private notificationsSubject = new BehaviorSubject<Notification[]>([]);
     private unreadCountSubject = new BehaviorSubject<number>(0);
 

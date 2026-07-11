@@ -40,7 +40,7 @@ if(this.banner){
 this.bannerForm = { ...this.banner }
 
 this.previewImage =
-'http://localhost:3000/api/images/' + this.banner.image
+'https://server-testing-ymn9.onrender.com/api/images/' + this.banner.image
 
 }
 
@@ -79,7 +79,7 @@ const formData = new FormData()
 formData.append('image', file)
 
 this.http.post<any>(
-'http://localhost:3000/api/upload',
+'https://server-testing-ymn9.onrender.com/api/upload',
 formData
 ).subscribe({
 
@@ -151,7 +151,7 @@ this.saving = true
 if(this.banner){
 
 this.http.put(
-`http://localhost:3000/api/banners/${this.banner._id}`,
+`https://server-testing-ymn9.onrender.com/api/banners/${this.banner._id}`,
 this.bannerForm
 ).subscribe({
 
@@ -184,7 +184,7 @@ this.saving = false
 else{
 
 this.http.post(
-'http://localhost:3000/api/banners',
+'https://server-testing-ymn9.onrender.com/api/banners',
 this.bannerForm
 ).subscribe({
 

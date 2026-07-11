@@ -7,7 +7,7 @@ import { IBlog } from '../interfaces/blog';
 })
 export class BlogService {
 
-  api = "http://localhost:3000/api/blogs";
+  api = "https://server-testing-ymn9.onrender.com/api/blogs";
 
   constructor(private http: HttpClient) {}
 

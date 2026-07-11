@@ -45,13 +45,13 @@ export class Home implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     // LOAD CATEGORY
-    this.http.get<any[]>("http://localhost:3000/api/categories")
+    this.http.get<any[]>("https://server-testing-ymn9.onrender.com/api/categories")
       .subscribe(res => {
         this.categories = res.filter(c => c.type === 'category');
       });
 
     // LOAD BANNER
-    this.http.get<any[]>("http://localhost:3000/api/banners")
+    this.http.get<any[]>("https://server-testing-ymn9.onrender.com/api/banners")
       .subscribe(res => {
         this.banners = res.filter(b => b.status === 'active');
         setTimeout(() => this.showBanner(this.current), 0);
@@ -84,12 +84,12 @@ export class Home implements OnInit, OnDestroy {
     if (!img) return '';
 
     if (typeof img === 'object' && img.url) {
-      return 'http://localhost:3000' + img.url;
+      return 'https://server-testing-ymn9.onrender.com' + img.url;
     }
 
     if (typeof img === 'string') {
       if (img.startsWith('http')) return img;
-      return 'http://localhost:3000' + img;
+      return 'https://server-testing-ymn9.onrender.com' + img;
     }
 
     return '';
@@ -102,18 +102,18 @@ export class Home implements OnInit, OnDestroy {
     }
 
     if (cat.banner.length === 1) {
-      return 'http://localhost:3000' + cat.banner[0].url;
+      return 'https://server-testing-ymn9.onrender.com' + cat.banner[0].url;
     }
 
     if (cat.banner[index]) {
-      return 'http://localhost:3000' + cat.banner[index].url;
+      return 'https://server-testing-ymn9.onrender.com' + cat.banner[index].url;
     }
 
-    return 'http://localhost:3000' + cat.banner[0].url;
+    return 'https://server-testing-ymn9.onrender.com' + cat.banner[0].url;
   }
 
   getImageUrl(imageId: string) {
-    return `http://localhost:3000/api/images/${imageId}`;
+    return `https://server-testing-ymn9.onrender.com/api/images/${imageId}`;
   }
 
   showBanner(index: number) {

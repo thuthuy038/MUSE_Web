@@ -59,7 +59,7 @@ export class Account implements OnInit {
     if (!rawUrl) return defaultAvatar;
 
     // Sửa lỗi ghép base URL
-    const baseUrl = 'http://localhost:3000';
+    const baseUrl = 'https://server-testing-ymn9.onrender.com';
     if (rawUrl.startsWith(baseUrl)) {
       const afterBase = rawUrl.substring(baseUrl.length);
       if (afterBase.startsWith('http://') || afterBase.startsWith('https://')) {
@@ -71,14 +71,14 @@ export class Account implements OnInit {
     if (rawUrl.startsWith('http://') || rawUrl.startsWith('https://')) {
       // Nếu là Google, dùng proxy để tránh CORS
       if (rawUrl.includes('lh3.googleusercontent.com')) {
-        return `http://localhost:3000/api/auth/proxy-image?url=${encodeURIComponent(rawUrl)}`;
+        return `https://server-testing-ymn9.onrender.com/api/auth/proxy-image?url=${encodeURIComponent(rawUrl)}`;
       }
       return rawUrl;
     }
 
     // Nếu là đường dẫn tương đối từ server
     if (rawUrl.startsWith('/api')) {
-      return `http://localhost:3000${rawUrl}`;
+      return `https://server-testing-ymn9.onrender.com${rawUrl}`;
     }
 
     return rawUrl;

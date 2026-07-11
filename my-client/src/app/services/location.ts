@@ -20,7 +20,7 @@ export interface Ward {
 })
 export class LocationService {
   private http = inject(HttpClient);
-  private API_HOST = "http://localhost:3000/api/location";
+  private API_HOST = "https://server-testing-ymn9.onrender.com/api/location";
 
   private provincesSubject = new BehaviorSubject<Province[]>([]);
   private districtsSubject = new BehaviorSubject<District[]>([]);
